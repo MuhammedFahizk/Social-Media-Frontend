@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { validateToken } from "../Services/apiCalls";
-import { setTokens } from "../Redux/AuthSlice"; // Ensure this is correctly imported from your Redux slice
+import { validateToken } from "../../Services/apiCalls";
+import { updateAccessToken } from "../../Redux/AuthSlice"; // Ensure this is correctly imported from your Redux slice
 
 const ProtectedRoutesAdmin = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { accessToken, refreshToken } = useSelector((state) => state.auth);
+  const { accessToken, refreshToken, isAdmin } = useSelector((state) => state.auth);
+  console.log(isAdmin);
   const [isTokenValid, setIsTokenValid] = useState(null); 
   const [isLoading, setIsLoading] = useState(true); // Track loading state
 
@@ -17,7 +18,7 @@ const ProtectedRoutesAdmin = () => {
         const { isValid, newAccessToken, newRefreshToken } = await validateToken(accessToken, refreshToken);
         if (newAccessToken && newRefreshToken) {
           // Update the new access token and refresh token in your Redux store
-          dispatch(setTokens({ accessToken: newAccessToken, refreshToken: newRefreshToken }));
+          dispatch(updateAccessToken({ accessToken: newAccessToken, refreshToken: newRefreshToken, isAdmin: true }));
         }
         setIsTokenValid(isValid);
       } else {
@@ -35,7 +36,9 @@ const ProtectedRoutesAdmin = () => {
     }
 
     if (!accessToken || !isTokenValid) {
+
       return <Navigate to="/admin/login" state={{ from: location }} />;
+      
     }
 
     return <Outlet />;

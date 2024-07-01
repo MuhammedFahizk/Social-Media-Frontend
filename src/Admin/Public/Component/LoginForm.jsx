@@ -27,13 +27,12 @@ const LoginForm = () => {
     try {
       const response = await loginAdmin(data);
       console.log(response);
-      dispatch(setTokens({ accessToken: response.accessToken, refreshToken: response.refreshToken }));
-
-      navigate("/home");
+      dispatch(setTokens({ accessToken: response.accessToken, refreshToken: response.refreshToken, isAdmin: true }));
+      navigate("/admin/");
     } catch (error) {
       setError(error.message);
       console.log("axios Error", error);
-      console.error("Login failed:", error);
+      console.error("Login failed:", error.message);
     }
   };
 

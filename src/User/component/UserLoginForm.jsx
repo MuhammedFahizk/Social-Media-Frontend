@@ -1,14 +1,18 @@
 import { useForm, Controller } from "react-hook-form";
-import Input from "../../../CommonComponents/Input";
+import Input from "../../CommonComponents/Input";
 import { HiOutlineMail } from "react-icons/hi";
-import PasswordInput from "../../../CommonComponents/PasswordInput";
+import PasswordInput from "../../CommonComponents/PasswordInput";
 import { IoIosLock } from "react-icons/io";
-import SubmitButton from "../../../CommonComponents/SubmitButton";
+import SubmitButton from "../../CommonComponents/SubmitButton";
 import { Link, useNavigate,  } from "react-router-dom";
 import { Checkbox } from "antd";
-import { loginUser } from "../../../api/authUser";
+import { loginUser } from "../../api/authUser";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setTokens } from "../../Redux/AuthSlice";
+
 const UserLoginForm = () => {
+  const dispatch = useDispatch()
   const [error, setError] = useState("");
   const {
     control,
@@ -23,7 +27,7 @@ const UserLoginForm = () => {
       console.log(response);
       response.data & setError(response.data);
       console.log(response,'fsd');
-      // dispatch(setTokens({ accessToken: response.accessToken, refreshToken: response.refreshToken }));
+      dispatch(setTokens({ accessToken: response.accessToken, refreshToken: response.refreshToken }));
 
      navigate('/home')
     } catch (error) {
@@ -77,20 +81,21 @@ const UserLoginForm = () => {
           }}
         />
         <div className="flex   justify-between">
-          <Controller
-            name="terms"
-            control={control}
-            rules={{ required: "You must agree to the terms and conditions" }}
-            render={({ field }) => (
-              <Checkbox
-                {...field}
-                className="text-white"
-                onChange={(e) => field.onChange(e.target.checked)}
-              >
-                Terms And Condition
-              </Checkbox>
-            )}
-          />
+        <Controller
+  name="terms"
+  control={control}
+  rules={{ required: "You must agree to the terms and conditions" }}
+  render={({ field }) => (
+    <Checkbox
+      {...field}
+      checked={field.value} // Correctly bind the `checked` prop to `field.value`
+      className="text-white"
+      onChange={(e) => field.onChange(e.target.checked)} // Update the `onChange` handler
+    >
+      Terms And Condition
+    </Checkbox>
+  )}
+/>
           <Link className="hover:text-primary hover:underline">
             Forgot Password
           </Link>

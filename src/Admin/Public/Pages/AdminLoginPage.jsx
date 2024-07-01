@@ -1,5 +1,5 @@
 import LoginForm from "../Component/LoginForm";
-import useAuthenticatedRedirect from "../../../api/AuthenticatedRedirect";
+import useAuthenticatedRedirect from "../../util/AuthenticatedRedirect";
 import { Navigate } from "react-router-dom";
 
 const AdminLoginPage = () => {

@@ -22,3 +22,4 @@ export const generateAdminAccessToken = async (refreshToken) => {
         throw error.response ? error.response.data : new Error(error.message);
     }
 };
+

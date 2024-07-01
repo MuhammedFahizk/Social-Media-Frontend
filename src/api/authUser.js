@@ -12,6 +12,18 @@ try {
 }
 }
 
+export const generateUserAccessToken = async (refreshToken) => {
+    try {
+        console.log(refreshToken, 'refresh token api');
+        const response = await userInstance.post("/generateAccessToken", { refreshToken });
+        console.log("Response: ", response);
+        return response.data;
+    } catch (error) {
+        console.error("Error: ", error);
+        throw error.response ? error.response.data : new Error(error.message);
+    }
+  };
+
 export const SignUpUser = async (data) => {
     try {
             const response = await userInstance.post("/signUp", data);

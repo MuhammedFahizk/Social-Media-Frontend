@@ -1,16 +1,16 @@
 import { useForm, Controller } from "react-hook-form";
 import { HiOutlineMail } from "react-icons/hi";
-import Input from "../../../CommonComponents/Input";
-import PasswordInput from "../../../CommonComponents/PasswordInput";
-import SubmitButton from "../../../CommonComponents/SubmitButton";
+import Input from "../../CommonComponents/Input";
+import PasswordInput from "../../CommonComponents/PasswordInput";
+import SubmitButton from "../../CommonComponents/SubmitButton";
 import { FaRegUser } from "react-icons/fa";
 import { IoIosLock, IoIosUnlock } from "react-icons/io";
 import { Link, } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Checkbox } from "antd";
-import { SignUpUser } from "../../../api/authUser";
+import { SignUpUser } from "../../api/authUser";
 import { useState } from "react";
-import { setTokens } from "../../../Redux/AuthSlice";
+import { setTokens } from "../../Redux/AuthSlice";
 import { useDispatch } from "react-redux";
 const UserSignUpForm = () => {
   const dispatch = useDispatch()
@@ -114,19 +114,21 @@ const UserSignUpForm = () => {
             }}
           />
           <Controller
-            name="terms"
-            control={control}
-            rules={{ required: "You must agree to the terms and conditions" }}
-            render={({ field }) => (
-              <Checkbox
-                {...field}
-                className="text-white"
-                onChange={(e) => field.onChange(e.target.checked)}
-              >
-                Terms And Condition
-              </Checkbox>
-            )}
-          />
+  name="terms"
+  control={control}
+  rules={{ required: "You must agree to the terms and conditions" }}
+  render={({ field }) => (
+    <Checkbox
+      {...field}
+      checked={field.value} // Correctly bind the `checked` prop to `field.value`
+      className="text-white"
+      onChange={(e) => field.onChange(e.target.checked)} // Update the `onChange` handler
+    >
+      Terms And Condition
+    </Checkbox>
+  )}
+/>
+
           {errors.terms && (
             <span className="text-red-500">{errors.terms.message}</span>
           )}
