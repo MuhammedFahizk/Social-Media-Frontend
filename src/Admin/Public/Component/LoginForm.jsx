@@ -4,11 +4,18 @@ import SubmitButton from "../../../CommonComponents/SubmitButton";
 import { HiOutlineMail } from "react-icons/hi";
 import { EyeOutlined } from "@ant-design/icons";
 import { FcGoogle } from "react-icons/fc";
-import { loginAdmin } from "../../api/auth";
-import {  useNavigate } from "react-router-dom";
-import { setAuthToken } from "../../api/setAuthToken";
+import { loginAdmin } from "../../../api/auth";
+import { useNavigate } from "react-router-dom";
+import { setTokens } from "../../../Redux/AuthSlice";
+
+import { useDispatch } from "react-redux";
+
+import { useState } from "react";
 const LoginForm = () => {
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   const {
     handleSubmit,
     formState: { errors },
@@ -20,11 +27,13 @@ const LoginForm = () => {
     try {
       const response = await loginAdmin(data);
       console.log(response);
+      dispatch(setTokens({ accessToken: response.accessToken, refreshToken: response.refreshToken }));
 
-      navigate('admin/dashboard')
-      setAuthToken()
+      navigate("/home");
     } catch (error) {
-      console.error("Login failed:", error.message);
+      setError(error.message);
+      console.log("axios Error", error);
+      console.error("Login failed:", error);
     }
   };
 
@@ -69,6 +78,7 @@ const LoginForm = () => {
             },
           }}
         />
+        <p className="text-red-500">{error}</p>
 
         <SubmitButton type="submit">Sign In</SubmitButton>
       </form>

@@ -15,13 +15,13 @@ const Input = ({ name, type, placeholder, control, rules, icon }) => {
       render={({ field, fieldState: { error } }) => (
         <>
           <AntdInput
-          className='w-full'
+          className='w-full mb-2'
             status= {error? "error"  : null }
             {...field}
             size="large"
             type={type}
             placeholder={placeholder}
-            suffix={icon}
+            prefix={icon}
           />
           {error && 
           <Text type="danger">{error.message}</Text>

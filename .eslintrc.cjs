@@ -20,6 +20,8 @@ module.exports = {
   rules: {
     'react/jsx-no-target-blank': 'off',
     "react/react-in-jsx-scope": "off",
+     "node/no-process-exit": "off",
+    "node/process/no-top-level-await": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }], 
     'react-refresh/only-export-components': [
       'warn',
