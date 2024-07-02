@@ -3,14 +3,13 @@ import Input from "../../../CommonComponents/Input";
 import SubmitButton from "../../../CommonComponents/SubmitButton";
 import { HiOutlineMail } from "react-icons/hi";
 import { EyeOutlined } from "@ant-design/icons";
-import { FcGoogle } from "react-icons/fc";
 import { loginAdmin } from "../../../api/auth";
 import { useNavigate } from "react-router-dom";
 import { setTokens } from "../../../Redux/AuthSlice";
-
 import { useDispatch } from "react-redux";
 
 import { useState } from "react";
+import GoogleLoginBtn from "./GoogleLoginBtn";
 const LoginForm = () => {
   const dispatch = useDispatch();
 
@@ -81,10 +80,7 @@ const LoginForm = () => {
 
         <SubmitButton type="submit">Sign In</SubmitButton>
       </form>
-      <SubmitButton>
-        <FcGoogle className="text-2xl mx-2" />
-        Login with Google
-      </SubmitButton>
+     <GoogleLoginBtn/>
     </div>
   );
 };

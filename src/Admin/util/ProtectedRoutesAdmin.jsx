@@ -3,7 +3,6 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { validateToken } from "../../Services/apiCalls";
 import { updateAccessToken } from "../../Redux/AuthSlice"; // Ensure this is correctly imported from your Redux slice
-import { Skeleton } from 'antd';
 
 const ProtectedRoutesAdmin = () => {
   const location = useLocation();
@@ -29,7 +28,7 @@ const ProtectedRoutesAdmin = () => {
     };
 
     checkToken();
-  }, [accessToken, refreshToken, location, dispatch]);
+  }, ); 
 
   const renderContent = useMemo(() => {
     if (isLoading) {

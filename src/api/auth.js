@@ -23,3 +23,13 @@ export const generateAdminAccessToken = async (refreshToken) => {
     }
 };
 
+export const adminLoginWithGoogle = async (googleData) => {
+  try {
+    const response = await adminInstance.post('loginWithGoogle',googleData )
+    console.log('response :', response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+  }
+}

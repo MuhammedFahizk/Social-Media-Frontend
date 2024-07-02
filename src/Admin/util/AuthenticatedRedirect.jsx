@@ -17,8 +17,7 @@ const useAuthenticatedRedirect = (role) => {
       setIsLoading(true); // Start loading
 
       if (accessToken) {
-        const { isValid, newAccessToken,  } = await validateToken(accessToken, refreshToken, isAdmin, role);
-        
+        const { isValid, newAccessToken,  } = await validateToken(accessToken, refreshToken, isAdmin, role);        
         if (newAccessToken) {
           dispatch(updateAccessToken({ accessToken: newAccessToken,  }));
         }
