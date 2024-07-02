@@ -34,3 +34,14 @@ export const SignUpUser = async (data) => {
         throw error.response ? error.response.data : new Error(error.message);
     }
     }
+
+    export const userLoginWithGoogle = async (googleData) => {
+        try {
+          const response = await userInstance.post('loginWithGoogle',googleData )
+          console.log('response :', response.data);
+          return response.data;
+        } catch (error) {
+          console.error("Error: ", error);
+          throw error.response ? error.response.data : new Error(error.message);
+        }
+      }

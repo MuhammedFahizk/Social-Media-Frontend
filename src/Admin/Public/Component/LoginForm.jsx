@@ -7,13 +7,14 @@ import { loginAdmin } from "../../../api/auth";
 import { useNavigate } from "react-router-dom";
 import { setTokens } from "../../../Redux/AuthSlice";
 import { useDispatch } from "react-redux";
+import {  toast } from 'react-toastify';
+
 
 import { useState } from "react";
 import GoogleLoginBtn from "./GoogleLoginBtn";
 const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const [error, setError] = useState("");
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -22,15 +23,17 @@ const LoginForm = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
+    const toastId = toast.loading('Loading...');
     console.log(data);
     try {
       const response = await loginAdmin(data);
       console.log(response);
       dispatch(setTokens({ accessToken: response.accessToken, refreshToken: response.refreshToken, isAdmin: true }));
+      toast.update(toastId, { render: "Login successful", type: "success", isLoading: false, autoClose: 4000 });
       navigate("/admin");
     } catch (error) {
-      setError(error.message);
       console.log("axios Error", error);
+      toast.update(toastId, { render: "Login failed: " + error.message, type: "error", isLoading: false, autoClose: 4000 });
       console.error("Login failed:", error.message);
     }
   };
@@ -76,12 +79,12 @@ const LoginForm = () => {
             },
           }}
         />
-        <p className="text-red-500">{error}</p>
 
         <SubmitButton type="submit">Sign In</SubmitButton>
       </form>
      <GoogleLoginBtn/>
     </div>
+    
   );
 };
 

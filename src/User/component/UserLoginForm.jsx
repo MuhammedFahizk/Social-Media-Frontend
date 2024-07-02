@@ -10,7 +10,7 @@ import { loginUser } from "../../api/authUser";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setTokens } from "../../Redux/AuthSlice";
-
+import UserLoginGoogle from "./UserLoginGoogle";
 const UserLoginForm = () => {
   const dispatch = useDispatch()
   const [error, setError] = useState("");
@@ -107,6 +107,10 @@ const UserLoginForm = () => {
         )}
         {error ? <span className="text-red-500">{error}</span> : null}
         <SubmitButton type="submit">Login</SubmitButton>
+        <div >
+
+        <UserLoginGoogle/>
+        </div>
       </form>
     </div>
   );
