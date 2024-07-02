@@ -32,7 +32,7 @@ const ProtectedRoutUser = () => {
 
     const renderContent = useMemo(() => {
       if (isLoading) {
-        return <div>Loading...</div>; // Optionally, you can return a loading spinner here
+       return <div>Loading ....</div>; // Optionally, you can return a loading spinner here
       }
   
       if (!accessToken || !isTokenValid) {

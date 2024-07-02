@@ -28,7 +28,7 @@ const LoginForm = () => {
       const response = await loginAdmin(data);
       console.log(response);
       dispatch(setTokens({ accessToken: response.accessToken, refreshToken: response.refreshToken, isAdmin: true }));
-      navigate("/admin/");
+      navigate("/admin");
     } catch (error) {
       setError(error.message);
       console.log("axios Error", error);

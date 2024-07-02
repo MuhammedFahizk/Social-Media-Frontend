@@ -3,6 +3,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { validateToken } from "../../Services/apiCalls";
 import { updateAccessToken } from "../../Redux/AuthSlice"; // Ensure this is correctly imported from your Redux slice
+import { Skeleton } from 'antd';
 
 const ProtectedRoutesAdmin = () => {
   const location = useLocation();
@@ -15,10 +16,10 @@ const ProtectedRoutesAdmin = () => {
   useEffect(() => {
     const checkToken = async () => {
       if (accessToken) {
-        const { isValid, newAccessToken, newRefreshToken } = await validateToken(accessToken, refreshToken);
-        if (newAccessToken && newRefreshToken) {
+        const { isValid, newAccessToken,  } = await validateToken(accessToken, refreshToken, isAdmin, 'admin');
+        if (newAccessToken ) {
           // Update the new access token and refresh token in your Redux store
-          dispatch(updateAccessToken({ accessToken: newAccessToken, refreshToken: newRefreshToken, isAdmin: true }));
+          dispatch(updateAccessToken({ accessToken: newAccessToken}));
         }
         setIsTokenValid(isValid);
       } else {

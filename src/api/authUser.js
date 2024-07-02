@@ -5,7 +5,7 @@ export const loginUser = async (data) => {
 try {
         const response = await userInstance.post("/login", data);
         console.log("Response ", response);
-        return response.data;
+        return response;
 } catch (error) {
     console.log("Error of axi ", error);
     throw error.response ? error.response.data : new Error(error.message);

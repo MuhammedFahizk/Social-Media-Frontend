@@ -13,18 +13,18 @@ export const Routes = createBrowserRouter([
         path: "admin",
         children: [
           {
-            path: "login",
-            element: <AdminLoginPage />,
-          },
-          {
             path: "",
             element: <ProtectedRoutesAdmin />,
             children: [
               {
-                path: "",
+                path: "Dashboard",
                 element: <AdminDashboardPage />,
-              },
+              }, 
             ],
+          },
+          {
+            path: "login",
+            element: <AdminLoginPage />,
           },
         ],
       },
@@ -36,11 +36,11 @@ export const Routes = createBrowserRouter([
             element: <UserLoginPage />,
           },
           {
-            path: "",
+            path: "/",
             element: <ProtectedRoutUser />,
             children: [
               {
-                path: "/home",
+                path: "home",
                 element: <h1>Home</h1>,
               },
             ],

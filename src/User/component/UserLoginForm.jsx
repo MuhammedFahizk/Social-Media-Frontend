@@ -21,21 +21,23 @@ const UserLoginForm = () => {
   } = useForm();
   const navigate = useNavigate()
   const onSubmit = async (data) => {
-    console.log(data);
     try {
       const response = await loginUser(data);
-      console.log(response);
-      response.data & setError(response.data);
-      console.log(response,'fsd');
-      dispatch(setTokens({ accessToken: response.accessToken, refreshToken: response.refreshToken }));
+      console.log(response.message);
 
-     navigate('/home')
+      if (response.status === 200) {
+        const { accessToken, refreshToken } = response.data;
+        dispatch(setTokens({ accessToken, refreshToken }));
+        return navigate("/home");
+      } else {
+        setError(response.data || "An error occurred");
+      }
     } catch (error) {
-      setError(error);
-      console.log("axios Error", error);
-      console.error("Login failed:", error.message);
+      setError(error.message ||' internal Server Error'  );
+      console.error("Login failed:", error);
     }
   };
+  
 
   return (
     <div className="     h-full flex justify-center items-center relative">

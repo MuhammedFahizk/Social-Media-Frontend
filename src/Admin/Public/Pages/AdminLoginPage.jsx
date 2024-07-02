@@ -3,14 +3,14 @@ import useAuthenticatedRedirect from "../../util/AuthenticatedRedirect";
 import { Navigate } from "react-router-dom";
 
 const AdminLoginPage = () => {
-  const { isTokenValid, isLoading } = useAuthenticatedRedirect();
+  const { isTokenValid, isLoading } = useAuthenticatedRedirect('admin');
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   if (isTokenValid) {
-    return <Navigate to="/admin" />;
+    return <Navigate to="/admin/dashboard" />;
   }
 
   return (

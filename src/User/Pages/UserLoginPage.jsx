@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import useAuthenticatedRedirect from "../../Admin/util/AuthenticatedRedirect";
 import UserLoginForm from "../component/UserLoginForm"
 const UserLoginPage = () => {
-  const { isTokenValid, isLoading } = useAuthenticatedRedirect();
+  const { isTokenValid, isLoading } = useAuthenticatedRedirect('user');
 
   if (isLoading) {
     return <div>Loading...</div>;

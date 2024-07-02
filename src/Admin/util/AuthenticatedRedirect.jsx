@@ -4,9 +4,10 @@ import { useLocation } from "react-router-dom";
 import { validateToken } from "../../Services/apiCalls";
 import { updateAccessToken } from "../../Redux/AuthSlice";
 
-const useAuthenticatedRedirect = () => {
+const useAuthenticatedRedirect = (role) => {
+  console.log(role);
   const location = useLocation();
-  const { accessToken, refreshToken } = useSelector((state) => state.auth);
+  const { accessToken, refreshToken, isAdmin } = useSelector((state) => state.auth);
   const [isTokenValid, setIsTokenValid] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const useAuthenticatedRedirect = () => {
       setIsLoading(true); // Start loading
 
       if (accessToken) {
-        const { isValid, newAccessToken } = await validateToken(accessToken, refreshToken);
+        const { isValid, newAccessToken,  } = await validateToken(accessToken, refreshToken, isAdmin, role);
         
         if (newAccessToken) {
           dispatch(updateAccessToken({ accessToken: newAccessToken,  }));
