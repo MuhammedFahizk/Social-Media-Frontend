@@ -35,6 +35,16 @@ export const SignUpUser = async (data) => {
     }
     }
 
+    export const otpValidation = async (data) => {
+      try {
+              const response = await userInstance.post("/otpValidation", data);
+              console.log("Response ", response);
+              return response.data;
+      } catch (error) {
+          console.log("Error  axi", error.response.data);
+          throw error.response ? error.response.data : new Error(error.message);
+      }
+      }
     export const userLoginWithGoogle = async (googleData) => {
         try {
           const response = await userInstance.post('loginWithGoogle',googleData )

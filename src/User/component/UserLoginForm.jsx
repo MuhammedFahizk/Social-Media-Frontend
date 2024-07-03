@@ -40,12 +40,12 @@ const UserLoginForm = () => {
   
 
   return (
-    <div className="     h-full flex justify-center items-center relative">
+    <div className="   p-2   flex justify-center items-center relative">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={`flex flex-col ${
           errors.Input ? "gap-2" : "gap-1"
-        } text-white p-10 rounded-2xl`}
+        }   rounded-2xl`}
       >
         <h1 className="text-primary">Welcome Back</h1>
         <h3>
@@ -82,7 +82,7 @@ const UserLoginForm = () => {
             },
           }}
         />
-        <div className="flex   justify-between">
+        <div className="flex  gap-6 my-2  justify-between">
         <Controller
   name="terms"
   control={control}
@@ -91,14 +91,14 @@ const UserLoginForm = () => {
     <Checkbox
       {...field}
       checked={field.value} // Correctly bind the `checked` prop to `field.value`
-      className="text-white"
+      className="text-xs"
       onChange={(e) => field.onChange(e.target.checked)} // Update the `onChange` handler
     >
       Terms And Condition
     </Checkbox>
   )}
 />
-          <Link className="hover:text-primary hover:underline">
+          <Link className="hover:text-primary  text-xs  hover:underline">
             Forgot Password
           </Link>
         </div>
@@ -109,7 +109,7 @@ const UserLoginForm = () => {
         <SubmitButton type="submit">Login</SubmitButton>
         <div >
 
-        <UserLoginGoogle/>
+        {/* <UserLoginGoogle/> */}
         </div>
       </form>
     </div>

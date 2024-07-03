@@ -6,16 +6,10 @@ import SubmitButton from "../../CommonComponents/SubmitButton";
 import { FaRegUser } from "react-icons/fa";
 import { IoIosLock, IoIosUnlock } from "react-icons/io";
 import { Link, } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { Checkbox } from "antd";
-import { SignUpUser } from "../../api/authUser";
 import { useState } from "react";
-import { setTokens } from "../../Redux/AuthSlice";
-import { useDispatch } from "react-redux";
-const UserSignUpForm = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [error, setError] = useState("");
+
+const UserSignUpForm = ({onSubmit, setBtnType, btnType}) => {
 
   const {
     control,
@@ -24,32 +18,17 @@ const UserSignUpForm = () => {
     watch,
   } = useForm();
 
-  const onSubmit = async(data) => {
-    console.log(data);
-    try {
-      const response = await SignUpUser(data);
-    response.data & setError(response.data);
-    console.log(response,'fsd');
-    dispatch(setTokens({ accessToken: response.accessToken, refreshToken: response.refreshToken }));
-
-    navigate("/home");
-
-    
-  } catch (error) {
-    setError(error);
-    console.error("Login failed:", error);
-  }
-  };
+ 
 
   const password = watch("password");
 
   return (
-    <div className="relative px-20 z-50 w-full  flex flex-col justify-center bg-[#00000000] md:bg-[#f3f1f100] text-white h-screen">
+    <div className="relative md:px-5 px-2 md:h-fit border-blue-200    h-screen md:h-fi z-50  rounded-xl  flex flex-col items-center justify-center bg-[#2f2d2d0a]   md:border-2 ">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col w-fit  justify-center  rounded-2xl   md:p-10"
       >
-        <h3 className="text-end">Start For Free</h3>
+        <h3 className="">Start For Free</h3>
         <h1 className="text-primary">Create New Account</h1>
         <h3>
           Already A Member{" "}
@@ -121,7 +100,7 @@ const UserSignUpForm = () => {
     <Checkbox
       {...field}
       checked={field.value} // Correctly bind the `checked` prop to `field.value`
-      className="text-white"
+      className=""
       onChange={(e) => field.onChange(e.target.checked)} // Update the `onChange` handler
     >
       Terms And Condition
@@ -132,12 +111,21 @@ const UserSignUpForm = () => {
           {errors.terms && (
             <span className="text-red-500">{errors.terms.message}</span>
           )}
-        <p className="text-red-500 ">{error}</p>
-          <SubmitButton type="submit">Sign Up</SubmitButton>
+        {/* <p className="text-red-500 ">{error}</p> */}
+          {
+            btnType? (
+              <SubmitButton type='submit' >Sign Up</SubmitButton>
+            ):(
+              <SubmitButton type='submit' isLoading={true}>Sign Up</SubmitButton>
+            )
+
+          }
         </div>
       </form>
     </div>
   );
 };
+
+
 
 export default UserSignUpForm;

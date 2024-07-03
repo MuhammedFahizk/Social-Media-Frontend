@@ -32,10 +32,11 @@ const GoogleLoginBtn = () => {
 
   return (
     <div>
-      <GoogleLogin
-        onSuccess={handleSuccess}
-        onError={handleError}
-      />
+       <GoogleLogin
+       size='large'
+       Shape='rectangular'
+       width='300px'
+       onSuccess={handleSuccess} onError={handleError} />
     </div>
   );
 };

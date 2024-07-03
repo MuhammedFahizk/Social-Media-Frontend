@@ -1,9 +1,36 @@
-import React from 'react'
-import UserSignUpForm from '../component/UserSignUpForm'
+import React, { useState, useEffect } from 'react';
+import UserSignUpForm from '../component/UserSignUpForm';
 import { Navigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 import useAuthenticatedRedirect from '../../Admin/util/AuthenticatedRedirect';
+import { otpValidation } from '../../api/authUser';
+import OtpVerificationForm from '../component/OtpVerificationForm';
+
 const UserSignUpPage = () => {
   const { isTokenValid, isLoading } = useAuthenticatedRedirect();
+  const [showOtpForm, setShowOtpForm] = useState(false);
+  const [userData, setUserData] = useState(null);
+const [btnType, setBtnType] = useState(true)
+
+  let toastId;
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    try {
+      setBtnType('')
+      const response = await otpValidation(data);
+      console.log(response);
+      // Show the OTP form after successful sign-up
+      setUserData(data); // Store user data
+      setShowOtpForm(true);
+    } catch (error) {
+      console.error("Sign-up failed:", error);
+    }
+  };
+
+  useEffect(() => {
+
+  }, [isLoading]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -14,17 +41,15 @@ const UserSignUpPage = () => {
   }
 
   return (
-    <div className=" flex   flex-col md:flex-row  justify-end items-center h-screen ">
-    <img className="absolute h-full w-full  object-cover " src="
-    https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&w=1260&"
-    alt="" />
-      <UserSignUpForm
- />
-    <div className="h-full w-full absolute   bg-gradient-to-r from-[#000] via-[#000000a4] to-[#0000006d] ">
+    <div className="flex flex-col md:flex-row justify-center   items-center h-screen">
+      
+      {!showOtpForm ? (
+        <UserSignUpForm btnType={btnType} setBtnType={setBtnType} onSubmit={onSubmit} />
+      ) : (
+        <OtpVerificationForm userData={userData} />
+      )}
     </div>
+  );
+};
 
-  </div>
-  )
-}
-
-export default UserSignUpPage
+export default UserSignUpPage;

@@ -9,7 +9,7 @@ const useAuthenticatedRedirect = (role) => {
   const location = useLocation();
   const { accessToken, refreshToken, isAdmin } = useSelector((state) => state.auth);
   const [isTokenValid, setIsTokenValid] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {

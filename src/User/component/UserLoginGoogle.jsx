@@ -47,8 +47,13 @@ const UserLoginGoogle = () => {
   };
 
   return (
-    <div>
-      <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
+    <div className="flex justify-center">
+      <GoogleLogin
+      size='large'
+      Shape='rectangular'
+      width='260px'
+      className='w-[370px]'
+      onSuccess={handleSuccess} onError={handleError} />
     </div>
   );
 };
