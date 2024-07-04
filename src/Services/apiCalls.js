@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode"; // Ensure jwt-decode is correctly imported
 import { generateAdminAccessToken } from "../api/auth";
-import { generateUserAccessToken } from "../api/authUser";
+import { generateUserAccessToken } from "../User/auth/authUser";
 
 export const validateToken = async (accessToken, refreshToken, isAdmin, role) => {
   try {

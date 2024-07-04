@@ -1,4 +1,4 @@
-import { userInstance } from "./api_instance";
+import { userInstance } from "../../api/api_instance";
 
 
 export const loginUser = async (data) => {

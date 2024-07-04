@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import UserSignUpForm from '../component/UserSignUpForm';
 import { Navigate } from 'react-router-dom';
 import useAuthenticatedRedirect from '../../Admin/util/AuthenticatedRedirect';
-import { otpValidation } from '../../api/authUser';
+import { otpValidation } from '../auth/authUser';
 import OtpVerificationForm from '../component/OtpVerificationForm';
 
 const UserSignUpPage = () => {

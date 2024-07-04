@@ -6,7 +6,7 @@ import { IoIosLock } from "react-icons/io";
 import SubmitButton from "../../CommonComponents/SubmitButton";
 import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "antd";
-import { loginUser } from "../../api/authUser";
+import { loginUser } from "../auth/authUser";
 import { useDispatch } from "react-redux";
 import { setTokens } from "../../Redux/AuthSlice";
 import { toast } from "react-toastify";

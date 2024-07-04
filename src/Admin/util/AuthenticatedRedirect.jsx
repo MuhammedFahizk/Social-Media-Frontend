@@ -35,7 +35,7 @@ const useAuthenticatedRedirect = (role) => {
 
     checkToken(); // Initial token check
 
-  }, [accessToken, refreshToken, dispatch, location.pathname]);
+  },[location] );
 
   return { isTokenValid, isLoading };
 };

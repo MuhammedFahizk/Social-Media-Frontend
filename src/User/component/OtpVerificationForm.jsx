@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import Input from "../../CommonComponents/Input";
 import { IoIosUnlock } from "react-icons/io";
 import SubmitButton from "../../CommonComponents/SubmitButton";
-import { SignUpUser } from "../../api/authUser";
+import { SignUpUser } from "../auth/authUser";
 import { useDispatch } from "react-redux";
 import { setTokens } from "../../Redux/AuthSlice";
 import { useNavigate } from "react-router-dom";

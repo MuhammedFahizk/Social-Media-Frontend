@@ -5,7 +5,7 @@ import { setTokens } from "../../Redux/AuthSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { userLoginWithGoogle } from "../../api/authUser";
+import { userLoginWithGoogle } from "../auth/authUser";
 
 const UserLoginGoogle = () => {
   const dispatch = useDispatch();

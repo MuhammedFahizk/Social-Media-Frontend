@@ -18,7 +18,6 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-//  3
 });
 
 export const persistor = persistStore(store);
