@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import UserSignUpForm from '../component/UserSignUpForm';
 import { Navigate } from 'react-router-dom';
-import { toast } from "react-toastify";
 import useAuthenticatedRedirect from '../../Admin/util/AuthenticatedRedirect';
 import { otpValidation } from '../../api/authUser';
 import OtpVerificationForm from '../component/OtpVerificationForm';
@@ -12,7 +11,6 @@ const UserSignUpPage = () => {
   const [userData, setUserData] = useState(null);
 const [btnType, setBtnType] = useState(true)
 
-  let toastId;
 
   const onSubmit = async (data) => {
     console.log(data);

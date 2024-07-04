@@ -5,12 +5,11 @@ import PasswordInput from "../../CommonComponents/PasswordInput";
 import SubmitButton from "../../CommonComponents/SubmitButton";
 import { FaRegUser } from "react-icons/fa";
 import { IoIosLock, IoIosUnlock } from "react-icons/io";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Checkbox } from "antd";
-import { useState } from "react";
+import PropTypes from 'prop-types';
 
-const UserSignUpForm = ({onSubmit, setBtnType, btnType}) => {
-
+const UserSignUpForm = ({ onSubmit, btnType }) => {
   const {
     control,
     handleSubmit,
@@ -18,21 +17,19 @@ const UserSignUpForm = ({onSubmit, setBtnType, btnType}) => {
     watch,
   } = useForm();
 
- 
-
   const password = watch("password");
 
   return (
-    <div className="relative md:px-5 px-2 md:h-fit border-blue-200    h-screen md:h-fi z-50  rounded-xl  flex flex-col items-center justify-center bg-[#2f2d2d0a]   md:border-2 ">
+    <div className="relative md:px-5 px-2 md:h-fit border-blue-200 h-screen md:h-fi z-50 rounded-xl flex flex-col items-center justify-center bg-[#2f2d2d0a] md:border-2">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col w-fit  justify-center  rounded-2xl   md:p-10"
+        className="flex flex-col w-fit justify-center rounded-2xl md:p-10"
       >
         <h3 className="">Start For Free</h3>
         <h1 className="text-primary">Create New Account</h1>
         <h3>
           Already A Member{" "}
-          <Link className=" text-secondary hover:underline" to={"/login"}>
+          <Link className="text-secondary hover:underline" to={"/login"}>
             Sign In
           </Link>
         </h3>
@@ -93,39 +90,39 @@ const UserSignUpForm = ({onSubmit, setBtnType, btnType}) => {
             }}
           />
           <Controller
-  name="terms"
-  control={control}
-  rules={{ required: "You must agree to the terms and conditions" }}
-  render={({ field }) => (
-    <Checkbox
-      {...field}
-      checked={field.value} // Correctly bind the `checked` prop to `field.value`
-      className=""
-      onChange={(e) => field.onChange(e.target.checked)} // Update the `onChange` handler
-    >
-      Terms And Condition
-    </Checkbox>
-  )}
-/>
+            name="terms"
+            control={control}
+            rules={{ required: "You must agree to the terms and conditions" }}
+            render={({ field }) => (
+              <Checkbox
+                {...field}
+                checked={field.value}
+                className=""
+                onChange={(e) => field.onChange(e.target.checked)}
+              >
+                Terms And Condition
+              </Checkbox>
+            )}
+          />
 
           {errors.terms && (
             <span className="text-red-500">{errors.terms.message}</span>
           )}
-        {/* <p className="text-red-500 ">{error}</p> */}
-          {
-            btnType? (
-              <SubmitButton type='submit' >Sign Up</SubmitButton>
-            ):(
-              <SubmitButton type='submit' isLoading={true}>Sign Up</SubmitButton>
-            )
 
-          }
+          {btnType ? (
+            <SubmitButton type='submit'>Sign Up</SubmitButton>
+          ) : (
+            <SubmitButton type='submit' isLoading={true}>Sign Up</SubmitButton>
+          )}
         </div>
       </form>
     </div>
   );
 };
 
-
+UserSignUpForm.propTypes = {
+  btnType: PropTypes.bool,
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default UserSignUpForm;

@@ -4,23 +4,25 @@ import { HiOutlineMail } from "react-icons/hi";
 import PasswordInput from "../../CommonComponents/PasswordInput";
 import { IoIosLock } from "react-icons/io";
 import SubmitButton from "../../CommonComponents/SubmitButton";
-import { Link, useNavigate,  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "antd";
 import { loginUser } from "../../api/authUser";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setTokens } from "../../Redux/AuthSlice";
-import UserLoginGoogle from "./UserLoginGoogle";
+import { toast } from "react-toastify";
+
 const UserLoginForm = () => {
-  const dispatch = useDispatch()
-  const [error, setError] = useState("");
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
+    const toastId = toast.loading("Please wait while we are checking your credentials..");
+
     try {
       const response = await loginUser(data);
       console.log(response.message);
@@ -28,24 +30,37 @@ const UserLoginForm = () => {
       if (response.status === 200) {
         const { accessToken, refreshToken } = response.data;
         dispatch(setTokens({ accessToken, refreshToken }));
+        toast.update(toastId, {
+          render: "Login successful",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+        });
         return navigate("/home");
       } else {
-        setError(response.data || "An error occurred");
+        toast.update(toastId, {
+          render: "Login failed: " + response.data || "An error occurred",
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+        });
       }
     } catch (error) {
-      setError(error.message ||' internal Server Error'  );
+      toast.update(toastId, {
+        render: "Login failed: " + error.message,
+        type: "error",
+        isLoading: false,
+        autoClose: 5000,
+      });
       console.error("Login failed:", error);
     }
   };
-  
 
   return (
-    <div className="   p-2   flex justify-center items-center relative">
+    <div className="p-2 flex justify-center items-center relative">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`flex flex-col ${
-          errors.Input ? "gap-2" : "gap-1"
-        }   rounded-2xl`}
+        className={`flex flex-col ${errors.Input ? "gap-2" : "gap-1"} rounded-2xl`}
       >
         <h1 className="text-primary">Welcome Back</h1>
         <h3>
@@ -82,34 +97,30 @@ const UserLoginForm = () => {
             },
           }}
         />
-        <div className="flex  gap-6 my-2  justify-between">
-        <Controller
-  name="terms"
-  control={control}
-  rules={{ required: "You must agree to the terms and conditions" }}
-  render={({ field }) => (
-    <Checkbox
-      {...field}
-      checked={field.value} // Correctly bind the `checked` prop to `field.value`
-      className="text-xs"
-      onChange={(e) => field.onChange(e.target.checked)} // Update the `onChange` handler
-    >
-      Terms And Condition
-    </Checkbox>
-  )}
-/>
-          <Link className="hover:text-primary  text-xs  hover:underline">
+        <div className="flex gap-6 my-2 justify-between">
+          <Controller
+            name="terms"
+            control={control}
+            rules={{ required: "You must agree to the terms and conditions" }}
+            render={({ field }) => (
+              <Checkbox
+                {...field}
+                checked={field.value}
+                className="text-xs"
+                onChange={(e) => field.onChange(e.target.checked)}
+              >
+                Terms And Condition
+              </Checkbox>
+            )}
+          />
+          <Link className="hover:text-primary text-xs hover:underline">
             Forgot Password
           </Link>
         </div>
-        {errors.terms && (
-          <span className="text-red-500">{errors.terms.message}</span>
-        )}
-        {error ? <span className="text-red-500">{error}</span> : null}
+        {errors.terms && <span className="text-red-500">{errors.terms.message}</span>}
         <SubmitButton type="submit">Login</SubmitButton>
-        <div >
+        <div>
 
-        {/* <UserLoginGoogle/> */}
         </div>
       </form>
     </div>

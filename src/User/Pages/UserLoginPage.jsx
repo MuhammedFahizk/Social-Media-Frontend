@@ -31,9 +31,7 @@ const UserLoginPage = () => {
     <div className=" flex  h-screen items-center justify-center">
       <div className="md:border-2 rounded-2xl border-blue-200   p-12   bg-[#2f2d2d0a] flex flex-col gap-3 justify-center">
     
-          {/* <div className="border-2 rounded p-10 ">
-sdfsd
-          </div> */}
+
        <UserLoginForm />
      <UserLoginGoogle />
           
