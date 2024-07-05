@@ -12,15 +12,19 @@ h1 {
 }
 
 h2 {
-  font-size: 12px;
+  font-size: 16px;
   font-family:  'Jakarta', cursive;
 }
 
 h3 {
-  font-size: 14px;
+  font-size: 12px;
   font-family:  'Jakarta', cursive;
 }
 primaryText {
   font-family:  'Jakarta', cursive;
   
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }

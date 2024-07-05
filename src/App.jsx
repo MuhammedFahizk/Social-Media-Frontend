@@ -11,7 +11,7 @@ function App() {
 
   <GoogleOAuthProvider clientId="52712851092-qm8gt1v43trspla3biv0c1oibkemcrjc.apps.googleusercontent.com">
   
-    <RouterProvider router={Routes} />;
+    <RouterProvider router={Routes} />
     <ToastContainer 
     
     />

@@ -5,6 +5,7 @@ import ProtectedRoutesAdmin from "../Admin/util/ProtectedRoutesAdmin";
 import UserLoginPage from "../User/Pages/UserLoginPage";
 import UserSignUpPage from "../User/Pages/UserSignUpPage";
 import ProtectedRoutUser from "../User/Utils.js/ProtectedRoutUser";
+import Home from "../User/Pages/Home";
 export const Routes = createBrowserRouter([
   {
     path: "/",
@@ -41,7 +42,7 @@ export const Routes = createBrowserRouter([
             children: [
               {
                 path: "home",
-                element: <h1>Home</h1>,
+                element: <Home/>,
               },
             ],
           },

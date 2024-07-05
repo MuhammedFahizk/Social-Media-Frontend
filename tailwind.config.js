@@ -5,9 +5,9 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
-      darkMode: ['variant', '&:not(.light *)'],
       fontFamily: {
         Jakarta : ["Plus Jakarta Sans", 'sans-serif'],
         Righteous : ["Righteous", 'sans-serif'], 
@@ -18,6 +18,11 @@ export default {
         primary: '#1677FF',
         secondary: '#EB5153',
         tertiary: '#1677FF',
+        light_Brown: '#978877',
+        lightGray: '#f5f5f5',
+        darkNav: '#2C2C2C', // Charcoal grey for the nav bar
+        darkBody: '#181818', // Rich black for the body background
+        darkSecondary: '#3C3C3C', // Dim grey for secondary elements
 
       },
     },

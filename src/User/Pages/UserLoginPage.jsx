@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import useAuthenticatedRedirect from "../../Admin/util/AuthenticatedRedirect";
-import UserLoginForm from "../component/UserLoginForm"
-import UserLoginGoogle from "../component/UserLoginGoogle";
+import UserLoginForm from "../Ui/UserLoginForm"
+import UserLoginGoogle from "../Ui/UserLoginGoogle";
 
 const UserLoginPage = () => {
   const { isTokenValid, isLoading } = useAuthenticatedRedirect('user');

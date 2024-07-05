@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import UserSignUpForm from '../component/UserSignUpForm';
+import UserSignUpForm from '../Ui/UserSignUpForm';
 import { Navigate } from 'react-router-dom';
 import useAuthenticatedRedirect from '../../Admin/util/AuthenticatedRedirect';
 import { otpValidation } from '../auth/authUser';
