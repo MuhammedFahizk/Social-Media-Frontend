@@ -1,11 +1,11 @@
-import LoginForm from "../Component/LoginForm";
-import useAuthenticatedRedirect from "../../util/AuthenticatedRedirect";
+import React from "react";
 import { Navigate } from "react-router-dom";
-
+import useAuthenticatedRedirect from "../../util/AuthenticatedRedirect";
+import LoginForm from "../Component/LoginForm";
 const AdminLoginPage = () => {
-  const { isTokenValid, isLoading } = useAuthenticatedRedirect('admin');
+  const { isTokenValid, loading } = useAuthenticatedRedirect();
 
-  if (isLoading) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
@@ -16,9 +16,7 @@ const AdminLoginPage = () => {
   return (
     <div className="p-10 flex md:h-screen h-screen sm:h-fit justify-center items-center">
       <LoginForm />
-      
     </div>
-
   );
 };
 

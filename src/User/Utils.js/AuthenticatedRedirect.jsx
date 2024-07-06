@@ -1,29 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { verifyUser } from '../auth/authUser';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { verifyUser } from "../auth/authUser";
 
 const useAuthenticatedRedirect = () => {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [isTokenValid, setIsTokenValid] = useState(false);
 
   useEffect(() => {
     const checkToken = async () => {
       try {
-        const res = await verifyUser();
-        console.log('Verification response:', res);
-        setIsTokenValid(true);
+        const res = await verifyUser(); // Your authentication verification function
+        console.log("Verification response:", res);
+        setIsTokenValid(true); // Set authentication status based on verification
       } catch (error) {
-        console.error('Verification error:', error);
-        console.log('Redirecting to Home due to error');
-        navigate('/home');
+        console.error("Verification error:", error);
+        setIsTokenValid(false); // Set authentication status to false if verification fails
       } finally {
-        setLoading(false);
+        setLoading(false); // Set loading state to false once verification is done
       }
     };
 
     checkToken();
-  }, [navigate]);
+  }, []);
 
   return { isTokenValid, loading };
 };

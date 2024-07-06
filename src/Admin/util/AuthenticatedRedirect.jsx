@@ -1,43 +1,28 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import { validateToken } from "../../Services/apiCalls";
-import { updateAccessToken } from "../../Redux/AuthSlice";
+import { verifyAdmin } from "../../api/auth";
 
-const useAuthenticatedRedirect = (role) => {
-  console.log(role);
-  const location = useLocation();
-  const { accessToken, refreshToken, isAdmin } = useSelector((state) => state.auth);
-  const [isTokenValid, setIsTokenValid] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
+const useAuthenticatedRedirect = () => {
+  const [loading, setLoading] = useState(true);
+  const [isTokenValid, setIsTokenValid] = useState(false);
 
   useEffect(() => {
     const checkToken = async () => {
-      setIsLoading(true); // Start loading
-
-      if (accessToken) {
-        const { isValid, newAccessToken,  } = await validateToken(accessToken, refreshToken, isAdmin, role);        
-        if (newAccessToken) {
-          dispatch(updateAccessToken({ accessToken: newAccessToken,  }));
-        }
-        if (isValid) {
-          setIsTokenValid(true); // Token is valid
-        } else {
-          setIsTokenValid(false); // Token is invalid
-        }
-      } else {
-        setIsTokenValid(false); // No token found
+      try {
+        const res = await verifyAdmin(); // Your authentication verification function
+        console.log("Verification response:", res);
+        setIsTokenValid(true); // Set authentication status based on verification
+      } catch (error) {
+        console.error("Verification error:", error);
+        setIsTokenValid(false); // Set authentication status to false if verification fails
+      } finally {
+        setLoading(false); // Set loading state to false once verification is done
       }
-
-      setIsLoading(false); // Stop loading
     };
 
-    checkToken(); // Initial token check
+    checkToken();
+  }, []);
 
-  },[location] );
-
-  return { isTokenValid, isLoading };
+  return { isTokenValid, loading };
 };
 
 export default useAuthenticatedRedirect;

@@ -33,3 +33,14 @@ export const adminLoginWithGoogle = async (googleData) => {
     throw error.response ? error.response.data : new Error(error.message);
   }
 }
+
+export const verifyAdmin = async () => {
+  try {
+    const response = await adminInstance.post('verifyAdmin' )
+    console.log('response fahiz :', response);
+    return response.data;
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+  }
+}
