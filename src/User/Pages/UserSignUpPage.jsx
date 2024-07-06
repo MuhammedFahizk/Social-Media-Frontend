@@ -1,36 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import UserSignUpForm from '../Ui/UserSignUpForm';
+import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import useAuthenticatedRedirect from '../../Admin/util/AuthenticatedRedirect';
+import UserSignUpForm from '../Ui/UserSignUpForm';
 import { otpValidation } from '../auth/authUser';
 import OtpVerificationForm from '../component/OtpVerificationForm';
+import useAuthenticatedRedirect from '../Utils.js/AuthenticatedRedirect';
 
 const UserSignUpPage = () => {
-  const { isTokenValid, isLoading } = useAuthenticatedRedirect();
   const [showOtpForm, setShowOtpForm] = useState(false);
   const [userData, setUserData] = useState(null);
-const [btnType, setBtnType] = useState(true)
+  const [btnType, setBtnType] = useState(true);
 
+  const { isTokenValid, loading } = useAuthenticatedRedirect();
 
-  const onSubmit = async (data) => {
-    console.log(data);
-    try {
-      setBtnType('')
-      const response = await otpValidation(data);
-      console.log(response);
-      // Show the OTP form after successful sign-up
-      setUserData(data); // Store user data
-      setShowOtpForm(true);
-    } catch (error) {
-      console.error("Sign-up failed:", error);
-    }
-  };
-
-  useEffect(() => {
-
-  }, [isLoading]);
-
-  if (isLoading) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
@@ -38,9 +20,23 @@ const [btnType, setBtnType] = useState(true)
     return <Navigate to="/home" />;
   }
 
+  const onSubmit = async (data) => {
+    console.log(data);
+    try {
+      setBtnType(false); // Assuming btnType controls a button state like loading spinner
+      const response = await otpValidation(data);
+      console.log(response);
+      setUserData(data); // Store user data
+      setShowOtpForm(true); // Show the OTP form after successful sign-up
+    } catch (error) {
+      console.error("Sign-up failed:", error);
+    } finally {
+      setBtnType(true); // Reset button state
+    }
+  };
+
   return (
-    <div className="flex flex-col md:flex-row justify-center   items-center h-screen">
-      
+    <div className="flex flex-col md:flex-row justify-center items-center h-screen">
       {!showOtpForm ? (
         <UserSignUpForm btnType={btnType} setBtnType={setBtnType} onSubmit={onSubmit} />
       ) : (

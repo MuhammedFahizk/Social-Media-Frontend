@@ -17,6 +17,7 @@ export const adminInstance = axios.create({
 
 export const userInstance = axios.create({
     baseURL: 'http://localhost:8080/user',
+    withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
         timeout: 1000

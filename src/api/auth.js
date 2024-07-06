@@ -2,7 +2,7 @@ import {adminInstance} from "./api_instance";
 
 export const loginAdmin = async (data) => {
   try {
-    const response = await adminInstance.post("/login", data);
+    const response = await adminInstance.post("/login", data, { withCredentials: true });
     console.log("Response ", response);
     return response.data;
   } catch (error) {
