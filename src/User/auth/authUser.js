@@ -56,3 +56,14 @@ export const SignUpUser = async (data) => {
           throw error.response ? error.response.data : new Error(error.message);
         }
       }
+
+export const LogOutUser =async () => {
+  try {
+    const response = await userInstance.post('/logOutUser')
+    console.log('response fahiz :', response);
+    return response.data;
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+  }
+}

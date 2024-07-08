@@ -5,15 +5,12 @@ import { HiOutlineMail } from "react-icons/hi";
 import { EyeOutlined } from "@ant-design/icons";
 import { loginAdmin } from "../../../api/auth";
 import { useNavigate } from "react-router-dom";
-import { setTokens } from "../../../Redux/AuthSlice";
-import { useDispatch } from "react-redux";
+
 import {  toast } from 'react-toastify';
 
 
-import { useState } from "react";
 import GoogleLoginBtn from "./GoogleLoginBtn";
 const LoginForm = () => {
-  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const {
@@ -28,7 +25,6 @@ const LoginForm = () => {
     try {
       const response = await loginAdmin(data);
       console.log(response);
-      dispatch(setTokens({ accessToken: response.accessToken, refreshToken: response.refreshToken, isAdmin: true }));
       toast.update(toastId, { render: "Login successful", type: "success", isLoading: false, autoClose: 4000 });
       navigate("/admin");
     } catch (error) {

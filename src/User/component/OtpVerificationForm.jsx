@@ -3,8 +3,7 @@ import Input from "../../CommonComponents/Input";
 import { IoIosUnlock } from "react-icons/io";
 import SubmitButton from "../../CommonComponents/SubmitButton";
 import { SignUpUser } from "../auth/authUser";
-import { useDispatch } from "react-redux";
-import { setTokens } from "../../Redux/AuthSlice";
+
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,7 +13,6 @@ import PropTypes from 'prop-types';
 const OtpVerificationForm = ({ userData }) => {
   const [loading, setLoading] = useState(false);
   const { control, handleSubmit } = useForm();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -27,7 +25,6 @@ const OtpVerificationForm = ({ userData }) => {
       console.log("response Sign page", response);
       if (response) {
         console.log(response.data);
-        dispatch(setTokens({ accessToken: response.accessToken, refreshToken: response.refreshToken }));
         navigate("/home");
         toast.success("OTP verification successful");
       } else {

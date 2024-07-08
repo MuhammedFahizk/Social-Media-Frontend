@@ -7,12 +7,10 @@ import SubmitButton from "../../CommonComponents/SubmitButton";
 import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "antd";
 import { loginUser } from "../auth/authUser";
-import { useDispatch } from "react-redux";
-import { setTokens } from "../../Redux/AuthSlice";
+
 import { toast } from "react-toastify";
 
 const UserLoginForm = () => {
-  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
@@ -21,20 +19,20 @@ const UserLoginForm = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    const toastId = toast.loading("Please wait while we are checking your credentials..");
+    const toastId = toast.loading(
+      "Please wait while we are checking your credentials.."
+    );
 
     try {
       const response = await loginUser(data);
       console.log(response.message);
 
       if (response.status === 200) {
-        const { accessToken, refreshToken } = response.data;
-        dispatch(setTokens({ accessToken, refreshToken }));
         toast.update(toastId, {
           render: "Login successful",
           type: "success",
           isLoading: false,
-          autoClose: 2000,
+          autoClose: 1000,
         });
         return navigate("/home");
       } else {
@@ -42,7 +40,7 @@ const UserLoginForm = () => {
           render: "Login failed: " + response.data || "An error occurred",
           type: "error",
           isLoading: false,
-          autoClose: 2000,
+          autoClose: 1000,
         });
       }
     } catch (error) {
@@ -50,7 +48,7 @@ const UserLoginForm = () => {
         render: "Login failed: " + error.message,
         type: "error",
         isLoading: false,
-        autoClose: 5000,
+        autoClose: 1000,
       });
       console.error("Login failed:", error);
     }
@@ -60,7 +58,9 @@ const UserLoginForm = () => {
     <div className="p-2 flex justify-center items-center relative">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`flex flex-col ${errors.Input ? "gap-2" : "gap-1"} rounded-2xl`}
+        className={`flex flex-col ${
+          errors.Input ? "gap-2" : "gap-1"
+        } rounded-2xl`}
       >
         <h1 className="text-primary">Welcome Back</h1>
         <h3>
@@ -117,11 +117,11 @@ const UserLoginForm = () => {
             Forgot Password
           </Link>
         </div>
-        {errors.terms && <span className="text-red-500">{errors.terms.message}</span>}
+        {errors.terms && (
+          <span className="text-red-500">{errors.terms.message}</span>
+        )}
         <SubmitButton type="submit">Login</SubmitButton>
-        <div>
-
-        </div>
+        <div></div>
       </form>
     </div>
   );

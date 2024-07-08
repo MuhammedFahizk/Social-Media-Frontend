@@ -1,5 +1,5 @@
 import { UserOutlined } from '@ant-design/icons';
-import { Avatar, Badge,Space } from 'antd';
+import { Avatar, Badge, } from 'antd';
 import React from 'react';
 
 const ProfileBtn = ({ count, image, icon }) => {

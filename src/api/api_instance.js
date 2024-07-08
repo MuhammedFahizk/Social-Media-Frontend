@@ -10,11 +10,6 @@ export const adminInstance = axios.create({
         
 })
 
-// instance.interceptors.request.use(
-//     config => {
-//         const toke
-//     }
-// )
 
 export const userInstance = axios.create({
     baseURL: 'http://localhost:8080/user',

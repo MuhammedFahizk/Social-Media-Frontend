@@ -1,14 +1,12 @@
 import React from "react";
 import { GoogleLogin } from "@react-oauth/google";
-import { useDispatch } from "react-redux";
-import { setTokens } from "../../Redux/AuthSlice";
+
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { userLoginWithGoogle } from "../auth/authUser";
 
 const UserLoginGoogle = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSuccess = async (credentialResponse) => {
@@ -16,18 +14,12 @@ const UserLoginGoogle = () => {
     try {
       const response = await userLoginWithGoogle(credentialResponse);
       console.log("Login successful", response);
-      dispatch(
-        setTokens({
-          accessToken: response.accessToken,
-          refreshToken: response.refreshToken,
-          isAdmin: false,
-        })
-      );
+     
       toast.update(toastId, {
         render: "Login successful",
         type: "success",
         isLoading: false,
-        autoClose: 5000,
+        autoClose: 1000,
       });
       navigate("/home");
     } catch (error) {
@@ -36,7 +28,7 @@ const UserLoginGoogle = () => {
         render: "Login failed: " + error.message,
         type: "error",
         isLoading: false,
-        autoClose: 5000,
+        autoClose: 1000,
       });
     }
   };
