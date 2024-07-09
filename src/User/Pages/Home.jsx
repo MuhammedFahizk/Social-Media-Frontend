@@ -1,13 +1,11 @@
 import HomeFeeds from "../Ui/HomeFeeds";
 import HomeLeftSide from "../Ui/HomeLeftSide";
-import NavBar from "../Ui/NavBar";
 import Stores from "../Ui/Stores";
 import Suggestions from "../Ui/Suggestions";
 const Home = () => {
   return (
-    <div className="dark:bg-darkBody text-text-light " >
-      <NavBar />
-      <div className="grid lg:grid-cols-9   grid-cols-1   gap-3  md:p-2 h-full bg-primary-light dark:bg-primary-dark dark:text-white">
+    <div className=" text-text-light " >
+      <div className="grid lg:grid-cols-9   grid-cols-1   gap-3  md:p-2 h-full   dark:text-white">
         <div className="lg:hidden ">
           <Stores />
         </div>

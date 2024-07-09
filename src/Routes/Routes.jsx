@@ -6,6 +6,9 @@ import UserLoginPage from "../User/Pages/UserLoginPage";
 import UserSignUpPage from "../User/Pages/UserSignUpPage";
 import ProtectedRoutUser from "../User/Utils.js/ProtectedRoutUser";
 import Home from "../User/Pages/Home";
+import ProfileLPage from "../User/Pages/ProfileLPage";
+import NavBar from "../User/Ui/NavBar";
+
 export const Routes = createBrowserRouter([
   {
     path: "/",
@@ -20,7 +23,7 @@ export const Routes = createBrowserRouter([
               {
                 path: "Dashboard",
                 element: <AdminDashboardPage />,
-              }, 
+              },
             ],
           },
           {
@@ -33,26 +36,30 @@ export const Routes = createBrowserRouter([
         path: "/",
         children: [
           {
-            path: "/login",
+            path: "login",
             element: <UserLoginPage />,
+          },
+          {
+            path: "signUp",
+            element: <UserSignUpPage />,
           },
           {
             path: "/",
             element: <ProtectedRoutUser />,
             children: [
               {
-                path: "home" ,
-                element: <Home/>,
+                path: "home",
+                element: <Home />,
               },
               {
-                path: "" ,
-                element: <Home/>,
+                path: "",
+                element: <Home />,
+              },
+              {
+                path: "profile",
+                element: <ProfileLPage />,
               },
             ],
-          },
-          {
-            path: "/signUp",
-            element: <UserSignUpPage />,
           },
         ],
       },

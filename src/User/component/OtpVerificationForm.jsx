@@ -3,12 +3,12 @@ import Input from "../../CommonComponents/Input";
 import { IoIosUnlock } from "react-icons/io";
 import SubmitButton from "../../CommonComponents/SubmitButton";
 import { SignUpUser } from "../auth/authUser";
-
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import PropTypes from 'prop-types';
+// import OtpTimer from "../Ui/OtpTimer";
 
 const OtpVerificationForm = ({ userData }) => {
   const [loading, setLoading] = useState(false);
@@ -39,6 +39,8 @@ const OtpVerificationForm = ({ userData }) => {
   };
 
   return (
+    <div>
+      {/* <OtpTimer/> */}
     <form className="z-50 border-2 p-10 rounded-2xl border-blue-200 bg-[#0000000c]" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-2 w-[300px]">
         <h2 className="text-center text-primary">Enter Your OTP Here</h2>
@@ -59,6 +61,8 @@ const OtpVerificationForm = ({ userData }) => {
         <SubmitButton type="submit" isLoading={loading}>Verify OTP</SubmitButton>
       </div>
     </form>
+    </div>
+
   );
 };
 

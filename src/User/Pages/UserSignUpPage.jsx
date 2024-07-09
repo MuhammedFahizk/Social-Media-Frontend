@@ -17,15 +17,16 @@ const UserSignUpPage = () => {
 
   // Toast notifications
   const notifyLoading = () => {
-    toast.dismiss(); // Dismiss any existing toast
-    const id = toast.info('Loading...');
+    toast.dismiss(); 
+    const id = toast.info('Loading...')
+    ;
     setToastId(id);
   };
 
 
 
   const notifyError = (errorMessage) => {
-    toast.dismiss(); // Dismiss any existing toast
+    toast.dismiss();
     const id = toast.error(errorMessage);
     setToastId(id);
   };
@@ -40,14 +41,15 @@ const UserSignUpPage = () => {
 
   const onSubmit = async (data) => {
     console.log(data);
-    notifyLoading(); // Notify loading state
+    notifyLoading();
 
     try {
-      setBtnType(false); // Assuming btnType controls a button state like loading spinner
+      setBtnType(false);
       const response = await otpValidation(data);
       console.log(response);
-      setUserData(data); // Store user data
-      setShowOtpForm(true); // Show the OTP form after successful sign-up
+      setUserData(data); 
+      setShowOtpForm(true);
+      toast.dismiss();
     } catch (error) {
       console.error("Sign-up failed:", error.message);
       notifyError(`ign-up failed. ${error.message}`); // Notify error
