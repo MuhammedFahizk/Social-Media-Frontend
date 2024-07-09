@@ -8,14 +8,14 @@ const useAuthenticatedRedirect = () => {
   useEffect(() => {
     const checkToken = async () => {
       try {
-        const res = await verifyUser(); // Your authentication verification function
+        const res = await verifyUser(); 
         console.log("Verification response:", res);
-        setIsTokenValid(true); // Set authentication status based on verification
+        setIsTokenValid(true); 
       } catch (error) {
         console.error("Verification error:", error);
-        setIsTokenValid(false); // Set authentication status to false if verification fails
+        setIsTokenValid(false);
       } finally {
-        setLoading(false); // Set loading state to false once verification is done
+        setLoading(false);
       }
     };
 

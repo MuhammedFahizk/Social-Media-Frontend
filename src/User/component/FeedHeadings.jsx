@@ -8,7 +8,7 @@ const FeedHeadings = () => {
       <div className='flex gap-2 justify-end static'>
         {headings.map((item, index) => (
           <h2
-            className={`text-end cursor-pointer ${index === current ? '' : 'text-light_Brown'}`}
+            className={`text-end cursor-pointer ${index === current ? 'text-text-primary' : 'text-text-gray'}`}
             key={index}
             onClick={() => setCurrent(index)}
           >

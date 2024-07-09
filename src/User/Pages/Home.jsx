@@ -5,15 +5,15 @@ import Stores from "../Ui/Stores";
 import Suggestions from "../Ui/Suggestions";
 const Home = () => {
   return (
-    <div className="dark:bg-darkBody">
+    <div className="dark:bg-darkBody text-text-light " >
       <NavBar />
-      <div className="grid lg:grid-cols-9  grid-cols-1   gap-3  p-2 h-fit bg-lightGray dark:bg-[#181818] dark:text-white">
+      <div className="grid lg:grid-cols-9   grid-cols-1   gap-3  md:p-2 h-full bg-primary-light dark:bg-primary-dark dark:text-white">
         <div className="lg:hidden ">
           <Stores />
         </div>
         <HomeLeftSide />
         <HomeFeeds />
-        <div className="hidden lg:block bg-white rounded-2xl dark:bg-darkNav  w-fit">
+        <div className="hidden lg:block bg-ternary-light shadow-md dark:shadow-md rounded-2xl dark:bg-secondary-dark  w-fit">
           <Stores />
           <Suggestions/>
 

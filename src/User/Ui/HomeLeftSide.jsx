@@ -5,7 +5,7 @@ const HomeLeftSide = () => {
   const friends = [1, 2, 3, 4, 5,6,7,8,9,0, 2, 3, 4, 5,6,7,8,9,0];
   return (
 
-    <div  className="  lg:flex leftHomeSideBar flex-col col-span-2   shadow-xl hidden gap-4 p-5 px-3 bg-white dark:bg-darkNav   rounded-3xl h-[88vh] ">
+    <div  className="  lg:flex leftHomeSideBar flex-col col-span-2  shadow-md    hidden gap-4 p-5 px-3 bg-secondary-light dark:bg-secondary-dark   rounded-3xl h-[88vh] ">
       <h2 className="  ">Friends</h2>
       <div className="flex flex-col gap-4 overflow-y-scroll no-scrollbar">
 {

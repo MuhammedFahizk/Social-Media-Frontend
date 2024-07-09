@@ -1,5 +1,7 @@
 import { Button, Dropdown } from "antd";
-import Avatar from "./Avatar";
+import PropTypes from "prop-types";
+
+
 import React from "react";
 import LogOutBtn from "./LogOutBtn";
 const items = [
@@ -32,20 +34,21 @@ const items = [
     label: <LogOutBtn />,
   },
 ];
-const ProfileDropDown = () => {
-  return (
-    <div className="flex h-full  items-center">
-      <Dropdown menu={{ items }} placement="bottomRight" arrow>
-        <Button className="bg-inherit border-0 hover:bg-inherit p-0 rounded-full">
-          <Avatar
-            image={
-              "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=600"
-            }
-          />
+const ProfileDropDown = ({item}) => {
+  return (                               
+    <div className="flex h-full  items-center ">
+      <Dropdown menu={{ items }} placement="bottomRight" className="bg-white" arrow>
+        <Button className=" border-0  hover:bg-inherit p-0 rounded-full">
+         
+        {item}
         </Button>
+        
       </Dropdown>
     </div>
   );
 };
+ProfileDropDown.propTypes = {
+  item: PropTypes.element.isRequired
+  };
 
 export default ProfileDropDown;

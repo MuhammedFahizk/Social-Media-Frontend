@@ -17,16 +17,18 @@ const DarkMode = () => {
   }, [isDarkMode]);
 
   const toggleDarkMode = (checked) => {
-    setDarkMode(checked);
+    setDarkMode(checked); 
   };
 
   return (
-    <div className="flex items-center h-full">
+    <div className="flex items-center h- ">
       <DarkModeSwitch
+      className="dark:bg-black rounded-full"
         checked={isDarkMode}
         onChange={toggleDarkMode}
         size={30}
-        color={isDarkMode?  "#978877": '#978877'}
+        // color={isDarkMode?  "#": '#978877'}
+
       />
     </div>
   );

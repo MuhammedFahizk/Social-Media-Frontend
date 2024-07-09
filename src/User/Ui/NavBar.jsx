@@ -17,7 +17,15 @@ const NavBar = () => {
         <Avatar count="2" icon={<IoIosNotificationsOutline />} />
 
         <DarkMode />
-        <DropDown />
+        <DropDown 
+        item= {
+          <Avatar
+          image={
+            "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=600"
+          }
+        />
+        }
+        />
       </div>
     </div>
   );

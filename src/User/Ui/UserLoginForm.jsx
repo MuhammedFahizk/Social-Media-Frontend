@@ -65,7 +65,7 @@ const UserLoginForm = () => {
         <h1 className="text-primary">Welcome Back</h1>
         <h3>
           Create New Account?
-          <Link to="/signup" className="text-secondary mx-2">
+          <Link to="/signup" className="text-secondary-dark mx-2">
             Sign Up
           </Link>
         </h3>
