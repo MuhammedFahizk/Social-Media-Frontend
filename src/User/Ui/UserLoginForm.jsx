@@ -7,10 +7,12 @@ import SubmitButton from "../../CommonComponents/SubmitButton";
 import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "antd";
 import { loginUser } from "../auth/authUser";
-
 import { toast } from "react-toastify";
+import {setUser } from "../Redux/UserInformation";
+import { useDispatch } from "react-redux";
 
 const UserLoginForm = () => {
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
@@ -28,6 +30,8 @@ const UserLoginForm = () => {
       console.log(response.message);
 
       if (response.status === 200) {
+        console.log('response:', response);
+        dispatch(setUser(response.data.user));
         toast.update(toastId, {
           render: "Login successful",
           type: "success",

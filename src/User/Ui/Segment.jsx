@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { Segmented } from "antd";
 
-const Segment = () => {
-  const [value, setValue] = useState("Post");
+const Segment = ({ value, setValue, options }) => {
   return (
     <div className="flex justify-end p-5">
       <Segmented
-      
-        options={["Post", "Tagged", "Saved"]}
+        options={options}
         value={value}
         onChange={setValue}
-
-        className="bg-text-primary"
-
+        className=""
       />
     </div>
   );

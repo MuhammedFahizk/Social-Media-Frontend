@@ -10,7 +10,7 @@ const AdminLoginPage = () => {
   }
 
   if (isTokenValid) {
-    return <Navigate to="/admin/dashboard" />;
+    return <Navigate to="/admin" />;
   }
 
   return (

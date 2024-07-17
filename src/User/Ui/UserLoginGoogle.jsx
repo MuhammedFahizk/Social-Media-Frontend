@@ -5,14 +5,18 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { userLoginWithGoogle } from "../auth/authUser";
-
+import { setUser } from "../Redux/UserInformation";
+import { useDispatch } from "react-redux";
 const UserLoginGoogle = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSuccess = async (credentialResponse) => {
     const toastId = toast.loading("Loading...");
     try {
       const response = await userLoginWithGoogle(credentialResponse);
+      console.log('dafa',response.response);
+      dispatch(setUser(response.user));
       console.log("Login successful", response);
      
       toast.update(toastId, {

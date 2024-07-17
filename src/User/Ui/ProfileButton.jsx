@@ -3,8 +3,9 @@ import DropDown from "../component/DropDown";
 import Avatar from "../component/Avatar";
 import LogOutBtn from "../component/LogOutBtn";
 import { useNavigate } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 const ProfileButton = () => {
+  const user = useSelector(state => state.user)
   const navigate = useNavigate();
   const items = [
     {
@@ -45,9 +46,7 @@ const ProfileButton = () => {
       items={items}
       item={
         <Avatar
-          image={
-            "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=600"
-          }
+          image={user.profilePicture}
         />
       }
     />
