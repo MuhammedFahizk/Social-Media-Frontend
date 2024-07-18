@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom';
 import Avatar from '../component/Avatar';
 import PropTypes from 'prop-types';
+import SearchUser from './SearchUser';
 const HomeLeftSide = ({ data }) => {
   console.log('data', data);
 
   const allFriends = data.following.concat(data.followers);
   return (
     <div className="lg:flex leftHomeSideBar flex-col col-span-2 shadow-md hidden gap-4 p-5 px-3 bg-secondary-light dark:bg-secondary-dark rounded-3xl h-[88vh]">
+    <div className=' flex   '>
+    <SearchUser />
+    </div>
       <h2 className=" ">Friends</h2>
       <div className="flex flex-col gap-4 overflow-y-scroll no-scrollbar">
         {allFriends.length === 0 ? (

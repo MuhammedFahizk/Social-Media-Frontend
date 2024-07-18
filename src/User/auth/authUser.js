@@ -112,3 +112,13 @@ return response;
     throw error.response ? error.response.data : new Error(error.message);
   } 
 }
+export const searchUsers = async(searchValue) => {
+  try {
+    const response = await userInstance.get(`/search/${searchValue}`)
+    return response.data.response
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+
+  }
+}
