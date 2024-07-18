@@ -86,6 +86,16 @@ export const followUser = async (id) => {
   } 
 }
 
+export const unFollowUser = async (id) => {
+  try {
+    const response = await userInstance.get(`/UnFollowUser/${id}`);
+    console.log("response Home page :", response);
+    return response;
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+  } 
+}
 export const profilePage = async (id) => {
   try {
     if (!id) {

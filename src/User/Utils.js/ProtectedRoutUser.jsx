@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { verifyUser } from '../auth/authUser';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'; // Import useLocation
 import NavBar from '../Ui/NavBar';
 
 const ProtectedRouteUser = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true); // State to track loading state
+  const location = useLocation(); // Get the current location object
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkToken = async () => {
@@ -22,18 +23,18 @@ const ProtectedRouteUser = () => {
     };
 
     checkToken();
-  }, [navigate]);
+  }, [navigate, location.pathname]); // Add location.pathname as a dependency
 
   if (loading) {
-    return <p>Loading...</p>; // Return a loading indicator while verifying user
+    return <p>Loading...</p>;
   }
 
   return (
-    <div className='dark:bg-primary-dark bg-primary-light darktext-white'  >
+    <div className='dark:bg-primary-dark bg-primary-light darktext-white'>
       <NavBar />
       <Outlet />
     </div>
-  ); // Once loading is complete, render the protected route outlet
+  );
 };
 
 export default ProtectedRouteUser;

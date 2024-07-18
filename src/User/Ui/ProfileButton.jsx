@@ -31,7 +31,7 @@ const ProfileButton = () => {
             navigate('/profile');
           }}
         >
-          Muhammed 
+          Profile 
         </a>
       ),
     },
