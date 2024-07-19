@@ -5,7 +5,14 @@ import SearchUser from './SearchUser';
 const HomeLeftSide = ({ data }) => {
   console.log('data', data);
 
-  const allFriends = data.following.concat(data.followers);
+  const combined = [...data.following, ...data.followers];
+
+  const uniqueMap = new Map();
+  combined.forEach(item => {
+    uniqueMap.set(item._id, item);
+  });
+  
+  const allFriends = Array.from(uniqueMap.values());
   return (
     <div className="lg:flex leftHomeSideBar flex-col col-span-2 shadow-md hidden gap-4 p-5 px-3 bg-secondary-light dark:bg-secondary-dark rounded-3xl h-[88vh]">
     <div className=' flex   '>
@@ -18,6 +25,9 @@ const HomeLeftSide = ({ data }) => {
         ) : (
           allFriends.map((friend, index) => (
             <div className='flex gap-3 ' key={index}>
+              {
+                console.log(friend)
+              }
               <Avatar image={friend.profilePicture }/>
              <Link to={`/profile/${friend._id}`}>
              {friend.userName}</Link>

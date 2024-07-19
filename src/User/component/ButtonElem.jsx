@@ -3,7 +3,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useState } from "react";
 import UnFollowBtn from "./UnfollowBtn";
 import { useSelector } from "react-redux";
-const ButtonElem = ({ item, list }) => {
+const ButtonElem = ({ item, list, following }) => {
   const { user } = useSelector((state) => state);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);

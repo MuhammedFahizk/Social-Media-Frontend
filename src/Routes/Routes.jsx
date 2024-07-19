@@ -16,7 +16,7 @@ export const Routes = createBrowserRouter([
     children: [
       {
         path: "admin",
-        element: <AdminLayout/>,
+        // element: <AdminLayout/>,
         children: [
           {
             path: "",

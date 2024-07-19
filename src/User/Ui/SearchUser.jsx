@@ -5,14 +5,15 @@ import { CiSearch } from "react-icons/ci";
 import AvatarBtn from "../component/Avatar";
 import { Link } from "react-router-dom";
 const CustomDropdown = ({ options }) => (
-  <ul>
-    {options.map((option, index) => (
-      <Link  to={`/profile/${option._id}`}  key={index} className="p-1 flex gap-2 hover:bg-text-primary rounded-lg" style={{ display: 'flex', alignItems: 'center' }}>
-        <AvatarBtn  />
-        <h3 className="text-black text-md ">{option.label}</h3>
-      </Link>
-    ))}
-  </ul>
+    <ul>
+      {options.map((option, index) => (
+        <Link to={`/profile/${option._id}`} key={index} className="p-1 flex gap-2 hover:bg-text-primary rounded-lg" style={{ display: 'flex', alignItems: 'center' }}>
+          <AvatarBtn image={option.profilePicture} />
+          <h3 className="text-black text-md ">{option.label}</h3>
+        </Link>
+      ))}
+    </ul>
+  
 );
 
 const SearchUser = () => {
@@ -35,7 +36,8 @@ const SearchUser = () => {
         const formattedResponse = response.map(user => ({
           label: user.userName,
           value: user.userName,
-          _id: user._id
+          _id: user._id,
+          profilePicture: user.profilePicture
         }));
         setOptions(formattedResponse);
       } catch (error) {
@@ -60,7 +62,7 @@ const SearchUser = () => {
         onSelect={onSelect}
         onSearch={(text) => setOptions(options.filter(filterOptions(text)))}
         onChange={onChange}
-        placeholder="Search ...."
+        placeholder=""
         className="h-full flex items-center  justify-center  mx-auto "
         popupClassName="custom-dropdown"
         dropdownRender={menu => (
@@ -70,6 +72,7 @@ const SearchUser = () => {
         onBlur={() => setTimeout(() => setVisible(false), 100)} // Delay to allow selection
       >
         <Input
+            placeholder="Search ... "
           className="h-full flex items-center  rounded-lg border-text-primary"
           suffix={<CiSearch style={{ fontSize: 20 }} />}
         />

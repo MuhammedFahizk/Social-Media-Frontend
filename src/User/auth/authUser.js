@@ -115,6 +115,7 @@ return response;
 export const searchUsers = async(searchValue) => {
   try {
     const response = await userInstance.get(`/search/${searchValue}`)
+    console.log("response search users :", response);
     return response.data.response
   } catch (error) {
     console.error("Error: ", error);

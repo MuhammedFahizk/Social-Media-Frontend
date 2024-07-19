@@ -25,14 +25,14 @@ const ProfileCard = ({ profile }) => {
 console.log('followers',profile.followers);
   return (
     <div className="rounded-2xl flex flex-col items-center gap-4 justify-center h-full md:col-span-2 border border-text-primary">
-      {profile.profilePicture && <ProfilePic image={profile.profilePicture} />}
+       <ProfilePic image={profile.profilePicture} />
       <div>
         <h2 className="text-sm text-center">{profile.userName}</h2>
         <p className="text-sm text-text-primary">{profile.email}</p>
       </div>
       <div className="flex gap-2">
-        <ButtonElem list={profile.followers} item={`Followers ${profile.followers.length}`} />
-        <ButtonElem  list={profile.following} item={`Followings ${profile.following.length}`} />
+        <ButtonElem list={profile.followers}  item={`Followers ${profile.followers.length}`} />
+        <ButtonElem  list={profile.following}  item={`Followings ${profile.following.length}`} />
       </div>
       {!owner && (
         follow ? <UnFollowBtn id={profile._id} /> : <FollowButton id={profile._id} />

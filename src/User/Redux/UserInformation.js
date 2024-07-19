@@ -1,4 +1,4 @@
-import { createAction, createReducer } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 // Define the initial state
 const initialState = {
@@ -7,16 +7,25 @@ const initialState = {
     email: '',
     bio: '',
     profilePicture: '',
+    following: [], // Ensure you have a following array
   }, 
 };
 
-const setUser = createAction('user/setUser');
-
-const userReducer = createReducer(initialState, (builder) => {
-  builder.addCase(setUser, (state, action) => {
-    console.log('user Payload',action.payload);
-    state.user = action.payload;
-  });
+const userSlice = createSlice({
+  name: 'user',
+  initialState,
+  reducers: {
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
+    followUserSuccess: (state, action) => {
+      state.user.following.push({ _id: action.payload });
+    },
+    unfollowUserSuccess: (state, action) => {
+      state.user.following = state.user.following.filter((item) => item._id !== action.payload);
+    },
+  },
 });
 
-export { setUser, userReducer };
+export const { setUser, followUserSuccess, unfollowUserSuccess } = userSlice.actions;
+export default userSlice.reducer;

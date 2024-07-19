@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { verifyAdmin } from '../../api/auth';
+import AdminLayout from '../private/Component/AdminLayout';
 const ProtectedRoutesAdmin = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true); // State to track loading state
@@ -28,7 +29,8 @@ const ProtectedRoutesAdmin = () => {
     return <p>Loading...</p>; // Return a loading indicator while verifying user
   }
 
-  return <Outlet />
+  return (
+    <><AdminLayout /></>)
 
   ; // Once loading is complete, render the protected route outlet
 };

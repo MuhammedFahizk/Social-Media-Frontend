@@ -1,29 +1,37 @@
 import { Button, Modal } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { unFollowUser } from "../auth/authUser";
 import FollowButton from "./FollowButton";
-
+import { useDispatch, useSelector } from "react-redux";
+import { unfollowUserSuccess } from "../Redux/UserInformation";
 const UnFollowBtn = ({ id }) => {
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [click, setClick] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { user } = useSelector((state) => state);
 
   const showModal = () => {
     setIsModalOpen(true);
   };
 
+  useEffect(() => {
+    if (user?.following) {
+      setIsFollowing(user.following.some((item) => item._id === id));
+    }
+  }, []);
+
   const handleOk = async () => {
-    setIsModalOpen(false);
-    setClick(false);
     setLoading(true);
     try {
-      const response = await unFollowUser(id);
-      console.log(response);
+      await unFollowUser(id);
+      dispatch(unfollowUserSuccess(id)); // Dispatch action
+      setIsFollowing(false);
     } catch (error) {
       console.error('Error unfollowing user:', error);
     } finally {
       setLoading(false);
-      setClick(!click);
+      setIsModalOpen(false);
     }
   };
 
@@ -31,33 +39,30 @@ const UnFollowBtn = ({ id }) => {
     setIsModalOpen(false);
   };
 
-  const handleButtonClick = () => {
-    
-    showModal();
-  };
-
   return (
     <div className="gap-2 flex">
-      {!click ? (
-        <Button
-          className="bg-blue-700 dark:bg-white text-white dark:text-black"
-          onClick={handleButtonClick}
-          disabled={loading}
-        >
-          {loading ? 'Processing...' : 'Following'}
-        </Button>
+      {isFollowing ? (
+        <>
+          <Button
+            className="bg-blue-700 dark:bg-white text-white dark:text-black"
+            onClick={showModal}
+            disabled={loading}
+          >
+            {loading ? 'Processing...' : 'Following'}
+          </Button>
+          <Modal
+            title="Unfollow Confirmation"
+            open={isModalOpen}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            confirmLoading={loading}
+          >
+            <p>Are you sure you want to unfollow?</p>
+          </Modal>
+        </>
       ) : (
         <FollowButton id={id} />
       )}
-      <Modal
-        title="Unfollow Confirmation"
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        confirmLoading={loading}
-      >
-        <p>Are you sure you want to unfollow?</p>
-      </Modal>
     </div>
   );
 };
