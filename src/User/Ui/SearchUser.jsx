@@ -8,7 +8,7 @@ const CustomDropdown = ({ options }) => (
     <ul>
       {options.map((option, index) => (
         <Link to={`/profile/${option._id}`} key={index} className="p-1 flex gap-2 hover:bg-text-primary rounded-lg" style={{ display: 'flex', alignItems: 'center' }}>
-          <AvatarBtn image={option.profilePicture} />
+          <AvatarBtn image={option.profilePicture} spell={option.label.charAt(0).toUpperCase()} />
           <h3 className="text-black text-md ">{option.label}</h3>
         </Link>
       ))}

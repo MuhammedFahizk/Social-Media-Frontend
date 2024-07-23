@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar, Table } from 'antd';
-import { usersList } from '../../../api/auth';
+import {  usersList } from '../../../api/auth';
 import { UserOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 const Users = () => {
+  const navigate = useNavigate()
   const [users, setUsers] = useState([]);
-  
+  const handleUserClick = (record) => {
+    console.log('click', record)
+    
+    navigate(`/admin/user/${record._id}`)
+  }
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -64,6 +70,9 @@ const Users = () => {
           dataSource={users}
           onChange={onChange}
           rowKey="id"
+          onRow={(record) => ({
+            onClick: () => handleUserClick(record)
+          })}
         />
       </div>
     </div>

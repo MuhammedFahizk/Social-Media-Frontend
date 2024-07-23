@@ -2,23 +2,17 @@ import React from "react";
 import DropDown from "../component/DropDown";
 import Avatar from "../component/Avatar";
 import LogOutBtn from "../component/LogOutBtn";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 const ProfileButton = () => {
   const user = useSelector(state => state.user)
   const navigate = useNavigate();
+
   const items = [
     {
       key: "1",
       label: (
-        <a
-        onClick={(e) => {
-          e.preventDefault();
-          navigate('/Post');
-        }}
-        >
-          Add Post
-        </a>
+        <><Link to={'/addPost'} /><h3>Add Post</h3></>
       ),
     },
     {

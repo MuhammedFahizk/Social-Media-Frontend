@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ProfilePic from "../component/ProfilePic";
-import ButtonElem from "../component/ButtonElem";
+import ButtonElem from "../../Admin/private/Component/ButtonElem";
 import { useSelector } from "react-redux";
 import FollowButton from "../component/FollowButton";
 import UnFollowBtn from "../component/UnfollowBtn";
@@ -25,7 +25,7 @@ const ProfileCard = ({ profile }) => {
 console.log('followers',profile.followers);
   return (
     <div className="rounded-2xl flex flex-col items-center gap-4 justify-center h-full md:col-span-2 border border-text-primary">
-       <ProfilePic image={profile.profilePicture} />
+       <ProfilePic owner={owner} image={profile.profilePicture} />
       <div>
         <h2 className="text-sm text-center">{profile.userName}</h2>
         <p className="text-sm text-text-primary">{profile.email}</p>

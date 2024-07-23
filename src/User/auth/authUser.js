@@ -123,3 +123,64 @@ export const searchUsers = async(searchValue) => {
 
   }
 }
+
+export const uploadPhoto = async (blob) => {
+  const formData = new FormData();
+  formData.append('file', blob, 'cropped-image.png'); // Give the blob a filename
+
+  try {
+    const response = await userInstance.post('/profile/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data.response;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error.response ? error.response.data : new Error(error.message);
+  }
+};
+
+export const createPost = async( data, content) => {
+  try {
+    console.log(data);
+    const response = await userInstance.post(`/createPost/${content}`, data)
+    console.log("response createPost users :", response);
+    return response
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+
+  }
+} 
+
+export const uploadImageCloud = async( formData ) => {
+  try {
+    console.log(formData);
+    const response = await userInstance.post('/uploadImage', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });    console.log("response upload image users :", response);
+    return response
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+
+  }
+} 
+
+export const deleteImageCloud = async( url ) => {
+  try {
+    console.log(url);
+    const payload = { url };
+
+    const response = await userInstance.post('/deleteImage', payload,);
+    console.log("response delete image users :", response);
+    return response
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+
+  }
+} 

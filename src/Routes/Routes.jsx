@@ -7,9 +7,9 @@ import UserSignUpPage from "../User/Pages/UserSignUpPage";
 import ProtectedRoutUser from "../User/Utils.js/ProtectedRoutUser";
 import Home from "../User/Pages/Home";
 import ProfileLPage from "../User/Pages/ProfileLPage";
-import NavBar from "../User/Ui/NavBar";
-import AdminLayout from "../Admin/private/Component/AdminLayout";
 import Users from "../Admin/private/Pages/Users";
+import UserPage from "../Admin/private/Pages/UserPage";
+import AddPost from "../User/Pages/AddPost";
 export const Routes = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +29,11 @@ export const Routes = createBrowserRouter([
                 path: "users",
                 element: <Users />,
               },
+              {
+                path: "user/:id",
+                element: < UserPage/>,
+              },
+
             ],
           },
           {
@@ -63,6 +68,10 @@ export const Routes = createBrowserRouter([
               {
                 path: "profile",
                 element: <ProfileLPage />,
+              },
+              {
+                path: "addPost",
+                element: <AddPost/>
               },
               {
                 path: "profile/:id",

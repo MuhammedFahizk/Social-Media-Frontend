@@ -1,73 +1,80 @@
-import React, { useState, useEffect } from 'react';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { message, Upload } from 'antd';
+import { useState } from 'react';
+import { UserOutlined } from "@ant-design/icons";
+import { Avatar, Modal, Upload } from "antd";
+import { FaRegEdit } from "react-icons/fa";
+import ImageCrop from './ImageCrop';
 
-const getBase64 = (img, callback) => {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-};
+const ProfilePic = ({ image, className, owner }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-const beforeUpload = (file) => {
-  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-  if (!isJpgOrPng) {
-    message.error('You can only upload JPG/PNG file!');
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error('Image must smaller than 2MB!');
-  }
-  return isJpgOrPng && isLt2M;
-};
+  const handleModalClose = () => {
+    setIsModalVisible(false);
+    setSelectedImage(null); // Clear the selected image when closing the modal
+  };
 
-const ProfilePic = ({ image }) => {
-  const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState(image);
-
-  useEffect(() => {
-    setImageUrl(image);
-  }, [image]);
-
-  const handleChange = (info) => {
-    if (info.file.status === 'uploading') {
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === 'done') {
-      getBase64(info.file.originFileObj, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
+  const handleImageChange = (info) => {
+    if (info.fileList.length > 0) {
+      const file = info.fileList[0].originFileObj;
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result);
+        setIsModalVisible(true); // Show the modal after selecting an image
+      };
+      reader.readAsDataURL(file);
     }
   };
 
-  const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div>Upload</div>
-    </div>
-  );
-
   return (
-    <Upload
-      name="avatar"
-      listType="picture-circle"
-      className="avatar-uploader"
-      showUploadList={false}
-      beforeUpload={beforeUpload}
-      onChange={handleChange}
+    <div
+      className={`relative ${className}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {imageUrl ? (
+      {image ? (
         <img
-          src={imageUrl}
-          alt="avatar"
-          style={{ width: '100%' , height: '100%',  }}
-          className='rounded-full object-cover'
+          src={image}
+          alt="Profile"
+          className="rounded-full z-30 h-40 w-40 object-cover border border-text-primary"
         />
       ) : (
-        uploadButton
+        <Avatar
+          size={160}
+          icon={<UserOutlined />}
+        />
       )}
-    </Upload>
+      {owner && isHovered && (
+        <>
+          <Upload
+          className="absolute bottom-0 right-0  z-10 inset-0 flex items-center justify-center rounded-full bg-[#00000090] text-white cursor-pointer"
+            id="fileInput"
+            accept="image/*"
+            showUploadList={false}
+            beforeUpload={() => false}
+            onChange={handleImageChange}
+            style={{ display: 'none' }}
+           >
+            <div
+              className="absolute z-10 inset-0 flex items-center justify-center rounded-full bg-[#00000090] text-white cursor-pointer"
+              aria-label="Edit Profile Picture"
+            >
+              <FaRegEdit className='text-3xl' />
+            </div>
+          </Upload>
+          
+          <Modal
+            visible={isModalVisible}
+            onCancel={handleModalClose}
+            footer={null}
+            centered
+            width={800}
+          >
+            {selectedImage && <ImageCrop image={selectedImage} />}
+          </Modal>
+        </>
+      )}
+    </div>
   );
 };
 

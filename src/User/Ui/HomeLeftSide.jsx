@@ -28,9 +28,10 @@ const HomeLeftSide = ({ data }) => {
               {
                 console.log(friend)
               }
-              <Avatar image={friend.profilePicture }/>
+              <Avatar image={friend.profilePicture } spell={friend.userName.charAt(0).toUpperCase()}/>
              <Link to={`/profile/${friend._id}`}>
-             {friend.userName}</Link>
+             <h2>{friend.userName}</h2></Link>
+             
             </div>
           ))
         )}

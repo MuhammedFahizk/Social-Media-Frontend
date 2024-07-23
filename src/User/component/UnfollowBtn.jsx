@@ -4,6 +4,7 @@ import { unFollowUser } from "../auth/authUser";
 import FollowButton from "./FollowButton";
 import { useDispatch, useSelector } from "react-redux";
 import { unfollowUserSuccess } from "../Redux/UserInformation";
+
 const UnFollowBtn = ({ id }) => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,15 +12,15 @@ const UnFollowBtn = ({ id }) => {
   const [loading, setLoading] = useState(false);
   const { user } = useSelector((state) => state);
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
   useEffect(() => {
     if (user?.following) {
       setIsFollowing(user.following.some((item) => item._id === id));
     }
-  }, []);
+  }, [user, id]);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
   const handleOk = async () => {
     setLoading(true);
@@ -39,6 +40,19 @@ const UnFollowBtn = ({ id }) => {
     setIsModalOpen(false);
   };
 
+  const modalFooter = (
+    <>
+      <Button onClick={handleCancel}>Cancel</Button>
+      <Button
+        type="primary"
+        onClick={handleOk}
+        loading={loading}
+      >
+        Unfollow
+      </Button>
+    </>
+  );
+
   return (
     <div className="gap-2 flex">
       {isFollowing ? (
@@ -53,9 +67,8 @@ const UnFollowBtn = ({ id }) => {
           <Modal
             title="Unfollow Confirmation"
             open={isModalOpen}
-            onOk={handleOk}
             onCancel={handleCancel}
-            confirmLoading={loading}
+            footer={modalFooter} // Custom footer buttons
           >
             <p>Are you sure you want to unfollow?</p>
           </Modal>

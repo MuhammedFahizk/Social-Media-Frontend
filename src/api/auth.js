@@ -59,3 +59,14 @@ export const usersList = async () => {
     throw error.response ? error.response.data : new Error(error.message);
   }
 };
+
+export const fetchUser = async (id) => {
+  try {
+    const response = await adminInstance.get(`users/${id}`);
+    console.log("response Fetch User :", response.data.data);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+  }
+}

@@ -1,22 +1,21 @@
 import { UserOutlined } from '@ant-design/icons';
-import { Avatar, Badge, } from 'antd';
+import { Avatar, Badge } from 'antd';
 import React from 'react';
 import PropTypes from "prop-types";
-const AvatarBtn = ({ count, image, icon }) => {
-  console.log(image);
+
+const AvatarBtn = ({ count, image, spell }) => {
   return (
-    <div className='flex items-center h-full '>
-      
-      <Badge count={count}
-      className=''
-     >
-      
+    <div className='flex items-center h-full'>
+      <Badge count={count}>
         <Avatar 
-          src={image || null} // Show the image if provided, otherwise null
-          className='bg-light_Brown h-7 w-7'
+          src={image || undefined}
+          className='bg-text-primary h-7 w-7'
           shape="circle"
-          // icon={!image && icon ? icon : <UserOutlined />}
-        />
+        >
+          {!image && (
+            <h3 className='text-white'>{spell}</h3>
+          )}
+        </Avatar>
       </Badge>
     </div>
   );
@@ -25,6 +24,7 @@ const AvatarBtn = ({ count, image, icon }) => {
 AvatarBtn.propTypes = {
   count: PropTypes.number,
   image: PropTypes.string,
-  icon: PropTypes.element
-} 
+  spell: PropTypes.string.isRequired,
+};
+
 export default AvatarBtn;
