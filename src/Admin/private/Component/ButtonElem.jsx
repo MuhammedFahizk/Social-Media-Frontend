@@ -1,9 +1,10 @@
-import { Button, Modal, Avatar, Divider, List, Skeleton } from "antd";
+import { Button, Modal, Divider, List, Skeleton } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useEffect, useState } from "react";
 import UnFollowBtn from "../../../User/component/UnfollowBtn";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Avatar from "../../../User/component/Avatar";
 const ButtonElem = ({ item, list,  }) => {
   const { user } = useSelector((state) => state);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -73,7 +74,7 @@ const ButtonElem = ({ item, list,  }) => {
               renderItem={(listItem) => (
                 <List.Item key={listItem._id}>
                   <List.Item.Meta
-                    avatar={<Avatar src={listItem.profilePicture} />}
+                    avatar={<Avatar src={listItem.profilePicture} spell={listItem.userName.charAt(0).toUpperCase()} />}
                     title={<Link onClick={() => setIsModalOpen(false)} to={`/profile/${listItem._id}`} >{listItem.userName}</Link>}
                     description={listItem.email}
                   />

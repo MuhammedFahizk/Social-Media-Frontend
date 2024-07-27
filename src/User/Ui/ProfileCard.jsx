@@ -24,7 +24,7 @@ const ProfileCard = ({ profile }) => {
   }
 console.log('followers',profile.followers);
   return (
-    <div className="rounded-2xl flex flex-col items-center gap-4 justify-center h-full md:col-span-2 border border-text-primary">
+    <div className="rounded-2xl flex flex-col items-center gap-4 justify-center h-full  md:col-span-2 border border-text-primary">
        <ProfilePic owner={owner} image={profile.profilePicture} />
       <div>
         <h2 className="text-sm text-center">{profile.userName}</h2>

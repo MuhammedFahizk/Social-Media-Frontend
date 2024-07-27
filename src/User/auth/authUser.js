@@ -112,17 +112,18 @@ return response;
     throw error.response ? error.response.data : new Error(error.message);
   } 
 }
-export const searchUsers = async(searchValue) => {
+export const searchUsers = async (searchValue, item, offset) => {
   try {
-    const response = await userInstance.get(`/search/${searchValue}`)
+    console.log('item',item);
+    console.log('searchValue', searchValue);
+    const response = await userInstance.get(`/search/${searchValue}`, { params: { item , offset} }); // Adjust the request method as necessary
     console.log("response search users :", response);
-    return response.data.response
+    return response;
   } catch (error) {
     console.error("Error: ", error);
     throw error.response ? error.response.data : new Error(error.message);
-
   }
-}
+};
 
 export const uploadPhoto = async (blob) => {
   const formData = new FormData();
@@ -153,7 +154,18 @@ export const createPost = async( data, content) => {
 
   }
 } 
+export const createStory = async( data, content) => {
+  try {
+    console.log(data);
+    const response = await userInstance.post(`/createStory/${content}`, data)
+    console.log("response createStory users :", response);
+    return response
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
 
+  }
+} 
 export const uploadImageCloud = async( formData ) => {
   try {
     console.log(formData);

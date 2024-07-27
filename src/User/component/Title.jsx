@@ -1,9 +1,11 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 const Title = () => {
   return (
     <div className='  h-full  flex items-center '>
-        <h1 className='dark:text-primary-dark'>React</h1>
+       <Link to={'/'}>
+       <h1 className='dark:text-primary-dark'>React</h1>
+       </Link>
     </div>
   )
 }

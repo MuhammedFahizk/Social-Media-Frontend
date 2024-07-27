@@ -4,14 +4,13 @@ import Editor from 'react-simple-wysiwyg';
 import { useForm } from "react-hook-form";
 import { createPost, deleteImageCloud } from "../auth/authUser";
 import UploadImage from "./UploadImage";
-
+import { useNavigate } from "react-router-dom";
 const CreateBlog = () => {
   const { register, handleSubmit, setValue, reset } = useForm();
   const [editorValue, setEditorValue] = useState('');
   const [imageUrl, setImageUrl] = useState(null);
-  const [tempImage, setTempImage] = useState(null); // State for temporary image URL
   const [submitted, setSubmitted] = useState(false);
-
+  const navigate = useNavigate()
   const onEditorChange = (e) => {
     setEditorValue(e.target.value);
     setValue('body', e.target.value);
@@ -19,27 +18,7 @@ const CreateBlog = () => {
 
   const onImageUpload = (url) => {
     setImageUrl(url);
-    setTempImage(url); // Set temporary image URL
   };
-
-  const deleteImage = async (url) => {
-    try {
-      await deleteImageCloud(url);
-      message.success('Temporary image deleted');
-    } catch (error) {
-      console.error('Error deleting image', error);
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      if (!submitted && tempImage) {
-        deleteImage(tempImage);
-        setImageUrl(null);
-        console.log('deleted');
-      }
-    };
-  }, [submitted, tempImage]);
 
   const onSubmit = async (data) => {
     if (!imageUrl) {
@@ -50,17 +29,20 @@ const CreateBlog = () => {
     data.body = editorValue;
     data.imageUrl = imageUrl;
     try {
+      setSubmitted(true); // Set submitted to true when the form is submitted
       console.log('Form Data:', data);
       const response = await createPost(data, 'blog');
       message.success('Successfully Created Blog');
       reset();
       setEditorValue('');
-      setTempImage(null);
-      setSubmitted(true);
       console.log('Blog created successfully', response.data);
+      setImageUrl(null);
+      console.log('imageUrl',imageUrl);
+      navigate('/profil')
     } catch (error) {
       console.log('Error creating blog', error);
       message.error('Error creating blog');
+      setSubmitted(false); // Reset submitted to false in case of an error
     }
   };
 
@@ -71,7 +53,7 @@ const CreateBlog = () => {
     minHeight: '200px',
     fontFamily: 'Arial, sans-serif',
     fontSize: '14px',
-    maxWidth: '100%', 
+    maxWidth: '100%',
     width: '100%',
   };
 
@@ -95,7 +77,13 @@ const CreateBlog = () => {
             style={editorStyles}
           />
         </div>
-        <UploadImage title={'Upload Cover Image'} onImageUpload={onImageUpload} setTempImage={setTempImage} />
+        <UploadImage 
+          title={'Upload Cover Image'} 
+          onImageUpload={onImageUpload} 
+          ratio={16/6}
+          imageUrl={imageUrl}
+          submitted={submitted}
+        />
         <button 
           type="submit" 
           className="mt-4 w-full border rounded-lg p-2 border-blue-600 hover:bg-blue-600 hover:text-white hover:scale-105 transition-all duration-300"

@@ -9,6 +9,8 @@ const persistConfig =  {
     whitelist: ['user']
 }
 
+
+
 const persistedReducer = persistReducer(persistConfig,userReducer);
 
 export const store = createStore(persistedReducer);

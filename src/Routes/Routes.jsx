@@ -10,6 +10,7 @@ import ProfileLPage from "../User/Pages/ProfileLPage";
 import Users from "../Admin/private/Pages/Users";
 import UserPage from "../Admin/private/Pages/UserPage";
 import AddPost from "../User/Pages/AddPost";
+import Search from "../User/Pages/Search";
 export const Routes = createBrowserRouter([
   {
     path: "/",
@@ -72,6 +73,10 @@ export const Routes = createBrowserRouter([
               {
                 path: "addPost",
                 element: <AddPost/>
+              },
+              {
+                path: "search",
+                element: <Search/>
               },
               {
                 path: "profile/:id",

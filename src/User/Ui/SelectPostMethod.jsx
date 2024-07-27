@@ -15,7 +15,7 @@ const SelectPostMethod = ({setValue, value, options}) => {
             onClick={() => onChange(option.value)}
             key={index}
             className={`cursor-pointer rounded-full flex justify-center items-center transition-all duration-300 ${
-              value === option.value ? 'bg-white shadow-lg  border border-blue-600   h-9 w-20' : 'border  h-8 w-16'
+              value === option.value ? 'bg-white shadow-lg text-black  border border-blue-600   h-9 w-20' : 'border  h-8 w-16'
             }`}
           >
             <h2 className="text-sm">{option.label}</h2>

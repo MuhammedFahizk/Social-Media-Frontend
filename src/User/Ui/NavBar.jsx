@@ -6,7 +6,6 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import DarkMode from "../component/DarkMode";
 import { MessageOutlined } from "@ant-design/icons";
 import ProfileButton from "./ProfileButton";
-import SearchUser from "./SearchUser";
 const NavBar = () => {
   
   return (

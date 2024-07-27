@@ -1,5 +1,6 @@
 import React from 'react'
 import { LogOutUser } from '../auth/authUser'
+import { Link } from 'react-router-dom'
 const LogOutBtn = () => {
   const logout = async() => {
    try {
@@ -15,9 +16,9 @@ const LogOutBtn = () => {
   return (
     <div>
       <hr />
-      <a target="_blank" className='text-red-500  hover:text-red-600'  onClick={logout} rel="noopener noreferrer" >
-    Log Out
-  </a>
+      <Link target="_blank" className='text-red-500  hover:text-red-600'  onClick={logout} rel="noopener noreferrer" >
+   <h3>Log Out</h3>
+  </Link>
     </div>
   )
 }

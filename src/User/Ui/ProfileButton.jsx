@@ -18,15 +18,13 @@ const ProfileButton = () => {
     {
       key: "2",
       label: (
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate('/profile');
-          }}
-        >
-          Profile 
-        </a>
+        <><Link to={'/search'} /><h3 className="">Search </h3></>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <><Link to={'/profile'} /><h3> Profile</h3></>
       ),
     },
     {
@@ -37,6 +35,7 @@ const ProfileButton = () => {
 
   return (
     <DropDown
+    
       items={items}
       item={
         <Avatar

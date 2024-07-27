@@ -19,7 +19,7 @@ const Suggestions = ({ data }) => {
           {data.map((user, index) => (
             <div className="flex items-center gap-3 justify-between" key={index}>
               <div className='flex gap-2'>
-                <Avatar image={user.profilePicture} />
+                <Avatar image={user.profilePicture} spell={user.userName.charAt(0).toUpperCase()} />
                 <Link to={`/profile/${user._id}`}>{user.userName}</Link>
               </div>
               <FollowButton id={user._id} />

@@ -11,6 +11,7 @@ const ProfileLPage = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [posts, setPosts] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,6 +21,7 @@ const ProfileLPage = () => {
         const response = await profilePage(id);
         setProfile(response.data.profile);
         dispatch(setUser(response.data.user));
+        setPosts(response.data.post);
       } catch (error) {
         console.error("Error fetching profile:", error);
         setError("Failed to fetch profile. Please try again later.");
@@ -44,9 +46,9 @@ const ProfileLPage = () => {
   }
 
   return (
-    <div className="w-full h-[90vh] dark:text-white grid-cols-1 grid md:grid-cols-9 md:p-10 p-5">
+    <div className="w-full h-[90vh] dark:text-white grid-cols-1 grid md:grid-cols-9 md:px-10 p-3">
       <ProfileCard profile={profile} />
-      <UserFeeds />
+      <UserFeeds  posts={ posts} />
     </div>
   );
 };
