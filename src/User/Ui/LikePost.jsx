@@ -34,14 +34,14 @@ const LikePost = ({ likes, id, }) => {
     <div className="flex items-center gap-2">
       {liked ? (
         <FaHandsClapping 
-          className={`text-2xl cursor-pointer text-[#ffde6f] 
+          className={`text-xl cursor-pointer text-[#ffde6f] 
                      transform transition-transform duration-300 
-                     ${liked ? 'scale-125 rotate-12' : 'scale-100 rotate-0'}`}
+                     ${liked ? 'scale-100 rotate-12' : 'scale-100 rotate-0'}`}
           onClick={handleLikeClick} 
         />
       ) : (
         <PiHandsClapping 
-          className={`text-2xl cursor-pointer text-gray-400 
+          className={`text-xl cursor-pointer text-gray-400 
                      transform transition-transform duration-300 
                      ${liked ? 'scale-125 rotate-12' : 'scale-100 rotate-0'}`}
           onClick={handleLikeClick} 

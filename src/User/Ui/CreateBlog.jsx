@@ -30,14 +30,11 @@ const CreateBlog = () => {
     data.imageUrl = imageUrl;
     try {
       setSubmitted(true); // Set submitted to true when the form is submitted
-      console.log('Form Data:', data);
       const response = await createPost(data, 'blog');
       message.success('Successfully Created Blog');
       reset();
       setEditorValue('');
-      console.log('Blog created successfully', response.data);
       setImageUrl(null);
-      console.log('imageUrl',imageUrl);
       navigate('/profile')
     } catch (error) {
       console.log('Error creating blog', error);

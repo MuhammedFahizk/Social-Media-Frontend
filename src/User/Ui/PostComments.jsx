@@ -6,7 +6,7 @@ import 'react-modern-drawer/dist/index.css'
 import { IoClose } from "react-icons/io5";
 import CreateComment from './CreateComment';
 import AvatarBtn from '../component/Avatar';
-
+import { MessageOutlined } from '@ant-design/icons';
 const PostComments = ({ id, initialComments }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [comments, setComments] = useState(initialComments || []) // Manage comments state
@@ -21,13 +21,15 @@ const PostComments = ({ id, initialComments }) => {
 
   return (
     <>
-      <BiSolidMessageDetail onClick={toggleDrawer} className='text-2xl cursor-pointer' />
-      <h3>{comments.length}</h3>
+     <div className='flex gap-2'>
+     <MessageOutlined onClick={toggleDrawer} className='  cursor-pointer' />
+     <h3>{comments.length}</h3>
+     </div>
       <Drawer
         open={isOpen}
         onClose={toggleDrawer}
         direction='right'
-        className='dark:bg-primary-dark'
+        className='dark:bg-primary-dark text-black  dark:text-white'
         size='350px'
         enableOverlay
       >

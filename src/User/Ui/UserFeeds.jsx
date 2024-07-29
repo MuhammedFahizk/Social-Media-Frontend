@@ -10,10 +10,10 @@ import PropTypes from 'prop-types';
 // import UserSaved from './UserSaved'; // Import if you have a component for Saved
 
 const UserFeeds = ({ posts, profile }) => {
-  const [value, setValue] = useState("Post");
+  const [value, setValue] = useState("Image");
 
   const options = [
-    { label: <div className="flex items-center"><BsFilePost className="mr-2" />Post</div>, value: "Post" },
+    { label: <div className="flex items-center"><BsFilePost className="mr-2" />Post</div>, value: "Image" },
     { label: <div className="flex items-center"><BsBook className="mr-2" />Blogs</div>, value: "Blogs" },
     { label: <div className="flex items-center"><BsTag className="mr-2" />Tagged</div>, value: "Tagged" },
     { label: <div className="flex items-center"><BsBookmark className="mr-2" />Saved</div>, value: "Saved" }
@@ -27,7 +27,7 @@ const UserFeeds = ({ posts, profile }) => {
       </div>
 
       <div className="  ">
-        {value === "Post" && <UserPosts />}
+        {value === "Image" && <UserPosts images={posts.filter((item) => item.content === 'image')} />}
         {/* {value === "Tagged" && <UserTagged />} */}
         {value === "Blogs" && posts && <UserBlogs blogs={posts.filter((item) => item.content === 'blog')} />}
         {/* {value === "Saved" && <UserSaved />} */}
