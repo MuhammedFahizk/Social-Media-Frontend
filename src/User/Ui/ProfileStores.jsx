@@ -1,8 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-const Stores = () => {
+const Stores = ({profile}) => {
 
-    const story = useSelector(state => state.user.story )
+    const {story} = profile
   return (
     <div className='lg:h-[100px] lg:w-full mt-4 md:mt-0     overflow-x-scroll no-scrollbar md:p-3 flex gap-2'>
       {story.map((store, index) => (

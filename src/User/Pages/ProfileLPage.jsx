@@ -21,6 +21,7 @@ const ProfileLPage = () => {
         const response = await profilePage(id);
         setProfile(response.data.profile);
         dispatch(setUser(response.data.user));
+        console.log(response);
         setPosts(response.data.post);
       } catch (error) {
         console.error("Error fetching profile:", error);
@@ -48,7 +49,7 @@ const ProfileLPage = () => {
   return (
     <div className="w-full h-[90vh] dark:text-white grid-cols-1 grid md:grid-cols-9 md:px-10 p-3">
       <ProfileCard profile={profile} />
-      <UserFeeds  posts={ posts} />
+      <UserFeeds  posts={ posts}  profile={profile} />
     </div>
   );
 };

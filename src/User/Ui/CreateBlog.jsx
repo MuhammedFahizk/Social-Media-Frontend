@@ -13,7 +13,7 @@ const CreateBlog = () => {
   const navigate = useNavigate()
   const onEditorChange = (e) => {
     setEditorValue(e.target.value);
-    setValue('body', e.target.value);
+    setValue('body', <div className="text-black dark:text-white">${e.target.value}</div>);
   };
 
   const onImageUpload = (url) => {
@@ -38,7 +38,7 @@ const CreateBlog = () => {
       console.log('Blog created successfully', response.data);
       setImageUrl(null);
       console.log('imageUrl',imageUrl);
-      navigate('/profil')
+      navigate('/profile')
     } catch (error) {
       console.log('Error creating blog', error);
       message.error('Error creating blog');

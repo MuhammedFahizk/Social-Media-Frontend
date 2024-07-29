@@ -184,11 +184,49 @@ export const uploadImageCloud = async( formData ) => {
 
 export const deleteImageCloud = async( url ) => {
   try {
-    console.log(url);
     const payload = { url };
 
     const response = await userInstance.post('/deleteImage', payload,);
     console.log("response delete image users :", response);
+    return response
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+
+  }
+} 
+
+
+export const fetchPost = async( id ) => {
+  try {
+
+    const response = await userInstance.get(`/post/${id}`,);
+    console.log("response post  :", response);
+    return response
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+
+  }
+} 
+
+export const likePost = async( id ) => {
+  try {
+
+    const response = await userInstance.get(`/likePost/${id}`,);
+    console.log("response likePost  :", response);
+    return response
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+
+  }
+} 
+export const unLikePost  = async( id ) => {
+  try {
+
+    const response = await userInstance.delete(`/unLikePost/${id}`,);
+    console.log("response likePost  :", response);
     return response
   } catch (error) {
     console.error("Error: ", error);

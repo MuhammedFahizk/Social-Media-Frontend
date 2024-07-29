@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Avatar } from 'antd';
 import { StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons';
-
+import { Link } from 'react-router-dom';
 const UserBlogs = ({ blogs }) => {
   console.log(blogs);
   return (
@@ -19,11 +19,12 @@ const UserBlogs = ({ blogs }) => {
         }}
         dataSource={blogs}
         renderItem={(blog) => (
+        <Link to={`/blog/${blog._id}`}>
           <List.Item
             key={blog.title}
             actions={[
               <span><StarOutlined /> {blog.stars}</span>,
-              <span><LikeOutlined /> {blog.likes}</span>,
+              <span><LikeOutlined /> {blog.likes ? blog.likes.length : 0}</span>,
               <span><MessageOutlined /> {blog.comments}</span>,
             ]}
             extra={
@@ -40,6 +41,7 @@ const UserBlogs = ({ blogs }) => {
               description={<span>{blog.description}</span>}
             />
           </List.Item>
+        </Link>
         )}
       />
     </div>
