@@ -21,11 +21,11 @@ const UserBlogs = ({ blogs }) => {
         renderItem={(blog) => (
         <Link to={`/blog/${blog._id}`}>
           <List.Item
-            key={blog.title}
+            key={blog._id}
             actions={[
               <span><StarOutlined /> {blog.stars}</span>,
               <span><LikeOutlined /> {blog.likes ? blog.likes.length : 0}</span>,
-              <span><MessageOutlined /> {blog.comments}</span>,
+              <span><MessageOutlined /> {blog.comments.length}</span>,
             ]}
             extra={
               <img

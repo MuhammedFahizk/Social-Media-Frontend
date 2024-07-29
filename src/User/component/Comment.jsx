@@ -6,6 +6,9 @@ const Comment = () => {
           <TfiCommentAlt />
           <h3>423</h3>
       </div>
+      <div>
+        hai
+      </div>
       </>
     
 

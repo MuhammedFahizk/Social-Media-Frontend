@@ -25,7 +25,6 @@ const BlogPage = () => {
 
     fetchData();
   }, [id]);
-
   const getTimeDifference = (createdAt) => {
     const now = moment();
     const created = moment(createdAt);
@@ -85,7 +84,7 @@ const BlogPage = () => {
           </div>
           <div className="border gap-4 flex rounded-2xl px-10 p-2">
             <LikePost likes={post.likes} id={post._id}  />
-            <PostComments />
+            <PostComments id={post._id} initialComments={post.comments} />
           </div>
           <div className="text-black dark:text-white">
             <div dangerouslySetInnerHTML={{ __html: wrapContent(post.body) }}></div>

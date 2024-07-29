@@ -233,4 +233,18 @@ export const unLikePost  = async( id ) => {
     throw error.response ? error.response.data : new Error(error.message);
 
   }
+
+} 
+
+export const commentPost  = async( id, comment ) => {
+  try {
+
+    const response = await userInstance.post(`/commentPost/${id}`, {comment},);
+    console.log("response commentPost  :", response);
+    return response
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+
+  }
 } 

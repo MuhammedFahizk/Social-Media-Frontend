@@ -45,6 +45,7 @@ const ProfileLPage = () => {
       </div>
     );
   }
+  
 
   return (
     <div className="w-full h-[90vh] dark:text-white grid-cols-1 grid md:grid-cols-9 md:px-10 p-3">
