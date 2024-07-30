@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const FeedHeadings = ({ headings, setValue, value }) => {
+const FeedHeadings = ({ headings, setValue }) => {
     const [current, setCurrent] = useState(0);
 
     const handleClick = (index, item) => {

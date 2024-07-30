@@ -5,7 +5,6 @@ import { likePost, unLikePost } from '../auth/authUser'; // Ensure this path is 
 import { useSelector } from 'react-redux';
 const LikePost = ({ likes, id, }) => {
   const {_id} = useSelector(state => state.user)
-  console.log(likes);
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(likes ? likes.length : 0);
 

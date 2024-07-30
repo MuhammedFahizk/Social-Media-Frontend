@@ -187,7 +187,6 @@ export const deleteImageCloud = async( url ) => {
     const payload = { url };
 
     const response = await userInstance.post('/deleteImage', payload,);
-    console.log("response delete image users :", response);
     return response
   } catch (error) {
     console.error("Error: ", error);
@@ -201,7 +200,6 @@ export const fetchPost = async( id ) => {
   try {
 
     const response = await userInstance.get(`/post/${id}`,);
-    console.log("response post  :", response);
     return response
   } catch (error) {
     console.error("Error: ", error);
@@ -214,7 +212,6 @@ export const likePost = async( id ) => {
   try {
 
     const response = await userInstance.get(`/likePost/${id}`,);
-    console.log("response likePost  :", response);
     return response
   } catch (error) {
     console.error("Error: ", error);
@@ -226,7 +223,6 @@ export const unLikePost  = async( id ) => {
   try {
 
     const response = await userInstance.delete(`/unLikePost/${id}`,);
-    console.log("response likePost  :", response);
     return response
   } catch (error) {
     console.error("Error: ", error);
@@ -240,7 +236,18 @@ export const commentPost  = async( id, comment ) => {
   try {
 
     const response = await userInstance.post(`/commentPost/${id}`, {comment},);
-    console.log("response commentPost  :", response);
+    return response
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+
+  }
+} 
+
+export const fetchPosts  = async(heading, offset ) => {
+  try {
+
+    const response = await userInstance.get(`/fetchPosts/${heading}/${offset}`);
     return response
   } catch (error) {
     console.error("Error: ", error);

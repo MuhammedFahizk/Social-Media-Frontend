@@ -39,10 +39,11 @@ const Home = () => {
 
   return (
     <div className="text-text-light">
-      <div className="grid lg:grid-cols-9 grid-cols-1 gap-3 md:p-2 h-full dark:text-white">
+      <div className="grid lg:grid-cols-9 grid-cols-1  gap-3 md:p-2 h-full dark:text-white">
         <div className="lg:hidden">
           <Stores />
         </div>
+
         <HomeLeftSide data={data.user} />
         <HomeFeeds />
         <div className="hidden lg:block bg-ternary-light shadow-md dark:shadow-md rounded-2xl dark:bg-secondary-dark w-fit">

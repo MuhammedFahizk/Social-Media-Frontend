@@ -30,7 +30,7 @@ const ProtectedRouteUser = () => {
   }
 
   return (
-    <div className='dark:bg-primary-dark bg-primary-light darktext-white'>
+    <div className='dark:bg-primary-dark  min-h-screen h-full m-0  bg-primary-light dark:text-white'>
       <NavBar />
       <Outlet />
     </div>

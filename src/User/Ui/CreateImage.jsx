@@ -50,7 +50,7 @@ const CreateImage = () => {
         <UploadImage 
           title="Upload Cover Image" 
           onImageUpload={onImageUpload} 
-          ratio={1/1}
+          ratio={9/16}
           imageUrl={imageUrl}
           submitted={submitted}
         />

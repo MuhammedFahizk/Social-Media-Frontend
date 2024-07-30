@@ -13,7 +13,7 @@ const HomeLeftSide = ({ data }) => {
   
   const allFriends = Array.from(uniqueMap.values());
   return (
-    <div className="lg:flex leftHomeSideBar flex-col col-span-2 shadow-md hidden gap-4 p-5 px-3 bg-secondary-light dark:bg-secondary-dark rounded-3xl h-[88vh]">
+    <div className="lg:flex z-10 sticky top-0   leftHomeSideBar  flex-col col-span-2 shadow-md hidden gap-4 p-5 px-3 bg-secondary-light dark:bg-secondary-dark rounded-3xl h-[88vh]">
     <div className=' flex   '>
     </div>
       <h2 className=" ">Friends</h2>

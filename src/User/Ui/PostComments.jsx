@@ -42,9 +42,15 @@ const PostComments = ({ id, initialComments }) => {
           <div className='flex-col flex gap-4 overflow-y-auto h-[300px] no-scrollbar shadow-2xl p-2 rounded-lg'>
             {
               comments.length > 0 ? comments.map((item) => (
-                <div className='flex gap-2' key={item.id || item.content}>
-                  <AvatarBtn image={item.author.profilePicture} /> {/* Assuming you have user profile picture */}
-                  <p>{item.content}</p>
+                <div className='flex flex-col' key={item.id || item.content}>
+                 <div className='flex gap-2 h-full items-center'>
+                  <AvatarBtn image={item.author.profilePicture} />
+                 <h2>{item.author.userName}</h2>
+                
+                 </div>
+                 <div className='my-1 mx-9 p-2 border rounded-lg'>
+                <p>{item.content}</p>
+                </div>
                 </div>
               )) : <p>No comments yet.</p>
             }
