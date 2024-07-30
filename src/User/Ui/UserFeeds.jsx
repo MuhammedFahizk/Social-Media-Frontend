@@ -27,7 +27,7 @@ const UserFeeds = ({ posts, profile }) => {
       </div>
 
       <div className="  ">
-        {value === "Image" && <UserPosts images={posts.filter((item) => item.content === 'image')} />}
+        {value === "Image" && <UserPosts id={profile._id} images={posts.filter((item) => item.content === 'image')} />}
         {/* {value === "Tagged" && <UserTagged />} */}
         {value === "Blogs" && posts && <UserBlogs blogs={posts.filter((item) => item.content === 'blog')} />}
         {/* {value === "Saved" && <UserSaved />} */}

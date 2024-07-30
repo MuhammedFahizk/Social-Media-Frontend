@@ -24,6 +24,8 @@ const HomeFeeds = ({ userId }) => {
       try {
         const response = await fetchPosts(value, offset, userId);
         if (response.data.length > 0) {
+  console.log('blogs',response.data);
+
           setPosts((prev) => [...prev, ...response.data]);
           setOffset((prevOffset) => prevOffset + 5);
         } else {
