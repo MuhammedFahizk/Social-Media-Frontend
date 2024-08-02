@@ -36,7 +36,7 @@ const ProfilePic = ({ image, className, owner }) => {
         <img
           src={image}
           alt="Profile"
-          className="rounded-full z-30 h-40 w-40 object-cover border border-text-primary"
+          className="rounded-2xl z-30 h-32  w-32 object-cover border border-text-primary"
         />
       ) : (
         <Avatar
@@ -47,7 +47,7 @@ const ProfilePic = ({ image, className, owner }) => {
       {owner && isHovered && (
         <>
           <Upload
-          className="absolute bottom-0 right-0  z-10 inset-0 flex items-center justify-center rounded-full bg-[#00000090] text-white cursor-pointer"
+          className="absolute bottom-0 right-0  z-10 inset-0 flex items-center justify-center rounded-lg bg-[#00000090] text-white cursor-pointer"
             id="fileInput"
             accept="image/*"
             showUploadList={false}
@@ -56,7 +56,7 @@ const ProfilePic = ({ image, className, owner }) => {
             style={{ display: 'none' }}
            >
             <div
-              className="absolute z-10 inset-0 flex items-center justify-center rounded-full bg-[#00000090] text-white cursor-pointer"
+              className="absolute z-10 inset-0 flex items-center justify-center rounded-lg bg-[#00000090] text-white cursor-pointer"
               aria-label="Edit Profile Picture"
             >
               <FaRegEdit className='text-3xl' />

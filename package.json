@@ -36,6 +36,7 @@
     "react-timer-hook": "^3.0.7",
     "react-toastify": "^10.0.5",
     "react-toggle-dark-mode": "^1.1.1",
+    "react-transition-group": "^4.4.5",
     "redux-persist": "^6.0.0",
     "summernote": "^0.8.20"
   },

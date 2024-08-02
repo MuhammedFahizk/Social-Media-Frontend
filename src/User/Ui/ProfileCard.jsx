@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ProfilePic from "../component/ProfilePic";
-import ButtonElem from "../../Admin/private/Component/ButtonElem";
+import ButtonElem from "../Ui/ButtonElm";
 import { useSelector } from "react-redux";
 import FollowButton from "../component/FollowButton";
 import UnFollowBtn from "../component/UnfollowBtn";
@@ -22,17 +22,23 @@ const ProfileCard = ({ profile }) => {
   if (!profile) {
     return null; // or a loading indicator, or some default content
   }
-console.log('followers',profile.followers);
   return (
-    <div className="rounded-2xl flex flex-col items-center gap-4 justify-center h-full  md:col-span-2 border border-text-primary">
+    <div className="rounded-xl flex   items-center gap-4 justify h-40  md:col-span-2 shadow-2xl dark:bg-secondary-dark p-2 ">
        <ProfilePic owner={owner} image={profile.profilePicture} />
+      <div className="flex  flex-col gap-3 ">
       <div>
-        <h2 className="text-sm text-center">{profile.userName}</h2>
-        <p className="text-sm text-text-primary">{profile.email}</p>
+
+       <div className="flex gap-3 h-full items-center">
+       <div className="h-6 rounded-lg w-1 bg-text-primary">  </div>
+
+<h2 className="text-sm text-center">{profile.userName}</h2>
+       </div>
+        <p className="text-sm text-start  text-text-primary">{profile.email}</p>
       </div>
       <div className="flex gap-2">
-        <ButtonElem list={profile.followers}  item={`Followers ${profile.followers.length}`} />
-        <ButtonElem  list={profile.following}  item={`Followings ${profile.following.length}`} />
+        <ButtonElem id={profile._id}  type={'followers'} />
+        <ButtonElem  id={profile._id}  type={'followings'}   />
+      </div>
       </div>
       {!owner && (
         follow ? <UnFollowBtn id={profile._id} /> : <FollowButton id={profile._id} />

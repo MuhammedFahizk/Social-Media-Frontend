@@ -196,7 +196,7 @@ export const deleteImageCloud = async( url ) => {
 } 
 
 
-export const fetchPost = async( id ) => {
+export const fetchPost = async( id,  ) => {
   try {
 
     const response = await userInstance.get(`/post/${id}`,);
@@ -248,6 +248,18 @@ export const fetchPosts  = async(heading, offset ) => {
   try {
 
     const response = await userInstance.get(`/fetchPosts/${heading}/${offset}`);
+    return response
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+
+  }
+} 
+
+export const deletePosts  = async(id ) => {
+  try {
+
+    const response = await userInstance.delete(`/deletePost/${id}`);
     return response
   } catch (error) {
     console.error("Error: ", error);

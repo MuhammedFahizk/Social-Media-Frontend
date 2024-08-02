@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar, Table } from 'antd';
-import {  usersList } from '../../../api/auth';
+import { usersList } from '../../../api/auth';
 import { UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+
 const Users = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
+  
   const handleUserClick = (record) => {
-    console.log('click', record)
-    
-    navigate(`/admin/user/${record._id}`)
-  }
+    navigate(`/admin/user/${record._id}`);
+  };
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -26,10 +27,9 @@ const Users = () => {
   const columns = [
     {
       title: '',
-      dataIndex: 'ProfilePic',
-      sortDirections: ['descend', 'ascend'],
-      render: (profilePic) => (
-        <Avatar src={profilePic} icon={<UserOutlined/>}  />
+      dataIndex: 'profilePicture',
+      render: (profilePicture) => (
+        <Avatar src={profilePicture} icon={<UserOutlined />} />
       ),
     },
     {
@@ -50,10 +50,19 @@ const Users = () => {
       sorter: (a, b) => a.following.length - b.following.length,
     },
     {
-      title: 'Following',
+      title: 'Followers',
       dataIndex: 'followers',
       render: (followers) => followers.length,
       sorter: (a, b) => a.followers.length - b.followers.length,
+    },
+    {
+      title: 'Status',
+      dataIndex: 'isBlocked',
+      render: (isBlocked) => (
+        <p style={{ color: isBlocked ? 'red' : 'green' }}>
+          {isBlocked ? 'Blocked' : 'Active'}
+        </p>
+      ),
     },
   ];
 
@@ -69,9 +78,9 @@ const Users = () => {
           columns={columns}
           dataSource={users}
           onChange={onChange}
-          rowKey="id"
+          rowKey="_id"
           onRow={(record) => ({
-            onClick: () => handleUserClick(record)
+            onClick: () => handleUserClick(record),
           })}
         />
       </div>

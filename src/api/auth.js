@@ -70,3 +70,25 @@ export const fetchUser = async (id) => {
     throw error.response ? error.response.data : new Error(error.message);
   }
 }
+export const blockUser = async (id) => {
+  try {
+    const response = await adminInstance.get(`blockUser/${id}`);
+    console.log("response blockUser User :", response.data.data);
+    return response;
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+  }
+}
+
+export const unblockUser = async (id) => {
+  try {
+    const response = await adminInstance.get(`unblockUser/${id}`);
+    console.log("response unblockUser User :", response);
+    return response;
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+  }
+}
+

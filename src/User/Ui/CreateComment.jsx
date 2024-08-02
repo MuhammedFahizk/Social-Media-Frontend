@@ -44,7 +44,7 @@ const CreateComment = ({ id, onNewComment }) => {
   };
 
   return (
-    <div className='p-5 gap-4 flex flex-col border-0 shadow-2xl rounded-lg'>
+    <div className='p-5 gap-4 bg-white dark:bg-primary-dark  flex flex-col border-0  shadow-2xl rounded-lg'>
       <div className='flex gap-2'>
         <AvatarBtn image={user.profilePicture} />
         <h2>{user.userName || 'Anonymous'}</h2>

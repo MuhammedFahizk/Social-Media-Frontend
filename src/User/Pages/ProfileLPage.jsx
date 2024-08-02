@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { profilePage } from "../auth/authUser";
 import { useParams, useNavigate } from "react-router-dom";
 import { setUser } from "../Redux/UserInformation";
-
+import HomeLeftSide from "../Ui/HomeLeftSide";
 const ProfileLPage = () => {
   const { id } = useParams();
   const [profile, setProfile] = useState(null);
@@ -35,7 +35,11 @@ const ProfileLPage = () => {
   }, [id, dispatch]);
 
   if (loading) {
-    return <div className="w-full h-[90vh] flex items-center justify-center">Loading...</div>;
+    return (
+      <div className="w-full h-[90vh] flex items-center justify-center">
+        Loading...
+      </div>
+    );
   }
 
   if (error) {
@@ -45,12 +49,14 @@ const ProfileLPage = () => {
       </div>
     );
   }
-  
 
   return (
-    <div className="w-full h-[90vh] dark:text-white grid-cols-1 grid md:grid-cols-9 md:px-10 p-3">
-      <ProfileCard profile={profile} />
-      <UserFeeds  posts={ posts}  profile={profile} />
+    <div className="w-full h-[88vh] dark:text-white grid-cols-1 gap-2 grid md:grid-cols-9  md:px-4 p-3">
+      <div className="col-span-7 overflow-y-scroll no-scrollbar">
+        <ProfileCard profile={profile} />
+        <UserFeeds posts={posts} profile={profile} />
+      </div>
+      <HomeLeftSide data={profile}/>
     </div>
   );
 };

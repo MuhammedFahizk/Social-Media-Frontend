@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
-const FeedHeadings = ({ headings, setValue }) => {
+const FeedHeadings = ({ headings, setValue, setSearchResults }) => {
     const [current, setCurrent] = useState(0);
 
     const handleClick = (index, item) => {
         setCurrent(index);
         setValue(item);
+        setSearchResults([])
     };
 
     return (

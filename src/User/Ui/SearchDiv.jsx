@@ -3,7 +3,7 @@ import FeedHeadings from '../component/FeedHeadings';
 import SearchBar from './SearchBar';
 import UsersList from './UsersList';
 import BlogList from './BlogList';
-
+import ImageList from './imageList';
 const SearchDiv = () => {
     const [value, setValue] = useState('users');
     const headings = ['users', 'blogs', 'images'];
@@ -12,7 +12,7 @@ const SearchDiv = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     return (
-        <div className='p-2 h-[90vh] col-span-6 w-full flex text-black flex-col gap-2'>
+        <div className='p-2 h-[90vh]  w-[700px] flex text-black flex-col gap-2'>
             <SearchBar 
                 searchTerm={searchTerm} 
                 setSearchTerm={setSearchTerm}  
@@ -23,6 +23,7 @@ const SearchDiv = () => {
                 headings={headings} 
                 setValue={setValue}  
                 value={value} 
+                setSearchResults={setSearchResults}
             />
             { value === 'users' && (
                 <UsersList 
@@ -40,6 +41,12 @@ const SearchDiv = () => {
                     searchTerm={searchTerm} 
                     setOffset={setOffset} 
                     item={value}  />}
+
+                    { value === 'images' && < ImageList
+                    setSearchResults={setSearchResults} 
+
+                    data={searchResults} 
+                        />}
         </div>
     );
 };

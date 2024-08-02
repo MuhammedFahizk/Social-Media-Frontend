@@ -1,34 +1,36 @@
-import React, { useState, useEffect, useCallback } from "react";
-import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
-import LikePost from "./LikePost";
+import { useEffect, useState, useCallback } from 'react';
 import { MessageOutlined } from "@ant-design/icons";
+import LikePost from "./LikePost";
+import { IoSettingsOutline } from "react-icons/io5";
 import Modal from "./Modal";
-import AvatarBtn from "../component/Avatar";
 import CreateComment from "./CreateComment";
-import PostOwner from "./PostOwner";
+import AvatarBtn from "../component/Avatar";
 
-const UserPosts = ({ images, id, setFilteredPosts }) => {
-  const { _id } = useSelector((state) => state.user);
+const ImageList = ({ data, setSearchResults }) => { // Assume `setData` is passed from parent to update `data`
   const [owner, setOwner] = useState(false);
   const [open, setOpen] = useState(false);
   const [comments, setComments] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  useEffect(() => {
-    setOwner(id === _id);
-  }, [id, _id]);
-
   const handleOpenModal = (item) => {
-    setComments(item.comments);
-    setSelectedImage(item);
-    setOpen(true);
+    setComments(item.comments); // Set comments for the selected image
+    setSelectedImage(item);    // Set the selected image
+    setOpen(true);             // Open the modal
+  };
+
+  const handleCloseModal = () => {
+    setOpen(false);          // Close the modal
+    setSelectedImage(null); // Clear selected image
+    console.log('Modal closed, open state:', open);
   };
 
   const handleNewComment = useCallback((newComment) => {
+    // Update comments locally
     setComments((prevComments) => [...prevComments, newComment]);
+
+    // Update the data array in the parent component
     if (selectedImage) {
-      setFilteredPosts((prevData) =>
+        setSearchResults((prevData) =>
         prevData.map((item) =>
           item._id === selectedImage._id
             ? { ...item, comments: [...item.comments, newComment] }
@@ -36,37 +38,32 @@ const UserPosts = ({ images, id, setFilteredPosts }) => {
         )
       );
     }
-  }, [selectedImage, setFilteredPosts]);
+  }, [selectedImage, setSearchResults]);
 
-  const handleCloseModal = () => {
-    setOpen(false);
-    setSelectedImage(null);
-  };
-
-  const handleDelete = (deletedId) => {
-    setFilteredPosts((prevPosts) => prevPosts.filter(post => post._id !== deletedId));
-  };
+  useEffect(() => {
+    // Optional: Sync comments when selectedImage changes (if data updates outside this component)
+    if (selectedImage) {
+      setComments(selectedImage.comments);
+    }
+  }, [selectedImage]);
 
   return (
-    <>
-      <div className="grid md:grid-cols-3 grid-cols-1 gap-2 p-10">
-        {images.map((item, index) => (
-          <div key={index} className="relative group" onClick={() => handleOpenModal(item)}>
-            <img alt="example" src={item.imageUrl} className="object-cover w-full" />
-            <div className="absolute top-0 left-0 w-full h-full hidden group-hover:flex items-center justify-center bg-black bg-opacity-50 z-10 text-white font-bold">
-              <LikePost id={item._id} likes={item.likes} />
-              <div className="flex gap-2 h-full items-center">
-                <MessageOutlined className="text-xl ml-2 cursor-pointer" />
-                <h3>{item.comments.length}</h3>
-              </div>
-              {owner && (
-                <PostOwner id={item._id} onDelete={handleDelete} />
-              )}
+    <div className="grid grid-cols-2  overflow-y-scroll no-scrollbar">
+      {data.map((item, index) => (
+        <div key={index} className="relative group" onClick={() => handleOpenModal(item)}>
+          <img alt="example" src={item.imageUrl} className="object-cover w-full" />
+          <div className="absolute top-0 left-0 w-full h-full hidden group-hover:flex items-center justify-center bg-black bg-opacity-50 z-10 text-white font-bold">
+            <LikePost id={item._id} likes={item.likes} />
+            <div className="flex gap-2 h-full items-center">
+              <MessageOutlined className="text-xl ml-2 cursor-pointer" />
+              <h3>{item.comments.length}</h3>
             </div>
+            {owner && (
+              <IoSettingsOutline className="text-2xl ml-2 cursor-pointer" />
+            )}
           </div>
-        ))}
-      </div>
-
+        </div>
+      ))}
       {selectedImage && (
         <Modal isOpen={open} onClose={handleCloseModal}>
           <div className="flex w-[800px] h-[500px]">
@@ -93,22 +90,8 @@ const UserPosts = ({ images, id, setFilteredPosts }) => {
           </div>
         </Modal>
       )}
-    </>
+    </div>
   );
 };
 
-UserPosts.propTypes = {
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
-      imageUrl: PropTypes.string.isRequired,
-      likes: PropTypes.array.isRequired,
-      comments: PropTypes.array.isRequired,
-      _id: PropTypes.string.isRequired,
-      hashTag: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  id: PropTypes.string.isRequired,
-  setFilteredPosts: PropTypes.func.isRequired,
-};
-
-export default UserPosts;
+export default ImageList;

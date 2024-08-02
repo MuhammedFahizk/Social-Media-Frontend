@@ -76,11 +76,7 @@ const BlogList = ({ data, setOffset, setSearchResults, searchTerm, item, offset 
                         </List.Item>
                     )}
                 </VirtualList>
-                {/* {!hasMore && (
-                    <div className='text-center py-4'>
-                        <p className='text-black dark:text-white'>No more items to load.</p>
-                    </div>
-                )} */}
+               
             </List>
         </div>
     );

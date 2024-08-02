@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Segment from './Segment';
 import { BsFilePost, BsTag, BsBook, BsBookmark } from "react-icons/bs";
 import UserBlogs from './UserBlogs';
@@ -11,6 +11,29 @@ import PropTypes from 'prop-types';
 
 const UserFeeds = ({ posts, profile }) => {
   const [value, setValue] = useState("Image");
+  const [filteredPosts, setFilteredPosts] = useState([]);
+
+  // Effect to filter posts based on selected value
+  useEffect(() => {
+    switch (value) {
+      case "Image":
+        setFilteredPosts(posts.filter(item => item.content === 'image'));
+        break;
+      case "Blogs":
+        setFilteredPosts(posts.filter(item => item.content === 'blog'));
+        break;
+      case "Tagged":
+        // Set filteredPosts based on tagged posts logic
+        // setFilteredPosts(posts.filter(item => /* logic for tagged */));
+        break;
+      case "Saved":
+        // Set filteredPosts based on saved posts logic
+        // setFilteredPosts(posts.filter(item => /* logic for saved */));
+        break;
+      default:
+        setFilteredPosts([]);
+    }
+  }, [value, posts]);
 
   const options = [
     { label: <div className="flex items-center"><BsFilePost className="mr-2" />Post</div>, value: "Image" },
@@ -20,25 +43,27 @@ const UserFeeds = ({ posts, profile }) => {
   ];
 
   return (
-    <div className="col-span-7 overflow-y-scroll no-scrollbar px-5 ">
-        <ProfileStores profile={profile}  />
-      <div className=" w-full  items-center  sticky top-0 z-10 ">
+    <div className="col-span-7   ">
+      {/* <ProfileStores profile={profile} /> */}
+      <div className="w-full items-center sticky bg-white  shadow-xl dark:bg-secondary-dark top-2  rounded-lg  z-10">
         <Segment value={value} setValue={setValue} options={options} />
       </div>
 
-      <div className="  ">
-        {value === "Image" && <UserPosts id={profile._id} images={posts.filter((item) => item.content === 'image')} />}
+      <div>
+        {value === "Image" && <UserPosts setFilteredPosts={setFilteredPosts} id={profile._id} images={filteredPosts} />}
         {/* {value === "Tagged" && <UserTagged />} */}
-        {value === "Blogs" && posts && <UserBlogs blogs={posts.filter((item) => item.content === 'blog')} />}
+        {value === "Blogs" && <UserBlogs blogs={filteredPosts} />}
         {/* {value === "Saved" && <UserSaved />} */}
       </div>
     </div>
   );
 };
+
 UserFeeds.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.shape({
     content: PropTypes.string.isRequired,
   })).isRequired,
   profile: PropTypes.object.isRequired,
 };
+
 export default UserFeeds;

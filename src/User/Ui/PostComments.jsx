@@ -10,14 +10,14 @@ import { MessageOutlined } from '@ant-design/icons';
 
 const PostComments = ({ id, initialComments }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [comments, setComments] = useState(initialComments || []); // Manage comments state
+  const [comments, setComments] = useState(initialComments || []);
 
   const toggleDrawer = useCallback(() => {
     setIsOpen(prevState => !prevState);
   }, []);
 
   const handleNewComment = useCallback((newComment) => {
-    setComments(prevComments => [...prevComments, newComment]); // Add new comment to state
+    setComments(prevComments => [...prevComments, newComment]);
   }, []);
 
   return (
@@ -47,9 +47,9 @@ const PostComments = ({ id, initialComments }) => {
                   <div className='flex gap-2 h-full items-center'>
                     <AvatarBtn 
                       image={item.author.profilePicture} 
-                      spell={item.author.userName.charAt(0).toUpperCase()} 
+                      // spell={item.author.userName.charAt(0).toUpperCase()} 
                     />
-                    <h2>{item.author.userName}</h2>
+                    <h2>{item.author.userName }</h2>
                   </div>
                   <div className='my-1 mx-9 p-2 border rounded-lg'>
                     <p>{item.content}</p>

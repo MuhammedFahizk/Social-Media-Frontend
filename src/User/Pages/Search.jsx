@@ -3,7 +3,7 @@ import SearchDiv from '../Ui/SearchDiv';
 const Search = () => {
     
   return (
-    <div className='text-black dark:text-white grid grid-cols-10  place-items-center'>
+    <div className='text-black dark:text-white w-full  mx-auto h-fit  bg-white  dark:bg-primary-dark   place-items-center'>
         <SearchDiv />
     </div>
   )
