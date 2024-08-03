@@ -1,12 +1,12 @@
 import { userInstance } from "../../api/api_instance";
 
 
-export const fetchConnections  = async(id , type , offset) => {
+export const fetchConnections  = async(id , type , offset, query) => {
     try {
   
       const response = await userInstance.get(`/connections/${id}`, {
         params: {
-           offset, type
+           offset, type, query
         }
       });
       return response

@@ -1,124 +1,79 @@
+import React, { useEffect, useState } from "react";
+import { MdOutlineClear } from "react-icons/md";
 import PropTypes from 'prop-types';
-import { Button, Modal, Divider, List, Avatar } from "antd";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import AvatarBtn from "../component/Avatar";
-import UnFollowBtn from "../component/UnfollowBtn";
-import { fetchConnections } from "../auth/getAuth";
+import { Button, Input, Modal } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import ConnectionModal from './ConnectionModal';
+import ConnectionSearch from "./ConnectionSearch";
 
-const ButtonElem = ({ type, id,  }) => {
-  const { user } = useSelector((state) => state);
+const ButtonElem = ({ type, id, length }) => {
+  const [totalCount, setTotalCount] = useState(length);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
+  const [search, setSearch] = useState('');
   const [offset, setOffset] = useState(0);
-  const [totalCount, setTotalCount] = useState(0);
+  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    if (isModalOpen) {
-      loadMoreData();
-    }else {
-      initialLoading()
-    }
-    
-  }, [isModalOpen, id]);
-
-  const showModal = () => setIsModalOpen(true);
-
-  const handleOk = () => setIsModalOpen(false);
-
-  const handleCancel = () => {
+  const showModal = () => { 
+    setIsModalOpen(true);
     setOffset(0);
     setData([]);
-    setIsModalOpen(false);
-  };
-  const initialLoading = async() => {
-    try {
-      const response = await fetchConnections(id, type, offset);
-      const { totalCount: newTotalCount } = response.data;
-
-      setTotalCount(newTotalCount);
-    } catch (error) {
-      console.error("Error fetching more connections: ", error);
-    } finally {
-      setLoading(false);
-    }
-  }
-  const loadMoreData = async () => {
-    if (loading) return;
-
-    setLoading(true);
-    try {
-      const response = await fetchConnections(id, type, offset);
-      const { connections: newData, totalCount: newTotalCount } = response.data;
-
-      setData((prevData) => [...prevData, ...newData]);
-      setOffset((prevOffset) => prevOffset + 10);
-      setTotalCount(newTotalCount);
-    } catch (error) {
-      console.error("Error fetching more connections: ", error);
-    } finally {
-      setLoading(false);
-    }
   };
 
-  const handleUnfollow = (unfollowedUserId) => {
-    setData((prevData) => prevData.filter((user) => user._id !== unfollowedUserId));
-    setTotalCount((prevCount) => prevCount - 1);
+  const handleCancel = () => setIsModalOpen(false);
+
+  useEffect(() => {
+    setTotalCount(length);
+    setSearch('');
+    setOffset(0);
+    setData([]);
+  }, [id]);
+
+  const handleClear = () => {
+    setSearch('');
+    setOffset(0);
+    setData([]);
   };
 
   return (
     <>
-      <Button
-        onClick={showModal}
-        className="bg-white px-2 text-xs font-Jakarta text-black p-1 rounded-md shadow-sm md:shadow-lg"
-      >
+      <Button onClick={showModal} className="bg-white px-2 text-xs font-Jakarta text-black p-1 rounded-md shadow-sm md:shadow-lg">
         {type === "followers" ? `Followers ${totalCount}` : `Followings ${totalCount}`}
       </Button>
-      <Modal
-        title="Connections"
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <div
-          className="items-center justify-center w-full h-[300px] overflow-y-scroll p-4 bg-white rounded"
-          id="scrollableDiv"
-        >
-          <InfiniteScroll
-            dataLength={length}
-            next={loadMoreData}
-            hasMore={ totalCount < data.length}
-            endMessage={
-              data.length < totalCount ? (
-                <Divider plain>
-                  <p onClick={loadMoreData} className="text-text-gray font-semibold cursor-pointer">See All</p>
-                </Divider>
-              ) : (
-                <Divider plain>It is all, nothing more 🤐</Divider>
-              )
-            }
-            scrollableTarget="scrollableDiv"
-          >
-            <List
-              dataSource={data}
-              renderItem={(listItem) => (
-                <List.Item key={listItem._id}>
-                  <List.Item.Meta
-                    avatar={<AvatarBtn image={listItem.profilePicture} spell={listItem.userName.charAt(0).toUpperCase()} />}
-                    title={<Link onClick={() => setIsModalOpen(false)} to={`/profile/${listItem._id}`} >{listItem.userName}</Link>}
-                    description={listItem.email}
-                  />
-                  {user._id !== listItem._id && (
-                    <UnFollowBtn id={listItem._id} onUnfollow={handleUnfollow} />
-                  )}
-                </List.Item>
-              )}
-            />
-          </InfiniteScroll>
-        </div>
+      <Modal title="Connections" open={isModalOpen} onOk={handleCancel} onCancel={handleCancel}>
+        <Input
+          placeholder="Search for connections"
+          suffix={<MdOutlineClear onClick={handleClear} className="cursor-pointer" />}
+          prefix={<SearchOutlined />}
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setOffset(0);
+          }}
+        />
+        {search ? (
+          <ConnectionSearch
+            search={search}
+            id={id}
+            length={length}
+            offset={offset}
+            setOffset={setOffset}
+            type={type}
+          />
+        ) : (
+          <ConnectionModal
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+            type={type}
+            setTotalCount={setTotalCount}
+            totalCount={totalCount}
+            id={id}
+            data={data}
+            setOffset={setOffset}
+            offset={offset}
+            setData={setData}
+            length={length}
+          />
+        )}
       </Modal>
     </>
   );
@@ -127,7 +82,7 @@ const ButtonElem = ({ type, id,  }) => {
 ButtonElem.propTypes = {
   type: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  initialLength: PropTypes.number.isRequired
+  length: PropTypes.number.isRequired,
 };
 
 export default ButtonElem;
