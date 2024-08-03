@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Button, Modal, Divider, List, Avatar } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useEffect, useState } from "react";
@@ -7,7 +8,7 @@ import AvatarBtn from "../component/Avatar";
 import UnFollowBtn from "../component/UnfollowBtn";
 import { fetchConnections } from "../auth/getAuth";
 
-const ButtonElem = ({ type, id }) => {
+const ButtonElem = ({ type, id,  }) => {
   const { user } = useSelector((state) => state);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -18,46 +19,46 @@ const ButtonElem = ({ type, id }) => {
   useEffect(() => {
     if (isModalOpen) {
       loadMoreData();
-    } else {
-      fetchInitialCount();
+    }else {
+      initialLoading()
     }
-    }, [isModalOpen, offset, totalCount, user.id]);
+    
+  }, [isModalOpen, id]);
 
-  const fetchInitialCount = async () => {
-    try {
-      const response = await fetchConnections(id, type, 0);
-      setTotalCount(response.data.length);
-      setData(response.data);
-      setOffset((prevOffset) => prevOffset + 10);
+  const showModal = () => setIsModalOpen(true);
 
-    } catch (error) {
-      console.error("Error fetching connection count: ", error);
-    }
-  };
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
+  const handleOk = () => setIsModalOpen(false);
 
   const handleCancel = () => {
+    setOffset(0);
+    setData([]);
     setIsModalOpen(false);
   };
+  const initialLoading = async() => {
+    try {
+      const response = await fetchConnections(id, type, offset);
+      const { totalCount: newTotalCount } = response.data;
 
+      setTotalCount(newTotalCount);
+    } catch (error) {
+      console.error("Error fetching more connections: ", error);
+    } finally {
+      setLoading(false);
+    }
+  }
   const loadMoreData = async () => {
     if (loading) return;
 
     setLoading(true);
     try {
       const response = await fetchConnections(id, type, offset);
-      const newData = response.data;
+      const { connections: newData, totalCount: newTotalCount } = response.data;
+
       setData((prevData) => [...prevData, ...newData]);
-      setOffset((prevOffset) => prevOffset + newData.length);
+      setOffset((prevOffset) => prevOffset + 10);
+      setTotalCount(newTotalCount);
     } catch (error) {
-      console.error("Error fetching connections: ", error);
+      console.error("Error fetching more connections: ", error);
     } finally {
       setLoading(false);
     }
@@ -83,20 +84,22 @@ const ButtonElem = ({ type, id }) => {
         onCancel={handleCancel}
       >
         <div
-          className="items-center justify-center w-full h-full p-4 bg-white rounded"
+          className="items-center justify-center w-full h-[300px] overflow-y-scroll p-4 bg-white rounded"
           id="scrollableDiv"
-          style={{
-            height: 300,
-            overflow: "auto",
-            padding: "0 16px",
-            border: "1px solid rgba(140, 140, 140, 0.35)",
-          }}
         >
           <InfiniteScroll
-            dataLength={data.length}
+            dataLength={length}
             next={loadMoreData}
-            hasMore={data.length < totalCount} 
-            endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
+            hasMore={ totalCount < data.length}
+            endMessage={
+              data.length < totalCount ? (
+                <Divider plain>
+                  <p onClick={loadMoreData} className="text-text-gray font-semibold cursor-pointer">See All</p>
+                </Divider>
+              ) : (
+                <Divider plain>It is all, nothing more 🤐</Divider>
+              )
+            }
             scrollableTarget="scrollableDiv"
           >
             <List
@@ -119,6 +122,12 @@ const ButtonElem = ({ type, id }) => {
       </Modal>
     </>
   );
+};
+
+ButtonElem.propTypes = {
+  type: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  initialLength: PropTypes.number.isRequired
 };
 
 export default ButtonElem;

@@ -36,8 +36,8 @@ const ProfileCard = ({ profile }) => {
         <p className="text-sm text-start  text-text-primary">{profile.email}</p>
       </div>
       <div className="flex gap-2">
-        <ButtonElem id={profile._id}  type={'followers'} />
-        <ButtonElem  id={profile._id}  type={'followings'}   />
+        <ButtonElem length={profile.followers.length} id={profile._id}  type={'followers'} />
+        <ButtonElem  length={profile.following.length}   id={profile._id}  type={'followings'}   />
       </div>
       </div>
       {!owner && (
