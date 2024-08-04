@@ -5,7 +5,7 @@ import { IoIosTrash } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { deleteComment } from "../auth/deleteApi";
 import { message } from "antd";
-
+import { formatTimeDifference } from "../../Services/formatTimeDifference";
 const CommentList = ({ comments, authorId, postId, onNewComment }) => {
   const { user } = useSelector((state) => state);
 
@@ -27,12 +27,17 @@ const CommentList = ({ comments, authorId, postId, onNewComment }) => {
       {comments.length > 0 ? (
         comments.map((item) => (
           <div className="flex flex-col" key={item.id || item.content}>
-            <div className="flex gap-3 h-full items-center">
+            <div className="flex gap-3 h-full w-full  items-center ">
               <AvatarBtn
                 image={item.author.profilePicture && item.author.profilePicture}
                 spell={item.author.userName.charAt(0).toUpperCase()}
               />
+              <div className="flex  justify-between w-full pe-4">
               <h3>{item.author.userName}</h3>
+              <h3 className="text-right text-xs  font-light">
+                {formatTimeDifference(item.createdAt)} ago
+              </h3>
+              </div>
             </div>
             <div className="my-1 mx-9 p-2 flex items-start h-full justify-between border rounded-lg">
               <p>{item.content}</p>

@@ -12,7 +12,8 @@ import PropTypes from 'prop-types';
 const UserFeeds = ({ posts, profile }) => {
   const [value, setValue] = useState("Image");
   const [filteredPosts, setFilteredPosts] = useState([]);
-
+  const imageCount = posts.filter(item => item.content === 'image').length;
+  const blogCount = posts.filter(item => item.content === 'blog').length;
   // Effect to filter posts based on selected value
   useEffect(() => {
     switch (value) {
@@ -36,8 +37,8 @@ const UserFeeds = ({ posts, profile }) => {
   }, [value, posts]);
 
   const options = [
-    { label: <div className="flex items-center"><BsFilePost className="mr-2" />Post</div>, value: "Image" },
-    { label: <div className="flex items-center"><BsBook className="mr-2" />Blogs</div>, value: "Blogs" },
+    { label: <div className="flex items-center"><BsFilePost className="mr-2" />Post {imageCount}</div>, value: "Image" },
+    { label: <div className="flex items-center"><BsBook className="mr-2" />Blogs {blogCount}</div>, value: "Blogs" },
     { label: <div className="flex items-center"><BsTag className="mr-2" />Tagged</div>, value: "Tagged" },
     { label: <div className="flex items-center"><BsBookmark className="mr-2" />Saved</div>, value: "Saved" }
   ];
@@ -50,7 +51,7 @@ const UserFeeds = ({ posts, profile }) => {
       </div>
 
       <div>
-        {value === "Image" && <UserPosts setFilteredPosts={setFilteredPosts} id={profile._id} images={filteredPosts} />}
+        {value === "Image" && <UserPosts setFilteredPosts={setFilteredPosts}  id={profile._id} images={filteredPosts} />}
         {/* {value === "Tagged" && <UserTagged />} */}
         {value === "Blogs" && <UserBlogs blogs={filteredPosts} />}
         {/* {value === "Saved" && <UserSaved />} */}
