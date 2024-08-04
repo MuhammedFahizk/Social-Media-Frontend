@@ -14,19 +14,22 @@ const ButtonElem = ({ type, id, length }) => {
   const [data, setData] = useState([]);
 
   const showModal = () => { 
-    setIsModalOpen(true);
     setOffset(0);
     setData([]);
+    setIsModalOpen(true);
   };
 
-  const handleCancel = () => setIsModalOpen(false);
+  const handleCancel = () =>{ setIsModalOpen(false)
+  
+  };
 
   useEffect(() => {
     setTotalCount(length);
     setSearch('');
     setOffset(0);
     setData([]);
-  }, [id]);
+   
+  }, [id, isModalOpen]);
 
   const handleClear = () => {
     setSearch('');

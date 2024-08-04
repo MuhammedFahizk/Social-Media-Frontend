@@ -5,7 +5,7 @@ import { Button, message } from 'antd';
 import { commentPost } from '../auth/authUser';
 import PropTypes from 'prop-types';
 
-const CreateComment = ({ id, onNewComment }) => {
+const CreateComment = ({ postId, onNewComment }) => {
   const { user } = useSelector(state => state);
   const [comment, setComment] = useState(''); // Manage input state
   const [loading, setLoading] = useState(false); // Manage loading state
@@ -22,16 +22,10 @@ const CreateComment = ({ id, onNewComment }) => {
 
     setLoading(true); // Set loading state to true
     try {
-      const response = await commentPost(id, comment);
+      const response = await commentPost(postId, comment);
       message.success('Comment posted successfully'); // Show success message
       setComment('');
-      onNewComment({
-        content: comment,
-        author: {
-          profilePicture: user.profilePicture || '', // Use default value if not available
-          userName: user.userName || 'Anonymous' // Use default value if not available
-        }
-      }); // Notify parent component
+      onNewComment(response.data.result.comments); // Notify parent component
     } catch (error) {
       message.error('Failed to post comment');
     } finally {

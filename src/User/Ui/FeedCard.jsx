@@ -66,7 +66,7 @@ const FeedCard = ({ post }) => {
       <div className="flex flex-col md:flex-row gap-3 md:justify-between w-full">
         <div className="flex gap-4 h-full items-center">
           <LikePost likes={post.likes} id={post._id} />
-          <PostComments id={post._id} initialComments={post.comments} />
+          <PostComments postId={post._id} authorId={post.author._id} initialComments={post.comments} />
         </div>
 
        

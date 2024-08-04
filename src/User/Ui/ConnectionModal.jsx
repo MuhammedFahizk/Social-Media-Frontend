@@ -5,7 +5,7 @@ import AvatarBtn from "../component/Avatar";
 import UnFollowBtn from "../component/UnfollowBtn";
 import { Divider, List } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { fetchConnections } from "../auth/getAuth";
+import { fetchConnections } from "../auth/getApi";
 import PropTypes from 'prop-types';
 
 const ConnectionModal = ({ isModalOpen, setIsModalOpen,setOffset,offset, data, setData, totalCount, setTotalCount, id, type, length }) => {
@@ -13,16 +13,25 @@ const ConnectionModal = ({ isModalOpen, setIsModalOpen,setOffset,offset, data, s
   const { user } = useSelector((state) => state);
 
   useEffect(() => {
+    console.log('Modal Open:', isModalOpen);
+    console.log('Data:', data);
+    console.log('Offset:', offset);
+  
     if (isModalOpen) {
+      // Reset loading state and fetch data when modal opens
+      setOffset()
       setLoading(false);
-      setOffset(0);
       loadMoreData();
     } else {
+      // Reset state when modal closes
       setOffset(0);
-      initialLoading();
+      setData([]);
+      initialLoading()
     }
-  }, [isModalOpen, id, type]);
-
+  
+    
+  }, [id, isModalOpen]);
+  
   const initialLoading = async () => {
     try {
       const response = await fetchConnections(id, type, 0);
@@ -35,21 +44,24 @@ const ConnectionModal = ({ isModalOpen, setIsModalOpen,setOffset,offset, data, s
     }
   };
 
-  const loadMoreData = async () => {
-    if (loading) return;
-    setLoading(true);
-    try {
-      const response = await fetchConnections(id, type, offset);
-      const { connections: newData, totalCount: newTotalCount } = response.data;
-      setData((prevData) => [...prevData, ...newData]);
-      setOffset((prevOffset) => prevOffset + 10);
-      setTotalCount(newTotalCount);
-    } catch (error) {
-      console.error("Error fetching more connections: ", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+const loadMoreData = async () => {
+  if (loading) return;
+  setLoading(true);
+
+  try {
+    const response = await fetchConnections(id, type, offset);
+    const { connections: newData, totalCount: newTotalCount } = response.data;
+    setData((prevData) => [...prevData, ...newData]);
+    setOffset((prevOffset) => prevOffset + 10);
+    setTotalCount(newTotalCount);
+    console.log('Loaded data:', newData);
+  } catch (error) {
+    console.error("Error fetching more connections: ", error);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const handleUnfollow = (unfollowedUserId) => {
     setData((prevData) => prevData.filter((user) => user._id !== unfollowedUserId));
@@ -64,15 +76,14 @@ const ConnectionModal = ({ isModalOpen, setIsModalOpen,setOffset,offset, data, s
       <InfiniteScroll
         dataLength={length}
         next={loadMoreData}
-        loader={<Divider plain><p>Loading...</p></Divider>}
         endMessage={
-            data.length < totalCount ? (
-             <Divider plain>
-               <p onClick={loadMoreData} className="text-text-gray font-semibold cursor-pointer">See More</p>
-             </Divider>
-           ) : (
-             <Divider plain>It is all, nothing more 🤐</Divider>
-           )}
+          data.length < totalCount ? (
+           <Divider plain>
+             <p onClick={loadMoreData} className="text-text-gray font-semibold cursor-pointer">See More</p>
+           </Divider>
+         ) : (
+           <Divider plain>It is all, nothing more 🤐</Divider>
+         )}
         scrollableTarget="scrollableDiv"
       >
         <List
@@ -98,10 +109,16 @@ const ConnectionModal = ({ isModalOpen, setIsModalOpen,setOffset,offset, data, s
 ConnectionModal.propTypes = {
   isModalOpen: PropTypes.bool.isRequired,
   setIsModalOpen: PropTypes.func.isRequired,
+  setOffset: PropTypes.func.isRequired,
+  offset: PropTypes.number.isRequired,
+  data: PropTypes.array.isRequired,
+  setData: PropTypes.func.isRequired,
+  totalCount: PropTypes.number.isRequired,
   setTotalCount: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   length: PropTypes.number.isRequired,
 };
+
 
 export default ConnectionModal;

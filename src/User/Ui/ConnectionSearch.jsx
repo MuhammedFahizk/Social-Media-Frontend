@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Input, List, Divider, Avatar } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { fetchConnections } from "../auth/getAuth";
+import { fetchConnections } from "../auth/getApi";
 import AvatarBtn from "../component/Avatar";
 import UnFollowBtn from "../component/UnfollowBtn";
 import { Link } from "react-router-dom";
@@ -17,6 +17,7 @@ const ConnectionSearch = ({ search, setIsSearchOpen, offset, setOffset, type,len
   const { user } = useSelector((state) => state);
 
   useEffect(() => {
+    
     if (search) {
       setIsNewSearch(true);
       setData([]);
