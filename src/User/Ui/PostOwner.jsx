@@ -40,7 +40,7 @@ const PostOwner = ({ id, onDelete }) => {
   ];
 
   return (
-    <ProfileDropDown item={<IoSettingsOutline className="text-2xl mx-2 text-white cursor-pointer" />} items={items} />
+    <ProfileDropDown item={<IoSettingsOutline className="text-xl mx-2 text-black dark:text-white cursor-pointer" />} items={items} />
   );
 };
 

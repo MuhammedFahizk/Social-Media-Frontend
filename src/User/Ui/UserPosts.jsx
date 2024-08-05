@@ -49,19 +49,22 @@ const UserPosts = ({ images, id, setFilteredPosts }) => {
     <>
       <div className="grid md:grid-cols-3 grid-cols-1 gap-2 p-10">
         {images.map((item) => (
-          <div key={item._id} className="relative group" onClick={() => handleOpenModal(item)}>
-            <img alt={item.hashTag} src={item.imageUrl} className="object-cover w-full" />
-            <div className="absolute top-0 left-0 w-full h-full hidden group-hover:flex items-center justify-center bg-black bg-opacity-50 z-10 text-white font-bold">
+          <div key={item._id}><div  className="relative group cursor-pointer" onClick={() => handleOpenModal(item)}>
+            <img alt={item.hashTag} src={item.imageUrl} className="object-cover w-full rounded-md" />
+            <div className="absolute top-0 left-0 rounded-md w-full h-full hidden group-hover:flex items-center justify-center bg-black bg-opacity-50 z-10 text-white font-bold">
+
+            </div>
+          </div>
+          <div className="flex  gap-2 p-2">
               <LikePost id={item._id} likes={item.likes} />
               <div className="flex gap-2 h-full items-center">
-                <MessageOutlined className="text-xl ml-2 cursor-pointer" />
+                <MessageOutlined className="text-md ml-2 cursor-pointer" />
                 <h3>{item.comments.length}</h3>
               </div>
               {owner && (
                 <PostOwner id={item._id} onDelete={handleDelete} />
               )}
-            </div>
-          </div>
+            </div></div>
         ))}
       </div>
 
@@ -70,6 +73,11 @@ const UserPosts = ({ images, id, setFilteredPosts }) => {
           <div className="flex w-[800px] h-[500px]">
             <img alt={selectedImage.hashTag} src={selectedImage.imageUrl} className="rounded-lg object-cover w-1/2" />
             <div className="w-[400px] p-3 bg-white dark:bg-primary-dark">
+            <div className="w-full justify-end flex ">
+            {owner && (
+                <PostOwner id={selectedImage._id} onDelete={handleDelete} />
+              )}
+            </div>
               <CreateComment postId={selectedImage._id} onNewComment={handleNewComment} />
               <CommentList
                 comments={comments}
@@ -77,6 +85,8 @@ const UserPosts = ({ images, id, setFilteredPosts }) => {
                 postId={selectedImage._id}
                 onNewComment={handleNewComment}
               />
+              
+              
             </div>
           </div>
         </Modal>

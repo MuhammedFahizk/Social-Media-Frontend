@@ -28,8 +28,8 @@ const ButtonElem = ({ type, id, length }) => {
     setSearch('');
     setOffset(0);
     setData([]);
-   
-  }, [id, isModalOpen]);
+    setIsModalOpen(false)
+  }, [id]);
 
   const handleClear = () => {
     setSearch('');

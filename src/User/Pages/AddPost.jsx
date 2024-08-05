@@ -5,7 +5,7 @@ import CustomizePost from '../Ui/CustomizePost'
 const AddPost = () => {
     const {user} = useSelector(state => state)
   return (
-    <div className='grid md:grid-cols-9 p-2 -full '>
+    <div className='grid md:grid-cols-9 p-2 h-fit '>
         <HomeLeftSide data={user} />
         <CustomizePost        />
     </div>

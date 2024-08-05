@@ -57,12 +57,18 @@ const CreateBlog = () => {
   return (
     <div className="flex flex-col w-[370px] md:w-full justify-center border-dotted border rounded-lg items-center h-fit p-4 md:p-6">
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-lg">
-        <div className="mb-4">
+        <div className="mb-4 divide-y-4  divide-y-reverse  space-y-3">
           <input 
             placeholder="Title" 
             {...register("title", { required: true })} 
             className="border border-blue-600 w-full rounded-lg p-2 "
           />
+          <input 
+            placeholder="Hash Tag" 
+            {...register("hashTag", { required: false })} 
+            className="border border-blue-600 w-full rounded-lg p-2 "
+          />
+          
         </div>
 
         <div className="mb-4">

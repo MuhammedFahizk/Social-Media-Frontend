@@ -61,10 +61,15 @@ const BlogPage = () => {
           </div>
           <div className="border gap-4 flex rounded-2xl p-4">
             <LikePost likes={post.likes} id={post._id} />
-            <PostComments postId={post._id} initialComments={post.comments} />
+            <PostComments authorId={post.author._id} postId={post._id} initialComments={post.comments} />
           </div>
           <div className="text-black dark:text-white">
             <div dangerouslySetInnerHTML={{ __html: wrapContent(post.body) }}></div>
+          </div>
+          <div>
+            {
+              post.hashTag
+            }
           </div>
         </div>
       )}
