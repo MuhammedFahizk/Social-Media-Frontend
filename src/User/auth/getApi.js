@@ -16,3 +16,15 @@ export const fetchConnections  = async(id , type , offset, query) => {
   
     }
   } 
+
+  export const getFreshStories  = async() => {
+    try {
+  
+      const response = await userInstance.get(`/getFreshStories`);
+      return response
+    } catch (error) {
+      console.error("Error: ", error);
+      throw error.response ? error.response.data : new Error(error.message);
+  
+    }
+  } 

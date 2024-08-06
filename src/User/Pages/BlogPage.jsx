@@ -68,8 +68,11 @@ const BlogPage = () => {
           </div>
           <div>
             {
-              post.hashTag
-            }
+              post.hashTags && post.hashTags.map((item,  index)=> (
+                <span className="text-gray-500 font-Righteous ms-2">{item}</span>
+              ))
+             }
+             
           </div>
         </div>
       )}

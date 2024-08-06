@@ -47,7 +47,7 @@ const UserPosts = ({ images, id, setFilteredPosts }) => {
 
   return (
     <>
-      <div className="grid md:grid-cols-3 grid-cols-1 gap-2 p-10">
+        <div className="grid md:grid-cols-3 grid-cols-1 gap-2 p-10">
         {images.map((item) => (
           <div key={item._id}><div  className="relative group cursor-pointer" onClick={() => handleOpenModal(item)}>
             <img alt={item.hashTag} src={item.imageUrl} className="object-cover w-full rounded-md" />
@@ -68,16 +68,22 @@ const UserPosts = ({ images, id, setFilteredPosts }) => {
         ))}
       </div>
 
+
       {selectedImage && (
         <Modal isOpen={open} onClose={handleCloseModal}>
-          <div className="flex w-[800px] h-[500px]">
-            <img alt={selectedImage.hashTag} src={selectedImage.imageUrl} className="rounded-lg object-cover w-1/2" />
-            <div className="w-[400px] p-3 bg-white dark:bg-primary-dark">
-            <div className="w-full justify-end flex ">
-            {owner && (
-                <PostOwner id={selectedImage._id} onDelete={handleDelete} />
-              )}
+          <div className="flex w-full max-w-4xl h-[500px] ">
+            <div className="w-1/2  flex flex-col items-start h-fit bg-gray-50 dark:bg-gray-800">
+              <img alt={selectedImage.hashTag} src={selectedImage.imageUrl} className="rounded-lg object-cover mb-4" />
+              <div className="flex justify-start  gap-2">
+                {selectedImage.hashTags && selectedImage.hashTags.map((item, index) => (
+                  <span key={index} className="text-gray-500   font-Righteous font-light  ms-2 py-1 rounded">{item}</span>
+                ))}
+              </div>
             </div>
+            <div className="w-1/2 p-4 gap-2 flex flex-col bg-white dark:bg-primary-dark overflow-y-auto">
+              <div className="flex justify-end">
+                {owner && <PostOwner id={selectedImage._id} onDelete={handleDelete} />}
+              </div>
               <CreateComment postId={selectedImage._id} onNewComment={handleNewComment} />
               <CommentList
                 comments={comments}
@@ -85,8 +91,6 @@ const UserPosts = ({ images, id, setFilteredPosts }) => {
                 postId={selectedImage._id}
                 onNewComment={handleNewComment}
               />
-              
-              
             </div>
           </div>
         </Modal>
@@ -110,3 +114,4 @@ UserPosts.propTypes = {
 };
 
 export default UserPosts;
+ 

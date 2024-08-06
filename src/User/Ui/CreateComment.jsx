@@ -46,7 +46,7 @@ const CreateComment = ({ postId, onNewComment }) => {
   };
 
   return (
-    <div className='p-5 gap-4 bg-white dark:bg-primary-dark flex flex-col border-0 shadow-2xl rounded-lg'>
+    <div className='p-2 gap-2 bg-white dark:bg-primary-dark flex flex-col border-0 shadow-2xl rounded-lg'>
       <div className='flex gap-2'>
         <AvatarBtn image={user.profilePicture} />
         <h2>{user.userName || 'Anonymous'}</h2>
@@ -54,10 +54,10 @@ const CreateComment = ({ postId, onNewComment }) => {
       <textarea
         ref={textareaRef}
         placeholder='What are your thoughts?'
-        className='dark:bg-inherit dark:text-white p-2 active:border-0 text-md font-Jakarta resize-none overflow-hidden'
+        className='dark:bg-inherit dark:text-white pb-4 px-2 active:border-0 text-md font-Jakarta resize-none overflow-hidden'
         value={comment}
         onChange={handleCommentChange}
-        rows={1} // Set a minimum number of rows
+        rows={2} // Set a minimum number of rows
       />
       <div className='flex justify-end gap-2 h-full items-center'>
         <h3 className='cursor-pointer' onClick={handleCancel}>Cancel</h3>
