@@ -3,11 +3,12 @@ import { Avatar, Badge } from 'antd';
 import React from 'react';
 import PropTypes from "prop-types";
 
-const AvatarBtn = ({ count, image, spell }) => {
+const AvatarBtn = ({ count, image, spell, size }) => {
   return (
     <div className='flex items-center h-full'>
       <Badge count={count}>
         <Avatar 
+       size='small'
           src={image || undefined}
           className='bg-text-primary h-7 w-7'
           shape="circle"

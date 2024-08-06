@@ -3,7 +3,6 @@ import Segment from './Segment';
 import { BsFilePost, BsTag, BsBook, BsBookmark } from "react-icons/bs";
 import UserBlogs from './UserBlogs';
 import UserPosts from './UserPosts';
-import ProfileStores from './ProfileStores';
 import PropTypes from 'prop-types';
 
 // import UserTagged from './UserTagged'; // Import if you have a component for Tagged

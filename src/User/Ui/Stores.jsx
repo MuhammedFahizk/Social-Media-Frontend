@@ -14,7 +14,7 @@ const Stores = () => {
     const fetchData = async () => {
       try {
         const response = await getFreshStories();
-        const sortedUsers = response.data.user.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Sort users by createdAt descending
+        const sortedUsers = response.data.user.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setUsers(sortedUsers);
       } catch (error) {
         console.error("Failed to load stories:", error);
@@ -23,6 +23,7 @@ const Stores = () => {
 
     fetchData();
   }, []);
+  console.log('users', users);
 
   const handleOpenModal = (userIndex) => {
     const story = users[userIndex].story;
@@ -38,8 +39,7 @@ const Stores = () => {
 
   const handleNextUser = () => {
     if (selectedUserIndex < users.length - 1) {
-      const nextIndex = selectedUserIndex + 1;
-      handleOpenModal(nextIndex);
+      handleOpenModal(selectedUserIndex + 1);
     } else {
       handleCloseModal();
     }
@@ -47,8 +47,7 @@ const Stores = () => {
 
   const handleReverseUser = () => {
     if (selectedUserIndex > 0) {
-      const prevIndex = selectedUserIndex - 1;
-      handleOpenModal(prevIndex);
+      handleOpenModal(selectedUserIndex - 1);
     } else {
       handleCloseModal();
     }
@@ -88,5 +87,7 @@ const Stores = () => {
     </div>
   );
 };
+
+
 
 export default Stores;
