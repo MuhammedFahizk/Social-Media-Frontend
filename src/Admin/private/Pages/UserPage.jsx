@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchUser, blockUser, unblockUser } from '../../../api/auth';
+import { fetchUser, blockUser, unblockUser } from '../../api/getApi';
 import { Card, message } from 'antd';
 import ButtonModal from '../../../User/component/Button';
 
@@ -48,7 +48,7 @@ const UserPage = () => {
     <div>
       {user ? (
         <div>
-          <div className='grid grid-cols-3'>
+          <div className='grid grid-cols-3 gap-2'>
             <Card
               className='col-span-1'
               cover={
@@ -73,6 +73,9 @@ const UserPage = () => {
                   </button>
                 )}
               </div>
+            </Card>
+            <Card>
+
             </Card>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { userInstance } from "../../api/api_instance";
+import { userInstance } from "../../Admin/api/api_instance";
 
 export const incrementViewerCount  = async( storyId, authorId ) => {
     try {

@@ -49,46 +49,5 @@ export const verifyAdmin = async () => {
   }
 };
 
-export const usersList = async () => {
-  try {
-    const response = await adminInstance.get("users");
-    console.log("response Admin :", response.data.data);
-    return response.data.data;
-  } catch (error) {
-    console.error("Error: ", error);
-    throw error.response ? error.response.data : new Error(error.message);
-  }
-};
 
-export const fetchUser = async (id) => {
-  try {
-    const response = await adminInstance.get(`users/${id}`);
-    console.log("response Fetch User :", response.data.data);
-    return response.data.data;
-  } catch (error) {
-    console.error("Error: ", error);
-    throw error.response ? error.response.data : new Error(error.message);
-  }
-}
-export const blockUser = async (id) => {
-  try {
-    const response = await adminInstance.get(`blockUser/${id}`);
-    console.log("response blockUser User :", response.data.data);
-    return response;
-  } catch (error) {
-    console.error("Error: ", error);
-    throw error.response ? error.response.data : new Error(error.message);
-  }
-}
-
-export const unblockUser = async (id) => {
-  try {
-    const response = await adminInstance.get(`unblockUser/${id}`);
-    console.log("response unblockUser User :", response);
-    return response;
-  } catch (error) {
-    console.error("Error: ", error);
-    throw error.response ? error.response.data : new Error(error.message);
-  }
-}
 

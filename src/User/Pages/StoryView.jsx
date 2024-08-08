@@ -2,17 +2,16 @@ import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import AvatarBtn from '../component/Avatar';
 import { incrementViewerCount } from '../auth/postApi';
-import { FaRegEye } from "react-icons/fa";
 import AvatarGroup from '../Ui/AvatarGroup';
 import { useSelector } from 'react-redux';
 
-const StoryView = ({ story, author, onNextUser, onReverse }) => {
+const StoryView = ({ story, author, onNextUser, onReverse, viewUpdate}) => {
   const [item, setItem] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
   const { user } = useSelector(state => state);
 
   const updateViewers = useCallback(async () => {
-    if (story[item]?._id && !story[item].views.includes(user._id)) {
+    if (story[item]?._id && !story[item].views.includes(user._id) ) {
       try {
         await incrementViewerCount(story[item]._id, author._id);
       } catch (error) {
@@ -62,7 +61,7 @@ const StoryView = ({ story, author, onNextUser, onReverse }) => {
   };
 
   return (
-    <div className="relative no-scrollbar cursor-pointer">
+    <div className="relative no-scrollbar cursor-pointer transition  ">
       <div className="absolute z-50 p-2 flex gap-3 bg-[#06060662] text-white w-full shadow-md top-2 h-fit items-center">
         <AvatarBtn image={author.profilePicture} />
         <h3>{author.userName}</h3>
@@ -70,19 +69,7 @@ const StoryView = ({ story, author, onNextUser, onReverse }) => {
       
       {/* Progress bar */}
       <div className='flex w-full absolute h-4'>
-  {story.map((item, index) => {
-    return (
-      <div key={index} className={`relative h-1.5 z-50 bg-gray-200 rounded-full dark:bg-gray-700 w-1/${story.length}`}>
-        <div
-          className="absolute h-full bg-blue-600 rounded-full"
-          style={{ width: `${(index / story.length) * 100}%` }}
-        />
-      </div>
-    );
-  })}
-  {story.length > 0 && (
-    <span className="ml-auto mr-2 text-black">Elapsed: {elapsedTime}s</span> // Display elapsed time
-  )}
+  
 </div>
 
 
@@ -103,10 +90,10 @@ const StoryView = ({ story, author, onNextUser, onReverse }) => {
         onClick={handleChangeItem}
         className="absolute w-1/2 h-full z-40 top-0 right-0"
       ></div>
-      <div className="absolute z-40 w-full text-white flex gap-2 h-fit items-center bg-[#03030367] bottom-4">
-        <FaRegEye className="text-white" />
-        <AvatarGroup users={story[item]?.views.userDetails} />
+      {author._id === user._id && viewUpdate && <div className="absolute z-40 w-full h-fit  text-white flex gap-2  items-center bg-[#03030367] bottom-4">
+        <AvatarGroup users={story[item]?.views} />
       </div>
+}
     </div>
   );
 };

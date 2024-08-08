@@ -1,6 +1,6 @@
 import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
-import { adminLoginWithGoogle } from '../../../api/auth';
+import { adminLoginWithGoogle } from '../../api/auth';
 
 import { useNavigate } from "react-router-dom";
 import {  toast } from 'react-toastify';

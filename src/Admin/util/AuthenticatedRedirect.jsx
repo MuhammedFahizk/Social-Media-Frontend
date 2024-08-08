@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { verifyAdmin } from "../../api/auth";
+import { verifyAdmin } from "../api/auth";
 
 const useAuthenticatedRedirect = () => {
   const [loading, setLoading] = useState(true);

@@ -3,7 +3,7 @@ import Input from "../../../CommonComponents/Input";
 import SubmitButton from "../../../CommonComponents/SubmitButton";
 import { HiOutlineMail } from "react-icons/hi";
 import { EyeOutlined } from "@ant-design/icons";
-import { loginAdmin } from "../../../api/auth";
+import { loginAdmin } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 
 import {  toast } from 'react-toastify';

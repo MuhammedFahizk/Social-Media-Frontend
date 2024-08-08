@@ -13,7 +13,7 @@ const Modal = ({ isOpen, onClose, children }) => {
   return (
     <div
       onClick={handleBackdropClick}
-      className="fixed inset-0 flex items-center justify-center bg-[#0000005c] z-50"
+      className="fixed inset-0 flex items-center justify-center bg-[#000000a8] z-50"
     >
       <div className="bg-white rounded-lg shadow-lg relative" onClick={(e) => e.stopPropagation()}>
         {children}

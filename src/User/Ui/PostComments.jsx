@@ -7,7 +7,7 @@ import { IoClose } from "react-icons/io5";
 import CreateComment from './CreateComment';
 import { MessageOutlined } from '@ant-design/icons';
 import CommentList from './CommentList';
-const PostComments = ({ postId, initialComments, authorId }) => {
+const PostComments = ({ postId, initialComments, authorId, isAdmin  }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [comments, setComments] = useState(initialComments || []);
   const toggleDrawer = useCallback(() => {
@@ -37,7 +37,13 @@ const PostComments = ({ postId, initialComments, authorId }) => {
             <h2>Responses</h2>
             <IoClose className='text-4xl cursor-pointer' onClick={toggleDrawer} />
           </div>
-          <CreateComment postId={postId} onNewComment={handleNewComment} />
+          {
+            isAdmin ? (
+''
+            ):(
+            <CreateComment postId={postId} onNewComment={handleNewComment} />
+          
+          )}
           <CommentList authorId={authorId} postId={postId} onNewComment={handleNewComment}  comments={comments} />
         </div>
       </Drawer>

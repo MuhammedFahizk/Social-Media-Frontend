@@ -31,7 +31,7 @@ const SearchBar = ({ item, setSearchResults,setSearchTerm, searchTerm }) => {
         onChange={handleInputChange}
         suffix={
             <div>
-                <Button  onClick={() => setSearchResults('')}><MdClear className='text-red-300' /></Button>
+                <Button  onClick={() => {{setSearchResults([]), setSearchTerm('')}}}><MdClear className='text-red-300' /></Button>
             </div>
         }
       />

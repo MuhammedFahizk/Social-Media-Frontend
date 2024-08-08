@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar, Table } from 'antd';
-import { usersList } from '../../../api/auth';
+import { usersList } from '../../api/getApi';
 import { UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 

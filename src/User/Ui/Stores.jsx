@@ -77,6 +77,7 @@ const Stores = () => {
       <Modal isOpen={open} onClose={handleCloseModal}>
         {selectedStory && (
           <StoryView
+            viewUpdate={true}
             story={selectedStory}
             author={author}
             onNextUser={handleNextUser}

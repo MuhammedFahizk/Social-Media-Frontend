@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { verifyAdmin } from '../../api/auth';
+import { verifyAdmin } from '../api/auth';
 import AdminLayout from '../private/Component/AdminLayout';
 const ProtectedRoutesAdmin = () => {
   const navigate = useNavigate();

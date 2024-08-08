@@ -1,4 +1,4 @@
-import { userInstance } from "../../api/api_instance";
+import { userInstance } from "../../Admin/api/api_instance";
 
 
 export const fetchConnections  = async(id , type , offset, query) => {
@@ -21,6 +21,18 @@ export const fetchConnections  = async(id , type , offset, query) => {
     try {
   
       const response = await userInstance.get(`/getFreshStories`);
+      return response
+    } catch (error) {
+      console.error("Error: ", error);
+      throw error.response ? error.response.data : new Error(error.message);
+  
+    }
+  } 
+
+  export const fetchProfileStores  = async(userId) => {
+    try {
+  
+      const response = await userInstance.get(`/fetchProfileStores/${userId}`);
       return response
     } catch (error) {
       console.error("Error: ", error);

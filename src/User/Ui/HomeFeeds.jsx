@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense, lazy, useRef } from 'react';
+import React, { useEffect, useState, Suspense, lazy, useRef, useCallback } from 'react';
 import FeedHeadings from '../component/FeedHeadings';
 import { fetchPosts } from '../auth/authUser';
 import { Skeleton, Spin } from 'antd';
@@ -15,32 +15,31 @@ const HomeFeeds = ({ userId }) => {
   const [hasMore, setHasMore] = useState(true); // Track if more posts are available
   const observerRef = useRef(null);
 
+  // Define fetchPostsFn with useCallback
+  const fetchPostsFn = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetchPosts(value, offset, userId);
+      if (response.data.length > 0) {
+        console.log('blogs', response.data);
+        setPosts((prev) => [...prev, ...response.data]);
+        setOffset((prevOffset) => prevOffset + 5);
+      } else {
+        setHasMore(false); // No more posts to fetch
+      }
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    } finally {
+      setLoading(false);
+      setShouldFetchMore(false); // Reset flag after fetching
+    }
+  }, [value, offset, userId, hasMore]); // Dependencies
+
   // Fetch posts whenever the value or shouldFetchMore changes
   useEffect(() => {
     if (!shouldFetchMore || !hasMore) return;
-
-    const fetchPostsFn = async () => {
-      setLoading(true);
-      try {
-        const response = await fetchPosts(value, offset, userId);
-        if (response.data.length > 0) {
-  console.log('blogs',response.data);
-
-          setPosts((prev) => [...prev, ...response.data]);
-          setOffset((prevOffset) => prevOffset + 5);
-        } else {
-          setHasMore(false); // No more posts to fetch
-        }
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      } finally {
-        setLoading(false);
-        setShouldFetchMore(false); // Reset flag after fetching
-      }
-    };
-
     fetchPostsFn();
-  }, [value, shouldFetchMore, offset, hasMore, userId]);
+  }, [fetchPostsFn, shouldFetchMore, hasMore]);
 
   // Set up Intersection Observer for infinite scrolling
   useEffect(() => {

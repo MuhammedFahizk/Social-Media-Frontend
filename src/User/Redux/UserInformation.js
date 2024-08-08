@@ -24,8 +24,12 @@ const userSlice = createSlice({
     unfollowUserSuccess: (state, action) => {
       state.user.following = state.user.following.filter((item) => item._id !== action.payload);
     },
+    logout: (state) => {
+      // Reset user state to initial state
+      state.user = initialState.user;
+    },
   },
 });
 
-export const { setUser, followUserSuccess, unfollowUserSuccess } = userSlice.actions;
+export const { setUser, followUserSuccess, unfollowUserSuccess, logout } = userSlice.actions;
 export default userSlice.reducer;

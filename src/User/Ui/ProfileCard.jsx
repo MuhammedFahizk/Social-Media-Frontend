@@ -5,7 +5,7 @@ import ButtonElem from "../Ui/ButtonElm";
 import { useSelector } from "react-redux";
 import FollowButton from "../component/FollowButton";
 import UnFollowBtn from "../component/UnfollowBtn";
-
+import ProfileStory from "./ProfileStory";
 const ProfileCard = ({ profile }) => {
   const [follow, setFollow] = useState(false);
   const [owner, setOwner] = useState(false);
@@ -23,7 +23,7 @@ const ProfileCard = ({ profile }) => {
     return null; // or a loading indicator, or some default content
   }
   return (
-    <div className="rounded-xl flex   items-center gap-4 justify h-40  md:col-span-2 shadow-2xl dark:bg-secondary-dark p-2 ">
+    <div className="rounded-xl flex  justify-between items-center gap-4 justify h-40   md:col-span-2 shadow-2xl dark:bg-secondary-dark p-2 ">
        <ProfilePic owner={owner} image={profile.profilePicture} />
       <div className="flex  flex-col gap-3 ">
       <div>
@@ -38,14 +38,15 @@ const ProfileCard = ({ profile }) => {
       <div className="flex gap-2">
         <ButtonElem length={profile.followers.length} id={profile._id}  type={'followers'} />
         <ButtonElem  length={profile.following.length}   id={profile._id}  type={'followings'}   />
-      </div>
-      </div>
-      {!owner && (
+        {!owner && (
         follow ? <UnFollowBtn id={profile._id} /> : <FollowButton id={profile._id} />
       )}
-      <div className="px-10 col-span-2">
-        <p className="text-right">Striving to dazzle myself. Work hard. Be kind.</p>
       </div>
+      <p className="text-left text-sm w-60">Striving to dazzle myself. Work hard. Be kind.</p>
+
+      </div>
+      
+      <ProfileStory profile={profile}/>
     </div>
   );
 };

@@ -12,6 +12,8 @@ import UserPage from "../Admin/private/Pages/UserPage";
 import AddPost from "../User/Pages/AddPost";
 import Search from "../User/Pages/Search";
 import BlogPage from "../User/Pages/BlogPage";
+import Posts from "../Admin/private/Pages/Posts";
+import BlogPageAdmin from "../Admin/private/Pages/BlogPageAdmin";
 export const Routes = createBrowserRouter([
   {
     path: "/",
@@ -32,8 +34,16 @@ export const Routes = createBrowserRouter([
                 element: <Users />,
               },
               {
+                path: "posts",
+                element: <Posts />,
+              },
+              {
                 path: "user/:id",
                 element: < UserPage/>,
+              },
+              {
+                path: "blog/:id",
+                element: < BlogPageAdmin/>,
               },
 
             ],

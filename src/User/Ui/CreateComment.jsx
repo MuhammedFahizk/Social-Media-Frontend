@@ -6,19 +6,19 @@ import { commentPost } from '../auth/authUser';
 import PropTypes from 'prop-types';
 
 const CreateComment = ({ postId, onNewComment }) => {
-  const { user } = useSelector(state => state);
-  const [comment, setComment] = useState(''); // Manage input state
-  const [loading, setLoading] = useState(false); // Manage loading state
-  const textareaRef = useRef(null); // Ref for the textarea
+  const { user } = useSelector((state) => state);
+  const [comment, setComment] = useState('');
+  const [loading, setLoading] = useState(false);
+  const textareaRef = useRef(null);
 
   const handleCommentChange = (event) => {
-    setComment(event.target.value); // Update comment state
+    setComment(event.target.value);
   };
 
   useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto'; // Reset the height
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set the height to the scrollHeight
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   }, [comment]);
 
@@ -28,23 +28,25 @@ const CreateComment = ({ postId, onNewComment }) => {
       return;
     }
 
-    setLoading(true); // Set loading state to true
+    setLoading(true);
     try {
       const response = await commentPost(postId, comment);
-      message.success('Comment posted successfully'); // Show success message
+      message.success('Comment posted successfully');
       setComment('');
-      onNewComment(response.data.result.comments); // Notify parent component
+      onNewComment(response.data.result.comments);
     } catch (error) {
+      console.error('Failed to post comment', error);
       message.error('Failed to post comment');
     } finally {
-      setLoading(false); // Set loading state back to false
+      setLoading(false);
     }
   };
 
   const handleCancel = () => {
-    setComment(''); // Clear the comment input
+    setComment('');
   };
 
+ 
   return (
     <div className='p-2 gap-2 bg-white dark:bg-primary-dark flex flex-col border-0 shadow-2xl rounded-lg'>
       <div className='flex gap-2'>
@@ -57,14 +59,15 @@ const CreateComment = ({ postId, onNewComment }) => {
         className='dark:bg-inherit dark:text-white pb-4 px-2 active:border-0 text-md font-Jakarta resize-none overflow-hidden'
         value={comment}
         onChange={handleCommentChange}
-        rows={2} // Set a minimum number of rows
+        rows={2}
+        aria-label='Comment'
       />
       <div className='flex justify-end gap-2 h-full items-center'>
         <h3 className='cursor-pointer' onClick={handleCancel}>Cancel</h3>
         <Button
           className='rounded-full text-white shadow-xl bg-[#beefb6]'
           onClick={handleSubmit}
-          loading={loading} // Show loading state
+          loading={loading}
         >
           Respond
         </Button>

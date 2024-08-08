@@ -72,7 +72,10 @@ const BlogPage = () => {
                 <span className="text-gray-500 font-Righteous ms-2">{item}</span>
               ))
              }
-             
+             <div className="border gap-4 flex rounded-2xl p-4">
+            <LikePost likes={post.likes} id={post._id} />
+            <PostComments authorId={post.author._id} postId={post._id} initialComments={post.comments} />
+          </div>
           </div>
         </div>
       )}
