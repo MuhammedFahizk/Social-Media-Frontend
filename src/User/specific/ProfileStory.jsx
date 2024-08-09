@@ -48,7 +48,7 @@ const ProfileStory = ({ profile }) => {
   }, [profile]); // Added empty dependency array
 
   return (
-    <div className="flex w-[500px] overflow-x-scroll gap-2 h-34 no-scrollbar"
+    <div className="flex md:w-[500px] w-[350px]  overflow-x-scroll gap-2 h-34 no-scrollbar"
 
     >
       {profileStores.map((story, index) => (
@@ -60,7 +60,7 @@ const ProfileStory = ({ profile }) => {
           <img
             src={story.story[0].imageUrl} // Uncomment and replace with actual path
             alt="story"
-            className="md:h-full h-[90px] w-full mt-1 md:rounded-2xl rounded-full  object-cover"
+            className="md:h-full h-[60px] w-full mt-1 md:rounded-2xl rounded-lg  object-cover"
           />
         </div>
       ))}

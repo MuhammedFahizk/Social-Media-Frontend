@@ -40,3 +40,15 @@ export const fetchConnections  = async(id , type , offset, query) => {
   
     }
   } 
+
+  export const fetchPost = async( id,  ) => {
+    try {
+  
+      const response = await userInstance.get(`/post/${id}`,);
+      return response
+    } catch (error) {
+      console.error("Error: ", error);
+      throw error.response ? error.response.data : new Error(error.message);
+  
+    }
+  } 

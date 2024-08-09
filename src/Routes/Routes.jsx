@@ -14,6 +14,7 @@ import Search from "../User/Pages/Search";
 import BlogPage from "../User/Pages/BlogPage";
 import Posts from "../Admin/private/Pages/Posts";
 import BlogPageAdmin from "../Admin/private/Pages/BlogPageAdmin";
+import EditPage from "../User/Pages/EditPage";
 export const Routes = createBrowserRouter([
   {
     path: "/",
@@ -92,6 +93,10 @@ export const Routes = createBrowserRouter([
               {
                 path: "profile/:id",
                 element: <ProfileLPage />,
+              },
+              {
+                path: "editPost/:id",
+                element: <EditPage />,
               },
               {
                 path: "blog/:id",

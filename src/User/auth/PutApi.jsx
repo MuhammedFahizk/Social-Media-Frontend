@@ -1,11 +1,12 @@
 import { userInstance } from "../../Admin/api/api_instance";
 
-export const incrementViewerCount  = async( storyId, authorId ) => {
+
+export const updatePost  = async( postId, data ) => {
     try {
   
-      const response = await userInstance.post(`/incrementViewerCount/`, {
-         storyId,
-          authorId
+      const response = await userInstance.put(`/updatePost/`, {
+        postId,
+        data
         });
       return response
     } catch (error) {
@@ -14,8 +15,3 @@ export const incrementViewerCount  = async( storyId, authorId ) => {
   
     }
   } 
-
-
-
-
-

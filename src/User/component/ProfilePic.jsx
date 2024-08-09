@@ -28,7 +28,7 @@ const ProfilePic = ({ image, className, owner }) => {
 
   return (
     <div
-      className={`relative ${className}`}
+      className={`relative ${className} h-fit`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -36,7 +36,7 @@ const ProfilePic = ({ image, className, owner }) => {
         <img
           src={image}
           alt="Profile"
-          className="rounded-2xl z-30 h-32  w-32 object-cover border border-text-primary"
+          className="rounded-2xl z-30 size-28 object-cover border border-text-primary"
         />
       ) : (
         <Avatar

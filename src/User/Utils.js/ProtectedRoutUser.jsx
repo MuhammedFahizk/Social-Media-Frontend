@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { verifyUser } from '../auth/authUser';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'; // Import useLocation
-import NavBar from '../Ui/NavBar';
+import NavBar from '../specific/NavBar';
 
 const ProtectedRouteUser = () => {
   const navigate = useNavigate();

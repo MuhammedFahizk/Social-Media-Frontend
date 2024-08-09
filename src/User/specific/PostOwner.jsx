@@ -6,6 +6,7 @@ import { IoIosTrash } from "react-icons/io";
 import { message } from "antd";
 import PropTypes from 'prop-types';
 import { deletePosts } from "../auth/authUser";
+import { Link } from "react-router-dom";
 
 const PostOwner = ({ id, onDelete }) => {
   const handleDeletePost = async () => {
@@ -21,10 +22,10 @@ const PostOwner = ({ id, onDelete }) => {
   const items = [
     { 
       label: (
-        <div className="flex h-full items-center justify-between gap-2">
+        <Link to={`/editPost/${id}`} className="flex h-full items-center justify-between gap-2">
           <h3>Edit</h3>
           <HiOutlinePencilSquare className="text-2xl" />
-        </div>
+        </Link>
       ), 
       key: 'edit' 
     },

@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import ProfileCard from "../Ui/ProfileCard";
-import UserFeeds from "../Ui/UserFeeds";
+import ProfileCard from "../specific/ProfileCard";
+import UserFeeds from "../specific/UserFeeds";
 import { useEffect, useState } from "react";
 import { profilePage } from "../auth/authUser";
 import { useParams, useNavigate } from "react-router-dom";
 import { setUser } from "../Redux/UserInformation";
-import HomeLeftSide from "../Ui/HomeLeftSide";
+import HomeLeftSide from "../specific/HomeLeftSide";
 const ProfileLPage = () => {
   const { id } = useParams();
   const [profile, setProfile] = useState(null);
@@ -51,7 +51,7 @@ const ProfileLPage = () => {
   }
 
   return (
-    <div className="w-full h-[88vh] dark:text-white grid-cols-1 gap-2 grid md:grid-cols-9  md:px-4 p-3">
+    <div className="w-full h-[88vh] dark:text-white grid-cols-1 gap-2 grid lg:grid-cols-9  md:px-4 p-3">
       <div className="col-span-7 overflow-y-scroll no-scrollbar">
         <ProfileCard profile={profile} />
         <UserFeeds posts={posts} profile={profile} />

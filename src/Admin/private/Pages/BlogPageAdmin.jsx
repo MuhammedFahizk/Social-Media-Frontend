@@ -3,7 +3,7 @@ import { formatTimeDifference } from "../../../Services/formatTimeDifference";
 import { useEffect, useState } from "react";
 import { fetchPost } from "../../api/getApi";
 import AvatarBtn from "../../../User/component/Avatar";
-import PostComments from "../../../User/Ui/PostComments";
+import PostComments from "../../../User/specific/PostComments";
 const BlogPageAdmin = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);

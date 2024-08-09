@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { fetchPost } from "../auth/authUser";
 import AvatarBtn from "../component/Avatar";
-import LikePost from "../Ui/LikePost";
-import PostComments from "../Ui/PostComments";
+import PostComments from "../specific/PostComments";
 import { formatTimeDifference } from "../../Services/formatTimeDifference";
+import LikePost from "../specific/LikePost";
+import { fetchPost } from "../auth/getApi";
 const BlogPage = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);

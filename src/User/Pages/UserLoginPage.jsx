@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import UserLoginForm from '../Ui/UserLoginForm';
-import UserLoginGoogle from '../Ui/UserLoginGoogle';
+import UserLoginForm from '../specific/UserLoginForm';
+import UserLoginGoogle from '../specific/UserLoginGoogle';
 import useAuthenticatedRedirect from '../Utils.js/AuthenticatedRedirect';
 
 const UserLoginPage = () => {

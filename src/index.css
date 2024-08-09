@@ -57,3 +57,22 @@ primaryText {
 .slide-down {
   animation: slideDown 0.5s ease-in;
 }
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.story-container {
+  position: absolute;
+  width: 100%; /* Adjust based on your needs */
+  height: 100%;
+  overflow: hidden;
+  animation-name: slideLeft;
+  animation-duration: 5s; /* Duration of the animation */
+  animation-fill-mode: forwards; /* Keeps the final state */
+}

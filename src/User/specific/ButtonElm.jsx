@@ -39,7 +39,7 @@ const ButtonElem = ({ type, id, length }) => {
 
   return (
     <>
-      <Button onClick={showModal} className="bg-white px-2 text-xs font-Jakarta text-black p-1 rounded-md shadow-sm md:shadow-lg">
+      <Button onClick={showModal} className="bg-white px-2 text-xs sm:text-xs font-Jakarta text-black p-1 rounded-md shadow-sm md:shadow-lg">
         {type === "followers" ? `Followers ${totalCount}` : `Followings ${totalCount}`}
       </Button>
       <Modal title="Connections" open={isModalOpen} onOk={handleCancel} onCancel={handleCancel}>

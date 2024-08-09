@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import PropTypes from 'prop-types';
-// import OtpTimer from "../Ui/OtpTimer";
+// import OtpTimer from "../specific/OtpTimer";
 
 const OtpVerificationForm = ({ userData }) => {
   const [loading, setLoading] = useState(false);

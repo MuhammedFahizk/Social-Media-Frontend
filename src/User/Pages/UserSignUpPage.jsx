@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
-import UserSignUpForm from '../Ui/UserSignUpForm';
+import UserSignUpForm from '../specific/UserSignUpForm';
 import { otpValidation } from '../auth/authUser';
 import OtpVerificationForm from '../component/OtpVerificationForm';
 import useAuthenticatedRedirect from '../Utils.js/AuthenticatedRedirect';

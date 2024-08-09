@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import SearchDiv from '../Ui/SearchDiv';
+import SearchDiv from '../specific/SearchDiv';
 const Search = () => {
     
   return (

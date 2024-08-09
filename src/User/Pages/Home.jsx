@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import HomeFeeds from "../Ui/HomeFeeds";
-import HomeLeftSide from "../Ui/HomeLeftSide";
-import Stores from "../Ui/Stores";
-import Suggestions from "../Ui/Suggestions";
+import HomeFeeds from "../specific/HomeFeeds";
+import HomeLeftSide from "../specific/HomeLeftSide";
+import Stores from "../specific/Stores";
+import Suggestions from "../specific/Suggestions";
 import { HomePage } from "../auth/authUser";
 
 const Home = () => {

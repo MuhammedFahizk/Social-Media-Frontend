@@ -30,7 +30,7 @@ const LikePost = ({ likes, id, }) => {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 ">
       {liked ? (
         <FaHandsClapping 
           className={`text-xl cursor-pointer text-[#ffde6f] 
@@ -46,8 +46,8 @@ const LikePost = ({ likes, id, }) => {
           onClick={handleLikeClick} 
         />
       )}
-      <h3 className={`transition-all duration-400 ${liked ? 'text-blue-500' : 'text-gray-600'}`}>
-        {likeCount}
+      <h3 className={`transition-all duration-400 ${liked  ? 'text-blue-500 dark:text-white' : 'text-gray-600 dark:text-white'}`}>
+        {likeCount > 0 ? likeCount : ''}
       </h3> {/* Display the updated number of likes */}
     </div>
   );

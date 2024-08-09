@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Modal from "../Ui/Modal";
+import Modal from "../specific/Modal";
 import StoryView from "../Pages/StoryView";
 import { getFreshStories } from "../auth/getApi";
 

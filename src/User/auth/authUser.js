@@ -196,17 +196,7 @@ export const deleteImageCloud = async( url ) => {
 } 
 
 
-export const fetchPost = async( id,  ) => {
-  try {
 
-    const response = await userInstance.get(`/post/${id}`,);
-    return response
-  } catch (error) {
-    console.error("Error: ", error);
-    throw error.response ? error.response.data : new Error(error.message);
-
-  }
-} 
 
 export const likePost = async( id ) => {
   try {
@@ -219,6 +209,7 @@ export const likePost = async( id ) => {
 
   }
 } 
+
 export const unLikePost  = async( id ) => {
   try {
 
