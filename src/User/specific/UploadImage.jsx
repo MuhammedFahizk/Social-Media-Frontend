@@ -94,13 +94,14 @@ const UploadImage = ({ onImageUpload, imageUrl, ratio, submitted }) => {
       gridGap={1}
       cropperProps={{ objectFit: 'contain' }}
     >
-      <Dragger {...props}>
-        <p className="ant-upload-drag-icon">
-          <InboxOutlined />
-        </p>
-        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-        <p className="ant-upload-hint">
-          Support for a single or bulk upload. Strictly prohibited from uploading company data or other banned files.
+      <Dragger {...props}
+      
+      >
+       <div className='text-text-gray dark:text-text-primary'>
+          <InboxOutlined className='text-text-gray text-5xl dark:text-text-primary'/>
+        <p className=" ">Click or drag file to this area to upload</p>
+        <p className="">
+          Support for a single  upload. Strictly prohibited from uploading company data or other banned files.
         </p>
         {uploadedImage && (
           <>
@@ -110,6 +111,7 @@ const UploadImage = ({ onImageUpload, imageUrl, ratio, submitted }) => {
             </Text>
           </>
         )}
+       </div>
       </Dragger>
     </ImgCrop>
   );

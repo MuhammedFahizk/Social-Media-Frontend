@@ -23,7 +23,7 @@ const CustomizePost = () => {
   ];
 
   return (
-    <div className="col-span-5 p-1 md:px-8 dark:text-white h-fit flex-col ">
+    <div className="col-span-9 p-1 md:px-8 dark:text-white h-fit flex-col ">
       <SelectPostMethod options={options} setValue={setValue} value={value} />
       {value === 'story' && <CreateStory />}
       {value === 'blog' && <CreateBlog />}

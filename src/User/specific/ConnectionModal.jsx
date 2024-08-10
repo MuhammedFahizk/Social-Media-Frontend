@@ -19,7 +19,6 @@ const ConnectionModal = ({ isModalOpen, setIsModalOpen,setOffset,offset, data, s
   
     if (isModalOpen) {
       // Reset loading state and fetch data when modal opens
-      setOffset()
       setLoading(false);
       loadMoreData();
     } else {

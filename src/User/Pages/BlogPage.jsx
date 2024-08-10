@@ -63,7 +63,7 @@ const BlogPage = () => {
             <LikePost likes={post.likes} id={post._id} />
             <PostComments authorId={post.author._id} postId={post._id} initialComments={post.comments} />
           </div>
-          <div className="text-black dark:text-white">
+          <div className="text-black bg-white p-3 rounded-lg shadow-lg">
             <div dangerouslySetInnerHTML={{ __html: wrapContent(post.body) }}></div>
           </div>
           <div>

@@ -48,7 +48,7 @@ const Home = () => {
         <HomeFeeds />
         <div className="hidden lg:block bg-ternary-light shadow-md dark:shadow-md rounded-2xl dark:bg-secondary-dark w-fit">
           <Stores />
-          <Suggestions data={data.users} />
+          <Suggestions  />
         </div>
       </div>
     </div>

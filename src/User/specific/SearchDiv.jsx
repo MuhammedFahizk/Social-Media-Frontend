@@ -12,7 +12,7 @@ const SearchDiv = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     return (
-        <div className='p-2 h-[90vh]  w-[700px] flex text-black flex-col gap-2'>
+        <div className='p-2 h-fit  mx-auto w-[700px] flex text-black flex-col gap-2'>
             <SearchBar 
                 searchTerm={searchTerm} 
                 setSearchTerm={setSearchTerm}  

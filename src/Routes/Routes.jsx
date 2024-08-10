@@ -15,6 +15,9 @@ import BlogPage from "../User/Pages/BlogPage";
 import Posts from "../Admin/private/Pages/Posts";
 import BlogPageAdmin from "../Admin/private/Pages/BlogPageAdmin";
 import EditPage from "../User/Pages/EditPage";
+import Message from "../User/Pages/Message";
+import UserList from "../User/specific/UsesrList";
+import ChatArea from "../User/specific/ChatArea";
 export const Routes = createBrowserRouter([
   {
     path: "/",
@@ -101,6 +104,11 @@ export const Routes = createBrowserRouter([
               {
                 path: "blog/:id",
                 element: < BlogPage/>,
+              },
+              {
+                path: "messages",
+                element: <Message />,
+                
               },
             ],
           },

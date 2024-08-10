@@ -37,7 +37,7 @@ const StoryView = ({ story, author, onNextUser, onReverse, viewUpdate }) => {
   useEffect(() => {
     const changeStoryInterval = setInterval(() => {
       handleChangeItem();
-    }, 30000); // 30-second interval
+    }, 10000);
 
     return () => clearInterval(changeStoryInterval);
   }, [item, story, ]);

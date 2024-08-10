@@ -40,7 +40,7 @@ const CreateStory = () => {
   };
 
   return (
-    <div className='flex justify-center border-dotted border rounded-lg h-full'>
+    <div className='flex justify-center  bg-secondary-light dark:bg-secondary-dark w-fit mx-auto rounded-lg h-full'>
       <form className='flex-col gap-2 flex w-full p-10' onSubmit={handleSubmit(onSubmit)}>
         <UploadImage 
           title="Upload Story Image" 
@@ -51,7 +51,7 @@ const CreateStory = () => {
         />
         <button 
           type="submit" 
-          className="mt-4 w-full border rounded-lg p-2 border-blue-600 hover:bg-blue-600 hover:text-white hover:scale-105 transition-all duration-300"
+          className="mt-4 w-full  rounded-lg p-2 bg-ternary-dark  hover:text-white hover:scale-105 transition-all duration-300"
           size="large"
         >
           Create Story

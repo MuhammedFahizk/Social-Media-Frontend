@@ -8,7 +8,7 @@ import { updatePost } from "../auth/PutApi";
 
 const CreateImage = ({ onEdit, data }) => {
   const navigate = useNavigate();
-  const [imageUrl, setImageUrl] = useState(data.imageUrl || null);
+  const [imageUrl, setImageUrl] = useState(data?.imageUrl || null);
   const [submitted, setSubmitted] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
@@ -18,7 +18,10 @@ const CreateImage = ({ onEdit, data }) => {
 
   const onSubmit = async (formData) => {
     formData.imageUrl = imageUrl;
-
+    if (!imageUrl) {
+      message.error('Please upload an image before submitting');
+      return;
+    }
     try {
       setSubmitted(true);
       if (onEdit) {
@@ -46,11 +49,11 @@ const CreateImage = ({ onEdit, data }) => {
           <div className="mb-4">
             <input
               type="text"
-              defaultValue={data.hashTags ? data.hashTags.join(' ') : ''}
+              defaultValue={data?.hashTags ? data.hashTags.join(' ') : ''}
               placeholder="Hash tag"
               {...register("hashTag")}
-              className=" p-2 rounded w-full dark:bg-blue-500 "
-            />
+              className="p-2 rounded w-full dark:bg-primary-dark bg-secondary-light dark:to-secondary-dark dark:text-white ]"
+              /> 
             {errors.hashTag && (
               <p className="text-red-500 text-sm mt-1">{errors.hashTag.message}</p>
             )}
@@ -69,7 +72,7 @@ const CreateImage = ({ onEdit, data }) => {
               <img src={imageUrl} alt="Cover" className="rounded w-full h-[300px] object-cover" />
             </div>
           )}
-          <button type="submit" className="mt-4 bg-blue-500 w-full text-white p-2 rounded">
+          <button type="submit" className="mt-4 bg-secondary-light text-text-gray  w-full dark:bg-primary-dark dark:to-secondary-dark dark:text-text-primary p-2 rounded">
             Submit
           </button>
         </form>

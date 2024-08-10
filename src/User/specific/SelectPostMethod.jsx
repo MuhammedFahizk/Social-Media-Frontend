@@ -8,7 +8,7 @@ const SelectPostMethod = ({setValue, value, options}) => {
   };
 
   return (
-    <div className="infinite-scroll-container h-fit flex py-4  ">
+    <div className="infinite-scroll-container h-fit flex py-4  w-fit  mx-auto ">
       <div className="flex gap-3 whitespace-nowrap">
         {options.map((option, index) => (
           <div
@@ -18,7 +18,7 @@ const SelectPostMethod = ({setValue, value, options}) => {
               value === option.value ? 'bg-white shadow-lg text-black  border border-blue-600   h-9 w-20' : 'border  h-8 w-16'
             }`}
           >
-            <h2 className="text-sm">{option.label}</h2>
+            <h2 className="text-sm dark:text-text-primary">{option.label}</h2>
           </div>
         ))}
       </div>

@@ -3,6 +3,9 @@ import { PiHandsClapping } from "react-icons/pi";
 import { FaHandsClapping } from "react-icons/fa6";
 import { likePost, unLikePost } from '../auth/authUser'; // Ensure this path is correct
 import { useSelector } from 'react-redux';
+import { FcLike } from "react-icons/fc";
+import { GoHeart } from "react-icons/go";
+
 const LikePost = ({ likes, id, }) => {
   const {_id} = useSelector(state => state.user)
   const [liked, setLiked] = useState(false);
@@ -32,14 +35,14 @@ const LikePost = ({ likes, id, }) => {
   return (
     <div className="flex items-center gap-2 ">
       {liked ? (
-        <FaHandsClapping 
+        <FcLike 
           className={`text-xl cursor-pointer text-[#ffde6f] 
                      transform transition-transform duration-300 
-                     ${liked ? 'scale-100 rotate-12' : 'scale-100 rotate-0'}`}
+                     ${liked ? '' : 'scale-100 rotate-0'}`}
           onClick={handleLikeClick} 
         />
       ) : (
-        <PiHandsClapping 
+        <GoHeart 
           className={`text-xl cursor-pointer text-gray-400 
                      transform transition-transform duration-300 
                      ${liked ? 'scale-125 rotate-12' : 'scale-100 rotate-0'}`}

@@ -38,8 +38,9 @@ export default {
         // darkBody: '#181818', // Rich black for the body background
         // darkSecondary: '#3C3C3C', // Dim grey for secondary elements
         'text-light' : '#000',
-        'text-gray' : '#B2B2B2',
-        'text-primary' : '#ddb892',
+        'text-gray' : '#bdbbbb',
+        'text-primary' : '#0f9bab',
+        'text-secondary' : '#2f4552',
         'primary-light': '#FFF',
 				'secondary-light': '#f4f4f6',
 				'ternary-light': '#f4f4f6',

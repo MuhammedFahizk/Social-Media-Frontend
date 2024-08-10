@@ -72,18 +72,18 @@ const CreateBlog = ({ onEdit, data }) => {
   };
 
   return (
-    <div className="flex flex-col w-[370px] md:w-[700px] mx-auto lg:w-[900px] justify-center shadow-2xl rounded-lg items-center h-fit p-6 bg-gradient-to-r from-white to-gray-100 dark:from-secondary-dark dark:to-[#151e45] my-4 ">
+    <div className="flex flex-col w-[370px] md:w-[700px] mx-auto lg:w-[900px] justify-center shadow-2xl rounded-lg items-center h-fit p-6 bg-gradient-to-r from-white to-gray-100 dark:from-secondary-dark dark:to-ternary-dark my-4 ">
       <form onSubmit={handleSubmit(onSubmit)} className="w-full">
         <div className="mb-6 space-y-4">
           <input 
             placeholder="Title" 
             {...register("title", { required: true })} 
-            className="border dark:bg-blue-500 border-blue-600 w-full rounded-lg p-3 focus:outline-none focus:border-blue-800 transition-all duration-300"
+            className=" dark:bg-ternary-dark bg-secondary-light w-full shadow-2xl  rounded-lg p-3 focus:outline-none focus:border-blue-800 transition-all duration-300"
           />
           <input 
             placeholder="Hash Tag" 
             {...register("hashTag", { required: false })} 
-            className="border dark:bg-blue-500 border-blue-600 w-full rounded-lg p-3 focus:outline-none focus:border-blue-800 transition-all duration-300"
+            className=" dark:bg-ternary-dark shadow-2xl bg-secondary-light  w-full rounded-lg p-3 focus:outline-none focus:border-blue-800 transition-all duration-300"
           />
         </div>
 
@@ -115,7 +115,7 @@ const CreateBlog = ({ onEdit, data }) => {
 
         <button 
           type="submit" 
-          className="mt-6 w-full bg-blue-600 text-white rounded-lg p-3 hover:bg-blue-800 transition-all duration-300 focus:outline-none focus:ring focus:ring-blue-300 shadow-md"
+          className="mt-6 w-full bg-secondary-light text-black dark:text-text-primary dark:bg-secondary-dark rounded-lg p-3 hover:bg-blue-800 transition-all duration-300 focus:outline-none focus:ring focus:ring-blue-300 shadow-inner"
         >
           {onEdit ? 'Update Blog' : 'Create Blog'}
         </button>
