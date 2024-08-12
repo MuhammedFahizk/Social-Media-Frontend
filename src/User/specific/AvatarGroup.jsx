@@ -23,9 +23,10 @@ const AvatarGroup = ({ users }) => {
          size="small"
          max={{
           count: 3,
+          
           style: {
               color: '#f56a00',
-            backgroundColor: '#ffff',
+              margin: 2
           },
         }}
         >
@@ -60,7 +61,7 @@ const AvatarGroup = ({ users }) => {
           <div>
             {
                 users.userDetails.map((item, index) => (
-                    <div key={index} className='m-4 flex gap-2 h-full items-center'>
+                    <div key={index} className='m-4  flex gap-2 h-full items-center'>
                                     <AvatarBtn image={item.profilePicture} spell={item.userName.charAt(0).toUpperCase()} />
                                     <h3 className='text-sm'>{item.userName}</h3>
                                     <h3>{item.createdAt}</h3>

@@ -52,10 +52,10 @@ export const fetchConnections  = async(id , type , offset, query) => {
   
     }
   } 
-   export const fetchSuggestions = async( ) => {
+   export const fetchSuggestions = async( offset) => {
     try {
   
-      const response = await userInstance.get(`/fetchSuggestions/`,);
+      const response = await userInstance.get(`/fetchSuggestions/${offset}`,);
       return response
     } catch (error) {
       console.error("Error: ", error);

@@ -25,7 +25,7 @@ const HomeFeeds = ({ userId }) => {
         setPosts((prev) => [...prev, ...response.data]);
         setOffset((prevOffset) => prevOffset + 5);
       } else {
-        setHasMore(false); // No more posts to fetch
+        setHasMore(false);
       }
     } catch (error) {
       console.error('Error fetching posts:', error);
@@ -41,7 +41,6 @@ const HomeFeeds = ({ userId }) => {
     fetchPostsFn();
   }, [fetchPostsFn, shouldFetchMore, hasMore]);
 
-  // Set up Intersection Observer for infinite scrolling
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {

@@ -46,7 +46,7 @@ const CreateImage = ({ onEdit, data }) => {
     <div className="flex justify-center items-center h-full ">
       <div className="border-dotted  rounded-lg p-6 dark:bg-secondary-dark  w-full max-w-md bg-white shadow-lg">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
+          <div className="mb-4 flex flex-col gap-2">
             <input
               type="text"
               defaultValue={data?.hashTags ? data.hashTags.join(' ') : ''}
@@ -54,8 +54,18 @@ const CreateImage = ({ onEdit, data }) => {
               {...register("hashTag")}
               className="p-2 rounded w-full dark:bg-primary-dark bg-secondary-light dark:to-secondary-dark dark:text-white ]"
               /> 
-            {errors.hashTag && (
+{errors.hashTag && (
               <p className="text-red-500 text-sm mt-1">{errors.hashTag.message}</p>
+            )}
+<input
+              type="text"
+              defaultValue={data?.location}
+              placeholder="Location "
+              {...register("location")}
+              className="p-2 rounded w-full dark:bg-primary-dark bg-secondary-light dark:to-secondary-dark dark:text-white ]"
+              /> 
+            {errors.location && (
+              <p className="text-red-500 text-sm mt-1">{errors.location.message}</p>
             )}
           </div>
           {!onEdit && (

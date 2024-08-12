@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { updatePost } from "../auth/PutApi";
 
 const CreateBlog = ({ onEdit, data }) => {
-  const { register, handleSubmit, setValue, reset } = useForm();
+  const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm();
   const [editorValue, setEditorValue] = useState(onEdit && data ? data.body : '');
   const [imageUrl, setImageUrl] = useState(onEdit && data ? data.imageUrl : null);
   const [submitted, setSubmitted] = useState(false);
@@ -77,26 +77,45 @@ const CreateBlog = ({ onEdit, data }) => {
         <div className="mb-6 space-y-4">
           <input 
             placeholder="Title" 
-            {...register("title", { required: true })} 
-            className=" dark:bg-ternary-dark bg-secondary-light w-full shadow-2xl  rounded-lg p-3 focus:outline-none focus:border-blue-800 transition-all duration-300"
-          />
+            {...register("title", { required: "Title is required" })} 
+            className="p-2 rounded w-full dark:bg-primary-dark bg-secondary-light dark:to-secondary-dark dark:text-white"
+            />
+          {errors.title && (
+            <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
+          )}
+
           <input 
             placeholder="Hash Tag" 
-            {...register("hashTag", { required: false })} 
-            className=" dark:bg-ternary-dark shadow-2xl bg-secondary-light  w-full rounded-lg p-3 focus:outline-none focus:border-blue-800 transition-all duration-300"
-          />
+            {...register("hashTag")} 
+            className="p-2 rounded w-full dark:bg-primary-dark bg-secondary-light dark:to-secondary-dark dark:text-white"
+            />
+          {errors.hashTag && (
+            <p className="text-red-500 text-sm mt-1">{errors.hashTag.message}</p>
+          )}
+
+          <input
+              type="text"
+              defaultValue={data?.location}
+              placeholder="Location "
+              {...register("location")}
+              className="p-2 rounded w-full dark:bg-primary-dark bg-secondary-light dark:to-secondary-dark dark:text-white"
+          /> 
+          {errors.location && (
+            <p className="text-red-500 text-sm mt-1">{errors.location.message}</p>
+          )}
         </div>
 
         <div className="mb-6 bg-white rounded-lg">
           <Editor
-        
             containerProps={{ style: { resize: 'vertical' } }}
             value={editorValue}
             onChange={onEditorChange}
             placeholder="Write your blog content here"
             style={editorStyles}
-
           />
+          {errors.body && (
+            <p className="text-red-500 text-sm mt-1">{errors.body.message}</p>
+          )}
         </div>
         
         {imageUrl ? (

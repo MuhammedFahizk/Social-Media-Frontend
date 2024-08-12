@@ -24,15 +24,13 @@ const FeedCard = ({ post }) => {
         />
         <div className="flex flex-col">
           <h3 className="font-bold text-sm">{post.author.userName}</h3>
-          <p className="text-sm text-text-gray">{post.author.email}</p>
+          <p className="text-sm text-text-gray">{post.location}</p>
         </div>
         <div className="ml-auto flex h-full items-center gap-2">
         <h3 className="text-left">
                 {formatTimeDifference(post.createdAt)} ago
               </h3>
-          <ProfileDropDown
-            item={<BsThreeDotsVertical className="text-black text-2xl w-4" />}
-          />
+         
         </div>
       </div>
 

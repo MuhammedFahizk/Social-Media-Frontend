@@ -97,7 +97,7 @@ const StoryView = ({ story, author, onNextUser, onReverse, viewUpdate }) => {
 
       {/* Viewer avatars */}
       {author._id === user._id && viewUpdate && (
-        <div className=" bottom-4 left-0 z-50 w-full px-4 flex items-center dark:bg-secondary-dark  bg-white h-fit p-2">
+        <div className=" bottom-4 left-0 z-50 w-full flex items-center dark:bg-secondary-dark  bg-white h-fit  ">
           <AvatarGroup users={story[item]?.views} />
         </div>
       )}

@@ -4,7 +4,7 @@ const Title = () => {
   return (
     <div className='  h-full  flex items-center '>
        <Link to={'/'}>
-       <h1 className=''>React</h1>
+       <h1 className=''>Chat-Hive</h1>
        </Link>
     </div>
   )
