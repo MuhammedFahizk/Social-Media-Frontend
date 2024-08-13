@@ -16,8 +16,8 @@ import Posts from "../Admin/private/Pages/Posts";
 import BlogPageAdmin from "../Admin/private/Pages/BlogPageAdmin";
 import EditPage from "../User/Pages/EditPage";
 import Message from "../User/Pages/Message";
-import UserList from "../User/specific/UsesrList";
-import ChatArea from "../User/specific/ChatArea";
+import UserList from "../User/specific/Message/ChatList";
+import ChatArea from "../User/specific/Message/ChatArea";
 export const Routes = createBrowserRouter([
   {
     path: "/",
@@ -108,7 +108,6 @@ export const Routes = createBrowserRouter([
               {
                 path: "messages",
                 element: <Message />,
-                
               },
             ],
           },
