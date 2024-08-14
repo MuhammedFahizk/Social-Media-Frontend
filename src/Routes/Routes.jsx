@@ -18,6 +18,8 @@ import EditPage from "../User/Pages/EditPage";
 import Message from "../User/Pages/Message";
 import UserList from "../User/specific/Message/ChatList";
 import ChatArea from "../User/specific/Message/ChatArea";
+import Notification from "../Admin/private/Pages/Notification";
+
 export const Routes = createBrowserRouter([
   {
     path: "/",
@@ -48,6 +50,10 @@ export const Routes = createBrowserRouter([
               {
                 path: "blog/:id",
                 element: < BlogPageAdmin/>,
+              },
+              {
+                path: "notification",
+                element: <Notification />,
               },
 
             ],

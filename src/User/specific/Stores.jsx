@@ -53,7 +53,7 @@ const Stores = () => {
   };
 
   return (
-    <div className="lg:h-[150px] lg:w-[270px] mt-4 md:mt-0 p-2 overflow-x-scroll no-scrollbar md:p-3 flex gap-2">
+    <><div className="lg:h-[150px] lg:w-[270px] mt-4 md:mt-0 p-2 overflow-x-scroll no-scrollbar md:p-3 flex gap-2">
       {users.map((user, index) => (
         <div
           onClick={() => handleOpenModal(index)}
@@ -64,30 +64,41 @@ const Stores = () => {
             <img
               src={user.story[0].imageUrl}
               alt="story"
-              className="md:h-full h-[90px] w-full mt-1 md:rounded-2xl rounded-full blur-sm object-cover"
-            />
+              className="md:h-full h-[90px] w-full mt-1 md:rounded-2xl rounded-full blur-sm object-cover" />
           )}
           <img
             src={user.profilePicture}
             alt="author"
-            className="h-14 w-14 rounded-full absolute shadow-3xl border-s-fuchsia-200 md:top-2/3 top-2/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover"
-          />
+            className="h-14 w-14 rounded-full absolute shadow-3xl border-s-fuchsia-200 md:top-2/3 top-2/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover" />
         </div>
       ))}
+    </div><Modal isOpen={open} onClose={handleCloseModal}>
+      <div className="w-full h-full bg-red-500 snap-x">
+        {
+          users.map((user, index) => (
+            <div key={index} className="w-full h-full snap-start">
+              <div className="flex flex-col items-center justify-center h-full">
+                <img src={user.story[0].imageUrl} alt="author" />
+              </div>
+              </div>
+          ))
+        }
 
-      <Modal isOpen={open} onClose={handleCloseModal}>
-        {selectedStory && (
-          <StoryView
-            viewUpdate={true}
-            story={selectedStory}
-            author={author}
-            onNextUser={handleNextUser}
-            onReverse={handleReverseUser}
-          />
-        )}
-      </Modal>
-    </div>
-  );
-};
+      </div>
+      </Modal></>
+)}
+  //</div>
+    //     {selectedStory && (
+    //       <StoryView
+    //         viewUpdate={true}
+    //         story={selectedStory}
+    //         users ={users} 
+    //         author={author}
+    //         onNextUser={handleNextUser}
+    //         onReverse={handleReverseUser}
+    //       />
+    //     )}
+    //   </Modal>
+    // </div>
 
 export default Stores;

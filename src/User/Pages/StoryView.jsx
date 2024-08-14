@@ -5,7 +5,8 @@ import { incrementViewerCount } from '../auth/postApi';
 import AvatarGroup from '../specific/AvatarGroup';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-const StoryView = ({ story, author, onNextUser, onReverse, viewUpdate }) => {
+
+const StoryView = ({ story, author, users, onNextUser, onReverse, viewUpdate }) => {
   const [item, setItem] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
   const { user } = useSelector(state => state);
@@ -40,7 +41,7 @@ const StoryView = ({ story, author, onNextUser, onReverse, viewUpdate }) => {
     }, 10000);
 
     return () => clearInterval(changeStoryInterval);
-  }, [item, story, ]);
+  }, [item, story]);
 
   const handleChangeItem = () => {
     if (item < story.length - 1) {
@@ -49,7 +50,7 @@ const StoryView = ({ story, author, onNextUser, onReverse, viewUpdate }) => {
       setItem(0);
       onNextUser();
     }
-    setElapsedTime(0); // Reset elapsed time when the story changes
+    setElapsedTime(0);
   };
 
   const handleReverse = () => {
@@ -62,46 +63,53 @@ const StoryView = ({ story, author, onNextUser, onReverse, viewUpdate }) => {
   };
 
   return (
-    <div 
-    className="relative w-full h-full  rounded-lg bg-white  dark:bg-primary-dark  overflow-hidden flex flex-col items-center justify-center">
-      {/* Header with Avatar and Username */}
-       
-       <Link 
-      className=" top-0 left-0 z-50 p-2 flex items-center gap-3 bg-white dark:bg-secondary-dark w-full h-fit"
-       to={`/profile/${author._id}`}>
-       <AvatarBtn image={author.profilePicture} />
-       <h3 className="font-semibold">{author.userName}</h3>
-       </Link>
+    // <div className="relative w-full h-full rounded-lg bg-white dark:bg-primary-dark overflow-hidden flex flex-col items-center justify-center">
+    //   {/* Header with Avatar and Username */}
+    //   <Link 
+    //     className="top-0 left-0 z-50 p-2 flex items-center gap-3 bg-white dark:bg-secondary-dark w-full h-fit"
+    //     to={`/profile/${author._id}`}>
+    //     <AvatarBtn image={author.profilePicture} />
+    //     <h3 className="font-semibold">{author.userName}</h3>
+    //   </Link>
+
+    //   {/* Story Image */}
+    //   {story.length > 0 && (
+    //     <img
+    //       src={story[item]?.imageUrl || ''}
+    //       alt={`Story ${item + 1}`}
+    //       className="z-30 w-[400px] m-2 rounded-lg h-full lg:h-[450px] object-cover"
+    //     />
+    //   )}
+
+    //   {/* Clickable areas for navigation */}
+    //   <div
+    //     onClick={handleReverse}
+    //     className="absolute w-1/2 h-full z-40 top-0 left-0 cursor-pointer"
+    //   ></div>
+    //   <div
+    //     onClick={handleChangeItem}
+    //     className="absolute w-1/2 h-full z-40 top-0 right-0 cursor-pointer"
+    //   ></div>
+
+    //   {/* Viewer avatars */}
+    //   {author._id === user._id && viewUpdate && (
+    //     <div className="bottom-4 left-0 z-50 w-full flex items-center dark:bg-secondary-dark bg-white h-fit">
+    //       <AvatarGroup users={story[item]?.views} />
+    //     </div>
+    //   )}
+    // </div>
+{/* <div className="flex w-[400px] p-2 h-[400px] overflow-x-scroll snap-x snap-mandatory">
+  {users.map((user, index) => (
+    <img 
+      key={index}
+      src={user.story[item].imageUrl} 
+      alt={`Story ${index + 1}`} 
+      className="  w-[500px] object-cover snap-center" 
+    />
+  ))}
+</div> */}
+
   
-
-     
-
-      {/* Story Image */}
-      {story.length > 0 && (
-        <img
-          src={story[item]?.imageUrl || ''}
-          alt={`Story ${item + 1}`}
-          className="z-30 w-[400px] m-2 rounded-lg h-full lg:h-[450px]  object-cover "
-        />
-      )}
-
-      {/* Clickable areas for navigation */}
-      <div
-        onClick={handleReverse}
-        className="absolute w-1/2 h-full z-40 top-0 left-0 cursor-pointer"
-      ></div>
-      <div
-        onClick={handleChangeItem}
-        className="absolute w-1/2 h-full z-40 top-0 right-0 cursor-pointer"
-      ></div>
-
-      {/* Viewer avatars */}
-      {author._id === user._id && viewUpdate && (
-        <div className=" bottom-4 left-0 z-50 w-full flex items-center dark:bg-secondary-dark  bg-white h-fit  ">
-          <AvatarGroup users={story[item]?.views} />
-        </div>
-      )}
-    </div>
   );
 };
 
@@ -111,7 +119,11 @@ StoryView.propTypes = {
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
       imageUrl: PropTypes.string.isRequired,
-      views: PropTypes.arrayOf(PropTypes.string).isRequired,
+      views: PropTypes.arrayOf(PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        userName: PropTypes.string,
+        profilePicture: PropTypes.string,
+      })).isRequired,
     })
   ).isRequired,
   author: PropTypes.shape({
@@ -119,6 +131,11 @@ StoryView.propTypes = {
     profilePicture: PropTypes.string.isRequired,
     userName: PropTypes.string.isRequired
   }).isRequired,
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      imageUrl: PropTypes.string,
+    })
+  ).isRequired,
   onNextUser: PropTypes.func.isRequired,
   onReverse: PropTypes.func.isRequired,
   viewUpdate: PropTypes.bool,
