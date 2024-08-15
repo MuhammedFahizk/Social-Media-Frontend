@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { Avatar, Badge, Dropdown, Menu } from "antd";
 import io from 'socket.io-client';
 import { useSelector } from "react-redux";
+import Notification from "./Notification";
 
 const NavBar = () => {
   const { user } = useSelector(state => state);
@@ -31,13 +32,17 @@ const NavBar = () => {
       socket.off('newNotification');
     };
   }, [user._id]);
-  
+  console.log('notifications', notifications);
   const notificationMenu = (
-    <Menu>
+    <Menu className=" ">
       {notifications.length > 0 ? (
         notifications.map((notif, index) => (
-          <Menu.Item key={index}>
-            {notif.message}
+          <Menu.Item key={index} className="dark:bg-ternary-dark hover:bg-secondary-dark">
+            {
+              notif.message.type === 'follow' || notif.message.type  === 'unFollow' ? (
+                <Notification data={notif.message} setNotifications={setNotifications}/>
+              ): ('') 
+            }
           </Menu.Item>
         ))
       ) : (

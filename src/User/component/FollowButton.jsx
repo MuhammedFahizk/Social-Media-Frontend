@@ -24,6 +24,7 @@ const FollowButton = ({ id }) => {
     try {
       const response = await followUser(userId);
       if (response.status === 200) {
+        console.log('response',response);
         dispatch(followUserSuccess(userId));
         setFollowing(true);
       } else {
@@ -39,7 +40,7 @@ const FollowButton = ({ id }) => {
   return (
     <>
       {following ? (
-        <UnFollowBtn id={id}  />
+        <UnFollowBtn id={id}   />
       ) : (
         <Button
           className="bg-blue-700 dark:bg-white text-white dark:text-black"

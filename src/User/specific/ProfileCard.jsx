@@ -41,7 +41,7 @@ const ProfileCard = ({ profile }) => {
        <ButtonElem  length={profile.following.length}   id={profile._id}  type={'followings'}   />
        </div>
         {!owner && (
-        follow ? <UnFollowBtn id={profile._id} /> : <FollowButton id={profile._id} />
+        <UnFollowBtn id={profile._id} /> 
       )}
       </div>
       <p className="text-left text-sm w-60">Striving to dazzle myself. Work hard. Be kind.</p>

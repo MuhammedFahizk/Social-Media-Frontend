@@ -4,8 +4,7 @@ import { unFollowUser } from "../auth/authUser";
 import FollowButton from "./FollowButton";
 import { useDispatch, useSelector } from "react-redux";
 import { unfollowUserSuccess } from "../Redux/UserInformation";
-
-const UnFollowBtn = ({ id, onUnfollow }) => {
+const UnFollowBtn = ({ id,  }) => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
@@ -26,7 +25,7 @@ const UnFollowBtn = ({ id, onUnfollow }) => {
     setLoading(true);
     try {
       await unFollowUser(id);
-      onUnfollow(id);
+      dispatch(unfollowUserSuccess(id));
       setIsFollowing(false);
     } catch (error) {
       console.error('Error unfollowing user:', error);
