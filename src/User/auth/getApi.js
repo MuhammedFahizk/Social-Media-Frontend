@@ -63,3 +63,15 @@ export const fetchConnections  = async(id , type , offset, query) => {
   
     }
   } 
+  
+  export const fetchUserNotifications = async() => {
+    try {
+  
+      const response = await userInstance.get(`/fetchUserNotifications`,);
+      return response
+    } catch (error) {
+      console.error("Error: ", error);
+      throw error.response ? error.response.data : new Error(error.message);
+  
+    }
+  } 
