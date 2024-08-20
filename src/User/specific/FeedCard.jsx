@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import LikePost from "./LikePost";
 import PostComments from "./PostComments";
 import { formatTimeDifference } from "../../Services/formatTimeDifference";
+import MoreOptionFeed from "./MoreOptionFeed";
 formatTimeDifference
 const FeedCard = ({ post }) => {
   const [openComments, setOpenComments] = useState(false);
@@ -27,10 +28,10 @@ const FeedCard = ({ post }) => {
           <p className="text-sm text-text-gray">{post.location}</p>
         </div>
         <div className="ml-auto flex h-full items-center gap-2">
-        <h3 className="text-left">
+        <h3 className="text-left ">
                 {formatTimeDifference(post.createdAt)} ago
               </h3>
-         
+          <MoreOptionFeed/>
         </div>
       </div>
 
