@@ -75,3 +75,29 @@ export const fetchConnections  = async(id , type , offset, query) => {
   
     }
   } 
+
+
+  export const fetchHideUsers = async() => {
+    try {
+  
+      const response = await userInstance.get(`/hide-users`,);
+      return response
+    } catch (error) {
+      console.error("Error: ", error);
+      throw error.response ? error.response.data : new Error(error.message);
+  
+    }
+  } 
+
+  export const fetchHidePosts = async() => {
+    try {
+  
+      const response = await userInstance.get(`/hide-posts`,);
+      return response
+    } catch (error) {
+      console.error("Error: ", error);
+      throw error.response ? error.response.data : new Error(error.message);
+  
+    }
+  } 
+

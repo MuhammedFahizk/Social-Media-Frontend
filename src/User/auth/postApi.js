@@ -16,6 +16,43 @@ export const incrementViewerCount  = async( storyId, authorId ) => {
   } 
 
 
+  export const editProfile  = async( data) => {
+    try {
+  
+      const response = await userInstance.post(`/edit-profile/`, data);
+      return response
+    } catch (error) {
+      console.error("Error: ", error);
+      throw error.response ? error.response.data : new Error(error.message);
+  
+    }
+  } 
+
+  export const hideContent  = async( data) => {
+    try {
+  
+      const response = await userInstance.post(`/hide-content/`, data);
+      return response
+    } catch (error) {
+      console.error("Error: ", error);
+      throw error.response ? error.response.data : new Error(error.message);
+  
+    }
+  } 
+
+  export const unHideContent  = async( data) => {
+    try {
+  console.log(data);
+      const response = await userInstance.post(`/unHide-content/`, data);
+      return response
+    } catch (error) {
+      console.error("Error: ", error);
+      throw error.response ? error.response.data : new Error(error.message);
+  
+    }
+  } 
+
+
 
 
 

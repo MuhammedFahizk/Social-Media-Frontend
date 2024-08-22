@@ -19,6 +19,11 @@ import Message from "../User/Pages/Message";
 import UserList from "../User/specific/Message/ChatList";
 import ChatArea from "../User/specific/Message/ChatArea";
 import Notification from "../Admin/private/Pages/Notification";
+import EditProfile from "../User/Pages/EditProfile";
+import EditPassword from "../User/specific/Settings/EditPassword";
+import EditProfileForm from "../User/specific/Settings/EditProfileForm!";
+import HidePosts from "../User/specific/Settings/HidePosts";
+import HideUsers from "../User/specific/Settings/HideUsers";
 
 export const Routes = createBrowserRouter([
   {
@@ -114,6 +119,28 @@ export const Routes = createBrowserRouter([
               {
                 path: "messages",
                 element: <Message />,
+              },
+              {
+                path: "edit-profile",
+                element: <EditProfile />,
+                children: [
+                  {
+                    path: "",
+                    element: <EditProfileForm />, // Default child route
+                  },
+                  {
+                    path: "password",
+                    element: <EditPassword />, // Nested route for password change
+                  },
+                  {
+                    path: "hide-posts",
+                    element: <HidePosts />, // Route for hiding posts
+                  },
+                  {
+                    path: "hide-users",
+                    element: <HideUsers />, // Route for hiding users
+                  },
+                ],
               },
             ],
           },

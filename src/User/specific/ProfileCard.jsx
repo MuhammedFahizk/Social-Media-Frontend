@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import FollowButton from "../component/FollowButton";
 import UnFollowBtn from "../component/UnfollowBtn";
 import ProfileStory from "./ProfileStory";
+import { Button } from "antd";
+import { Link } from "react-router-dom";
 const ProfileCard = ({ profile }) => {
   const [follow, setFollow] = useState(false);
   const [owner, setOwner] = useState(false);
@@ -14,8 +16,7 @@ const ProfileCard = ({ profile }) => {
     if (profile && user) {
       setOwner(user._id === profile._id);
       // setFollow(profile.followers.includes(user._id));set
-      setFollow(profile.followers.some((item) => item._id === user._id))
-
+      setFollow(profile.followers.some((item) => item._id === user._id));
     }
   }, [profile, user]);
 
@@ -25,31 +26,35 @@ const ProfileCard = ({ profile }) => {
   return (
     <div className="rounded-xl md:flex  justify-between items-center gap-4 justify md:h-40   md:col-span-2 shadow-2xl dark:bg-secondary-dark p-2 ">
       <div className="flex gap-2">
-      <ProfilePic owner={owner} image={profile.profilePicture} />
-      <div className="flex  flex-col  ">
-      <div>
+        <ProfilePic owner={owner} image={profile.profilePicture} />
+        <div className="flex  flex-col  ">
+          <div>
+            <div className="flex gap-3 h-full items-center ">
+              <h2 className="text-sm text-center ">{profile.userName}</h2>
+            </div>
+          </div>
+          <div className="flex flex-col sm:flex-row   gap-2">
+            <div className="flex gap-2">
+              <ButtonElem
+                length={profile.followers.length}
+                id={profile._id}
+                type={"followers"}
+              />
+              <ButtonElem
+                length={profile.following.length}
+                id={profile._id}
+                type={"followings"}
+              />
+            </div>
+            {!owner ? <UnFollowBtn id={profile._id} /> : <Link to={'/edit-profile'}><Button>Edit</Button></Link>}
+          </div>
+          <p className="text-left text-sm w-60">
+            Striving to dazzle myself. Work hard. Be kind.
+          </p>
+        </div>
+      </div>
 
-       <div className="flex gap-3 h-full items-center">
-
-<h2 className="text-sm text-center ">{profile.userName}</h2>
-        <p className="text-sm text-start  text-text-primary">{profile.email}</p>
-       </div> 
-      </div>
-      <div className="flex flex-col sm:flex-row   gap-2">
-       <div className="flex gap-2">
-       <ButtonElem length={profile.followers.length} id={profile._id}  type={'followers'} />
-       <ButtonElem  length={profile.following.length}   id={profile._id}  type={'followings'}   />
-       </div>
-        {!owner && (
-        <UnFollowBtn id={profile._id} /> 
-      )}
-      </div>
-      <p className="text-left text-sm w-60">Striving to dazzle myself. Work hard. Be kind.</p>
-
-      </div>
-      </div>
-      
-      <ProfileStory profile={profile}/>
+      <ProfileStory profile={profile} />
     </div>
   );
 };
@@ -69,4 +74,4 @@ ProfileCard.defaultProps = {
   profile: null,
 };
 
-export default ProfileCard
+export default ProfileCard;

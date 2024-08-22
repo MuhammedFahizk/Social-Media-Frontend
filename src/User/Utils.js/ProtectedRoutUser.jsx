@@ -27,7 +27,7 @@ const ProtectedRouteUser = () => {
     };
 
     checkToken();
-  }, [navigate, location.pathname]); // Add location.pathname as a dependency
+  }, [navigate, location.pathname]);
 
   if (loading) {
     return <p>Loading...</p>;

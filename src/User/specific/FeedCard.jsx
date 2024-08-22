@@ -31,7 +31,7 @@ const FeedCard = ({ post }) => {
         <h3 className="text-left ">
                 {formatTimeDifference(post.createdAt)} ago
               </h3>
-          <MoreOptionFeed/>
+          <MoreOptionFeed postId={post._id} userId={post.author} />
         </div>
       </div>
 

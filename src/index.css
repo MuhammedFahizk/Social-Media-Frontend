@@ -76,3 +76,12 @@ primaryText {
   animation-duration: 5s; /* Duration of the animation */
   animation-fill-mode: forwards; /* Keeps the final state */
 }
+
+.ant-menu-item-selected, .ant-menu-item-selected a {
+  color: #1E90FF !important; /* Blue color for selected item */
+}
+
+/* Ensure the submenu selected item has a blue text color in dark mode */
+.ant-menu-submenu-selected, .ant-menu-submenu-selected a {
+  color: #1E90FF !important; /* Blue color for selected item */
+}
