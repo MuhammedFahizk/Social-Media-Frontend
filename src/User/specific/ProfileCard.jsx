@@ -8,6 +8,7 @@ import UnFollowBtn from "../component/UnfollowBtn";
 import ProfileStory from "./ProfileStory";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
+import { FcSettings } from "react-icons/fc";
 const ProfileCard = ({ profile }) => {
   const [follow, setFollow] = useState(false);
   const [owner, setOwner] = useState(false);
@@ -46,7 +47,7 @@ const ProfileCard = ({ profile }) => {
                 type={"followings"}
               />
             </div>
-            {!owner ? <UnFollowBtn id={profile._id} /> : <Link to={'/edit-profile'}><Button>Edit</Button></Link>}
+            {!owner ? <UnFollowBtn id={profile._id} /> : <Link to={'/profile-settings'}><Button className="bg-text-primary text-white border-0"><FcSettings className="text-white"/>Settings</Button></Link>}
           </div>
           <p className="text-left text-sm w-60">
             Striving to dazzle myself. Work hard. Be kind.

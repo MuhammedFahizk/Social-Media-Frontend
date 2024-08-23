@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 
 const StoryView = ({ story, author, users, onNextUser, onReverse, viewUpdate }) => {
   const [item, setItem] = useState(0);
-  const [elapsedTime, setElapsedTime] = useState(0);
   const { user } = useSelector(state => state);
 
   const updateViewers = useCallback(async () => {
@@ -27,22 +26,6 @@ const StoryView = ({ story, author, users, onNextUser, onReverse, viewUpdate }) 
     updateViewers();
   }, [updateViewers]);
 
-  useEffect(() => {
-    const countdownInterval = setInterval(() => {
-      setElapsedTime(prevTime => prevTime + 1);
-    }, 1000);
-
-    return () => clearInterval(countdownInterval);
-  }, []);
-
-  useEffect(() => {
-    const changeStoryInterval = setInterval(() => {
-      handleChangeItem();
-    }, 10000);
-
-    return () => clearInterval(changeStoryInterval);
-  }, [item, story]);
-
   const handleChangeItem = () => {
     if (item < story.length - 1) {
       setItem(prev => prev + 1);
@@ -50,68 +33,49 @@ const StoryView = ({ story, author, users, onNextUser, onReverse, viewUpdate }) 
       setItem(0);
       onNextUser();
     }
-    setElapsedTime(0);
   };
 
   const handleReverse = () => {
     if (item > 0) {
       setItem(prev => prev - 1);
-      setElapsedTime(0);
     } else {
       onReverse();
     }
   };
 
   return (
-    // <div className="relative w-full h-full rounded-lg bg-white dark:bg-primary-dark overflow-hidden flex flex-col items-center justify-center">
-    //   {/* Header with Avatar and Username */}
-    //   <Link 
-    //     className="top-0 left-0 z-50 p-2 flex items-center gap-3 bg-white dark:bg-secondary-dark w-full h-fit"
-    //     to={`/profile/${author._id}`}>
-    //     <AvatarBtn image={author.profilePicture} />
-    //     <h3 className="font-semibold">{author.userName}</h3>
-    //   </Link>
+    <div
+    className="no-scrollbar cursor-pointer "
+  >
+    <div className="absolute z-50 p-2  flex gap-3 bg-[#06060662] text-white w-full shadow-md top-2 h-fit items-center">
+      <AvatarBtn image={author.profilePicture} />
+      <h3>{author.userName}</h3>
+    </div>
+    {story.length > 0 && (
+      <img
+        src={story[item]?.imageUrl || ''}
+        alt={`Story ${item + 1}`}
 
-    //   {/* Story Image */}
-    //   {story.length > 0 && (
-    //     <img
-    //       src={story[item]?.imageUrl || ''}
-    //       alt={`Story ${item + 1}`}
-    //       className="z-30 w-[400px] m-2 rounded-lg h-full lg:h-[450px] object-cover"
-    //     />
-    //   )}
+        className="relative z-30 w-[400px] h-full object-cover"
+      />
+    )}
+    <div
+    onClick={handleReverse}
+    className=' absolute w-1/2 h-full  z-40 top-0'>
 
-    //   {/* Clickable areas for navigation */}
-    //   <div
-    //     onClick={handleReverse}
-    //     className="absolute w-1/2 h-full z-40 top-0 left-0 cursor-pointer"
-    //   ></div>
-    //   <div
-    //     onClick={handleChangeItem}
-    //     className="absolute w-1/2 h-full z-40 top-0 right-0 cursor-pointer"
-    //   ></div>
+</div>
+<div 
+    onClick={handleChangeItem}
 
-    //   {/* Viewer avatars */}
-    //   {author._id === user._id && viewUpdate && (
-    //     <div className="bottom-4 left-0 z-50 w-full flex items-center dark:bg-secondary-dark bg-white h-fit">
-    //       <AvatarGroup users={story[item]?.views} />
-    //     </div>
-    //   )}
-    // </div>
-{/* <div className="flex w-[400px] p-2 h-[400px] overflow-x-scroll snap-x snap-mandatory">
-  {users.map((user, index) => (
-    <img 
-      key={index}
-      src={user.story[item].imageUrl} 
-      alt={`Story ${index + 1}`} 
-      className="  w-[500px] object-cover snap-center" 
-    />
-  ))}
-</div> */}
+className=' absolute w-1/2 h-full right-0  z-40 top-0'>
 
-  
-  );
+</div>
+    {/* <div className=' absolute  z-40 w-full p-2 text bg-[#ffffff36] bottom-4'>
+    </div> */}
+  </div>
+);
 };
+
 
 // Define prop types
 StoryView.propTypes = {
@@ -133,7 +97,11 @@ StoryView.propTypes = {
   }).isRequired,
   users: PropTypes.arrayOf(
     PropTypes.shape({
-      imageUrl: PropTypes.string,
+      story: PropTypes.arrayOf(
+        PropTypes.shape({
+          imageUrl: PropTypes.string,
+        })
+      ),
     })
   ).isRequired,
   onNextUser: PropTypes.func.isRequired,

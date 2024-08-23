@@ -8,8 +8,11 @@ import LikePost from "./LikePost";
 import PostComments from "./PostComments";
 import { formatTimeDifference } from "../../Services/formatTimeDifference";
 import MoreOptionFeed from "./MoreOptionFeed";
+import { useSelector } from "react-redux";
 formatTimeDifference
 const FeedCard = ({ post }) => {
+  const {_id} = useSelector((state) => state.user);
+
   const [openComments, setOpenComments] = useState(false);
 
   const toggleComments = () => {
@@ -31,7 +34,13 @@ const FeedCard = ({ post }) => {
         <h3 className="text-left ">
                 {formatTimeDifference(post.createdAt)} ago
               </h3>
+              {
+                _id !== post.author._id ? (
           <MoreOptionFeed postId={post._id} userId={post.author} />
+) : (
+  <></>
+  )
+              }
         </div>
       </div>
 

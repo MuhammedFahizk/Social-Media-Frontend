@@ -121,7 +121,7 @@ export const Routes = createBrowserRouter([
                 element: <Message />,
               },
               {
-                path: "edit-profile",
+                path: "profile-settings",
                 element: <EditProfile />,
                 children: [
                   {

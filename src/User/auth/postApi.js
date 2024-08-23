@@ -52,6 +52,16 @@ export const incrementViewerCount  = async( storyId, authorId ) => {
     }
   } 
 
+  export const resetPassword = async (data) => {
+    try {
+      console.log(data);
+        const response = await userInstance.post('/reset-password', data);
+        return response.data;
+    } catch (error) {
+        console.error("Error resetting password:", error);
+        throw error.response ? error.response.data : new Error(error.message);
+    }
+};
 
 
 

@@ -15,14 +15,9 @@ const ProfileButton = () => {
         <><Link to={'/addPost'} /><h3>Add Post</h3></>
       ),
     },
+    
     {
       key: "2",
-      label: (
-        <><Link to={'/search'} /><h3 className="">Search </h3></>
-      ),
-    },
-    {
-      key: "3",
       label: (
         <><Link to={'/profile'} /><h3> Profile</h3></>
       ),

@@ -9,29 +9,35 @@ const { SubMenu } = Menu;
 
 const Sidebars = () => {
   return (
-    <Sider width={260} className="site-layout-background ">
+    <Sider width={260} className="site-layout-background   h-full">
       <Menu
         mode="inline"
-        className="dark:bg-secondary-dark rounded-lg dark:text-white"
+        className=" dark:bg-primary-dark rounded-lg dark:text-white h-[500px]"
         defaultSelectedKeys={['1']}
         style={{ height: '100%', borderRight: 0 }}
       >
         <Menu.Item key="1" icon={<UserOutlined />} className="dark:text-white">
-          <Link className="dark:text-white" to="/edit-profile">Profile</Link>
+          <Link className="dark:text-white" to="/profile-settings">Profile</Link>
         </Menu.Item>
         <Menu.Item key="2" icon={<LockOutlined />} className="dark:text-white">
-          <Link className="dark:text-white" to="/edit-profile/password">Change Password</Link>
+          <Link className="dark:text-white" to="/profile-settings/password">Change Password</Link>
         </Menu.Item>
-        <SubMenu key="sub1" title="Manage" icon={<SettingOutlined />} className="dark:text-white">
-          <Menu.Item key="3" className="dark:text-white">
-            <Link className="dark:text-white" to="/edit-profile/hide-posts">Hide Posts</Link>
-          </Menu.Item>
-          <Menu.Item key="4" className="dark:text-white">
-            <Link className="dark:text-white" to="/edit-profile/hide-users">Hide Users</Link>
-          </Menu.Item>
-        </SubMenu>
+        <SubMenu
+  key="sub1"
+  title={<span className='text-black dark:text-white'>Manage</span>}
+  icon={<SettingOutlined className='text-black dark:text-white' />}
+  className="dark:text-white"
+>
+  <Menu.Item key="3" className="dark:text-white">
+    <Link className="dark:text-white" to="/profile-settings/hide-posts">Hide Posts</Link>
+  </Menu.Item>
+  <Menu.Item key="4" className="dark:text-white">
+    <Link className="dark:text-white" to="/profile-settings/hide-users">Hide Users</Link>
+  </Menu.Item>
+</SubMenu>
+
         <Menu.Item key="5" icon={<IoSettings />} className="dark:text-white">
-          <Link className="dark:text-white" to="/edit-profile/settings">Settings</Link>
+          <Link className="dark:text-white" to="/profile-settings/settings">Settings</Link>
         </Menu.Item>
       </Menu>
     </Sider>
