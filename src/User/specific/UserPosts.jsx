@@ -10,7 +10,7 @@ import PostOwner from "./PostOwner";
 import CommentList from "./CommentList";
 
 const UserPosts = ({ images, id, setFilteredPosts }) => {
-  const { _id } = useSelector((state) => state.user);
+  const { _id } = useSelector((state) => state.user.user);
   const [owner, setOwner] = useState(false);
   const [open, setOpen] = useState(false);
   const [comments, setComments] = useState([]);

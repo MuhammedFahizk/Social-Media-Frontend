@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 const ConnectionModal = ({ isModalOpen, setIsModalOpen,setOffset,offset, data, setData, totalCount, setTotalCount, id, type, length }) => {
   const [loading, setLoading] = useState(false);
-  const { user } = useSelector((state) => state);
+  const {user} = useSelector(state => state.user)
 
   useEffect(() => {
     console.log('Modal Open:', isModalOpen);

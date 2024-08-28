@@ -6,7 +6,7 @@ import { commentPost } from '../auth/authUser';
 import PropTypes from 'prop-types';
 
 const CreateComment = ({ postId, onNewComment }) => {
-  const { user } = useSelector((state) => state);
+  const {user} = useSelector(state => state.user)
   const [comment, setComment] = useState('');
   const [loading, setLoading] = useState(false);
   const textareaRef = useRef(null);

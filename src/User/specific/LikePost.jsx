@@ -7,7 +7,7 @@ import { FcLike } from "react-icons/fc";
 import { GoHeart } from "react-icons/go";
 
 const LikePost = ({ likes, id, }) => {
-  const {_id} = useSelector(state => state.user)
+  const {_id} = useSelector(state => state.user.user)
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(likes ? likes.length : 0);
 

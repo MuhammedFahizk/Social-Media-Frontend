@@ -9,7 +9,7 @@ const UnFollowBtn = ({ id,  }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { user } = useSelector((state) => state);
+  const {user} = useSelector(state => state.user)
 
   useEffect(() => {
     if (user?.following) {

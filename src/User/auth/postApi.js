@@ -63,6 +63,32 @@ export const incrementViewerCount  = async( storyId, authorId ) => {
     }
 };
 
+export const reportPost = async (data) => {
+  try {
+    console.log(data);
+      const response = await userInstance.post('/report-post', data);
+      return response.data;
+  } catch (error) {
+      console.error("Error resetting password:", error);
+      throw error.response ? error.response.data : new Error(error.message);
+  }
+};
+
+
+
+export const postChatMessage = async (receiverId, message) => {
+  try {
+    const response = await userInstance.post(`/chats/${receiverId}/messages`, {
+      message, // The chat message content
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error posting chat message:", error);
+    throw error.response ? error.response.data : new Error(error.message);
+  }
+};
+
+
 
 
 

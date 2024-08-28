@@ -101,3 +101,13 @@ export const fetchConnections  = async(id , type , offset, query) => {
     }
   } 
 
+  export const fetchUserChat = async (userId) => {
+    try {
+      const response = await userInstance.get(`/chats/${userId}`);
+      return response;
+    } catch (error) {
+      console.error("Error fetching user chat:", error);
+      throw error.response ? error.response.data : new Error(error.message);
+    }
+  };
+  

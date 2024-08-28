@@ -1,14 +1,20 @@
 import { useForm } from "react-hook-form";
 import { GoPaperAirplane } from "react-icons/go";
-
+import { postChatMessage } from "../../auth/postApi";
+import { useSelector } from "react-redux";
 const SendChat = () => {
+  const { selectedChatUser} = useSelector(state => state.chatting)
   const { register, handleSubmit, reset } = useForm();
 
   // Function to handle form submission
   const onSubmit = (data) => {
     console.log(data.message);
-    reset();
-  };
+    postChatMessage(selectedChatUser,data.message).then((response) => {
+      console.log(response);
+      });
+      reset();
+      };
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex h-full items-center w-full gap-x-5">

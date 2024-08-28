@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import ProfileCard from "../specific/ProfileCard";
 import UserFeeds from "../specific/UserFeeds";
 import { useEffect, useState } from "react";
@@ -13,7 +13,7 @@ const ProfileLPage = () => {
   const [error, setError] = useState(null);
   const [posts, setPosts] = useState(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {

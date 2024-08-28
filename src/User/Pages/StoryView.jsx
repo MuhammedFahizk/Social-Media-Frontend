@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const StoryView = ({ story, author, users, onNextUser, onReverse, viewUpdate }) => {
   const [item, setItem] = useState(0);
-  const { user } = useSelector(state => state);
+  const {user} = useSelector(state => state.user)
 
   const updateViewers = useCallback(async () => {
     const currentStory = story[item];

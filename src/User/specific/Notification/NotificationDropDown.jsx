@@ -9,7 +9,7 @@ import Notification from "./Notification";
 import Like from "./Like";
 
 const NotificationMenu = () => {
-  const { user } = useSelector((state) => state);
+  const {user} = useSelector(state => state.user)
   const [notifications, setNotifications] = useState([]);
   const [newNotifications, setNewNotifications] = useState([]);
   useSocket(user?._id, setNewNotifications);

@@ -5,7 +5,7 @@ import { UserOutlined, MailOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { editProfile } from '../../auth/postApi';
 const EditProfileForm = () => {
-  const user = useSelector((state) => state.user);
+  const {user} = useSelector(state => state.user)
 
   const { handleSubmit, control } = useForm({
     defaultValues: {

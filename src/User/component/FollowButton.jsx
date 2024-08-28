@@ -11,7 +11,7 @@ const FollowButton = ({ id }) => {
   const [loading, setLoading] = useState(false);
   const [following, setFollowing] = useState(false);
 
-  const { user } = useSelector((state) => state);
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (user?.following) {

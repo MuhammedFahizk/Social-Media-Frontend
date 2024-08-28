@@ -17,7 +17,7 @@ const UserList = () => {
     // </ul>
     <div className='col-span-2 bg-white h-[88vh] dark:bg-secondary-dark px-5 p-2 shadow-lg  rounded-lg  ' >
 <SearchChat/>
-
+    
 
     </div>
   );

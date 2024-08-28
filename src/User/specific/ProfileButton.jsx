@@ -5,7 +5,7 @@ import LogOutBtn from "../component/LogOutBtn";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 const ProfileButton = () => {
-  const user = useSelector(state => state.user)
+  const {user} = useSelector(state => state.user)
   const navigate = useNavigate();
 
   const items = [

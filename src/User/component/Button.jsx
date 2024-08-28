@@ -5,7 +5,7 @@ import UnFollowBtn from "./UnfollowBtn";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 const ButtonModal = ({ item, list,  }) => {
-  const { user } = useSelector((state) => state);
+  const { user } = useSelector((state) => state.user);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(list);

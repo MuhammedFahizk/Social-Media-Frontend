@@ -7,7 +7,7 @@ import PostOwner from './PostOwner';
 import LikePost from './LikePost';
 const UserBlogs = ({ blogs }) => {
   const [currentPage, setCurrentPage] = useState(1);
-    const { _id } = useSelector((state) => state.user);
+    const { _id } = useSelector((state) => state.user.user);
   const [owner, setOwner] = useState(false);
   const pageSize = 4;
 

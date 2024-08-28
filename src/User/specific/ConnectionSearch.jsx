@@ -14,7 +14,7 @@ const ConnectionSearch = ({ search, setIsSearchOpen, offset, setOffset, type,len
   const [totalCount, setTotalCount] = useState(0);
   const [isNewSearch, setIsNewSearch] = useState(true);
 
-  const { user } = useSelector((state) => state);
+  const {user} = useSelector(state => state.user)
 
   useEffect(() => {
     

@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Avatar from "../../../User/component/Avatar";
 const ButtonElem = ({ item, list,  }) => {
-  const { user } = useSelector((state) => state);
+  const {user} = useSelector(state => state.user)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(list);

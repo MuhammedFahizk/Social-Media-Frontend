@@ -11,7 +11,7 @@ import MoreOptionFeed from "./MoreOptionFeed";
 import { useSelector } from "react-redux";
 formatTimeDifference
 const FeedCard = ({ post }) => {
-  const {_id} = useSelector((state) => state.user);
+  const {_id} = useSelector((state) => state.user.user);
 
   const [openComments, setOpenComments] = useState(false);
 

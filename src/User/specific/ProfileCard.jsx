@@ -12,7 +12,8 @@ import { FcSettings } from "react-icons/fc";
 const ProfileCard = ({ profile }) => {
   const [follow, setFollow] = useState(false);
   const [owner, setOwner] = useState(false);
-  const { user } = useSelector((state) => state);
+  const {user} = useSelector(state => state.user)
+  
   useEffect(() => {
     if (profile && user) {
       setOwner(user._id === profile._id);

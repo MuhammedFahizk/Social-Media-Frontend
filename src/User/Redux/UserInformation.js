@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { produce } from 'immer';
 
-// Define the initial state
 const initialState = {
   user: {
     name: '',
     email: '',
     bio: '',
     profilePicture: '',
-    following: [], // Ensure you have a following array
-  }, 
+    following: [],
+  },
 };
 
 const userSlice = createSlice({
@@ -16,7 +16,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload;
+      // If using Immer, ensure immutability
+      return produce(state, draft => {
+        draft.user = action.payload;
+      });
     },
     followUserSuccess: (state, action) => {
       state.user.following.push({ _id: action.payload });

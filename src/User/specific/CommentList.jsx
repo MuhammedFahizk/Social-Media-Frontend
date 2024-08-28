@@ -8,7 +8,7 @@ import { message } from "antd";
 import { formatTimeDifference } from "../../Services/formatTimeDifference";
 
 const CommentList = ({ comments, authorId, postId, onNewComment }) => {
-  const { user } = useSelector((state) => state);
+  const {user} = useSelector(state => state.user)
 
   const handleDeleteComment = async (commentId) => {
     try {

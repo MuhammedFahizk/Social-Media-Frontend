@@ -8,7 +8,7 @@ import { fetchSuggestions } from '../auth/getApi';
 
 const Suggestions = () => {
   const observerRef = useRef(null);
-  const { user } = useSelector((state) => state);
+  const {user} = useSelector(state => state.user)
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
