@@ -9,7 +9,8 @@ import messageSlice from "../Redux/messageSlice";
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['user'], // Persist only the 'user' slice
+  whitelist: ['user','chatting'], // Persist only the 'user' slice
+
 };
 
 // Combine all reducers into one root reducer

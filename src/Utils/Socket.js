@@ -22,3 +22,10 @@ export const registerUser = (userId) => {
       socket.on(event, callback);
     }
   };
+
+  export const off = (event, callback) => {
+    if (socket) {
+      socket.off(event, callback); // Unregister a specific listener for the event
+    }
+  };
+  

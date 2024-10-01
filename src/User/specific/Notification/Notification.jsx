@@ -26,7 +26,7 @@ const Notification = ({ data, setNotifications }) => {
         <h3 className="text-xs text-gray-500">{formatTimeDifference(data?.notification.createdAt)}</h3>
       </div>
       {
-        data.notification.postImage && (
+        data.notification?.postImage && (
           <Link className='ms-auto' >
              <img
               src={data.notification.postImage}

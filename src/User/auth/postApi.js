@@ -89,6 +89,19 @@ export const postChatMessage = async (receiverId, message) => {
 };
 
 
+export const messageRead = async (messageId) => {
+  try {
+    const response = await userInstance.post(`/chats/read`, {
+      messageId, 
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error marking chat message as read:", error);
+    throw error.response ? error.response.data : new Error("An error occurred while updating the message status.");
+  }
+};
+
+
 
 
 

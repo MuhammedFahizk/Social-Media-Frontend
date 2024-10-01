@@ -11,15 +11,14 @@ const  ChatRoom = () => {
   const [chats, setChats] = useState([])
   const dispatch = useDispatch();
   const { selectedChatUser } = useSelector((state) => state.chatting);
-  const state = useSelector((state) => state);
-  console.log(state);
+  
   
   useEffect(() => {
     const loadChatMessages = async () => {
       if (selectedChatUser) {
         try {
           const response = await fetchUserChat(selectedChatUser);
-          console.log(response);
+          console.log('response',response);
           
           setUser(response.data.user)
           setChats(response.data.chats)

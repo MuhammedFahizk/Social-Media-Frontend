@@ -110,4 +110,16 @@ export const fetchConnections  = async(id , type , offset, query) => {
       throw error.response ? error.response.data : new Error(error.message);
     }
   };
+
+  export const fetchChatList = async () => {
+    try {
+      const response = await userInstance.get(`/friends`);
+      console.log('response',response);
+      
+      return response;
+    } catch (error) {
+      console.error("Error fetching user chat:", error);
+      throw error.response ? error.response.data : new Error(error.message);
+    }
+  };
   

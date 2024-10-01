@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useCallback } from "react";
 import AvatarBtn from "../../component/Avatar";
 import { useDispatch } from "react-redux";
-import { ChooseUser } from "../../Redux/chattingSlice";
+import { ChooseUser, addChat } from "../../Redux/chattingSlice";
 
 const CustomDropdown = ({ options }) => {
   const dispatch = useDispatch();
+
+  const handleSelectUser = useCallback((userId) => {
+    dispatch(ChooseUser(userId));
+    dispatch(addChat(userId));
+  }, [dispatch]);
 
   return (
     <ul className="h-[40vh] overflow-y-scroll no-scrollbar">
@@ -13,7 +18,7 @@ const CustomDropdown = ({ options }) => {
           key={index}
           className="p-1 flex gap-2 hover:bg-text-primary rounded-lg"
           style={{ display: 'flex', alignItems: 'center' }}
-          onClick={() => dispatch(ChooseUser(option._id))}
+          onClick={() => handleSelectUser(option._id)}
         >
           <AvatarBtn />
           <h3 className="text-black text-md">{option.label}</h3>

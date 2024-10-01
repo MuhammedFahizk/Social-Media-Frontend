@@ -1,24 +1,39 @@
-import { useEffect } from 'react';
-import { on } from "../../Utils/Socket"; // Assuming this is the file where your socket functions are defined
-import { useDispatch } from 'react-redux';
-import { addRealTimeMessage } from '../Redux/messageSlice';
+import { useEffect, useRef } from "react";
+import { on, off } from "../../Utils/Socket"; 
+import { useDispatch, useSelector } from "react-redux";
+import { addRealTimeMessage } from "../Redux/messageSlice";
+import { messageRead } from "../auth/postApi";
+
 const useReceiveMessage = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const selectedChatUser = useSelector((state) => state.chatting.selectedChatUser);
+  const selectedChatUserRef = useRef(selectedChatUser);
+
   useEffect(() => {
-    const handleReceiveMessage = (message) => {
-      console.log('message', message);
-      dispatch(addRealTimeMessage(message))
-      // You can add any additional logic here, such as updating state or triggering notifications
+    selectedChatUserRef.current = selectedChatUser;
+  }, [selectedChatUser]);
+
+  useEffect(() => {
+    const handleReceiveMessage = async (message, callback) => {
+      if (message.sender === selectedChatUserRef.current) {
+        try {
+          await messageRead(message._id);
+        } catch (error) {
+          console.error("Error updating message status:", error);
+        }
+        dispatch(addRealTimeMessage(message));
+      }
+
+        callback("Message received and processed");
     };
 
-    on('receiveMessage', handleReceiveMessage);
+    on("receiveMessage", handleReceiveMessage);
 
-    // Cleanup function to unregister the event listener
     return () => {
-      // Make sure to unregister the event listener when the component unmounts
-      on('receiveMessage', null); // or use a specific function to unregister if your socket library provides one
+      off("receiveMessage", handleReceiveMessage);
     };
-  }, []); // Empty dependency array to ensure this runs only on mount
+  }, [dispatch]);
+
 };
 
 export default useReceiveMessage;
