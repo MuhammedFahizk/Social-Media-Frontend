@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { verifyUser } from '../auth/authUser';
-import { Outlet, useNavigate, useLocation } from 'react-router-dom'; // Import useLocation
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import NavBar from '../specific/NavBar';
 import { toast } from 'react-toastify';
+import useAuthorize from '../../Routes/useAuthorize';
 
 const ProtectedRouteUser = () => {
+  const { isAuthorized, loading: isAuthLoading } = useAuthorize('user'); // Check for 'user' role
+  const [loading, setLoading] = useState(true); // State to track loading token verification
   const navigate = useNavigate();
-  const location = useLocation(); // Get the current location object
-  const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
     const checkToken = async () => {
@@ -16,27 +18,29 @@ const ProtectedRouteUser = () => {
         console.log('Verification response:', res);
       } catch (error) {
         console.error('Error verifying user:', error);
-        console.error('Verification error:', error);
-        console.log('Redirecting to login due to error');
-        // toast.error(error.error.message)
-
-        navigate('/login');
+        toast.error('Session expired, please log in again.'); // Notify user about the error
+        navigate('/login', { state: { from: location.pathname } }); // Redirect to login
       } finally {
         setLoading(false);
       }
     };
 
-    checkToken();
-  }, [navigate, location.pathname]);
+    // Check token only if the user is authorized
+    if (isAuthorized) {
+      checkToken();
+    } else {
+      setLoading(false); // If not authorized, stop loading
+    }
+  }, [navigate, isAuthorized, location.pathname]);
 
-  if (loading) {
-    return <p>Loading...</p>;
+  if (isAuthLoading || loading) {
+    return <span className="loader"></span>
   }
 
   return (
-    <div className='dark:bg-primary-dark  min-h-screen h-full m-0  bg-primary-light dark:text-white'>
+    <div className='dark:bg-primary-dark min-h-screen h-full m-0 bg-primary-light dark:text-white'>
       <NavBar />
-      <Outlet />
+      <Outlet /> {/* Render nested routes here */}
     </div>
   );
 };

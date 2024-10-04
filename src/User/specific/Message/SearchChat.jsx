@@ -3,6 +3,7 @@ import { AutoComplete, Input } from "antd";
 import { searchUsers } from "../../auth/authUser";
 import { CiSearch } from "react-icons/ci";
 import CustomDropdown from "./CustomDropdownUsers";
+
 const SearchChat = () => {
   const [value, setValue] = useState("");
   const [options, setOptions] = useState([]);
@@ -46,17 +47,16 @@ const SearchChat = () => {
         value={value}
         options={options}
         onSelect={onSelect}
-        onSearch={(text) => setOptions(options.filter(option => filterOptions(text, option)))}
         onChange={onChange}
-        placeholder="Search ...."
-        className="h-fit flex items-center justify-center mx-auto"
+        className="h-fit w-full"
         popupClassName="custom-dropdown"
         dropdownRender={menu => <CustomDropdown options={options} />}
         onFocus={() => setVisible(true)}
-        onBlur={() => setTimeout(() => setVisible(false), 100)} // Delay to allow selection
+        onBlur={() => setTimeout(() => setVisible(false), 100)} 
       >
         <Input
-          className="h-full flex items-center rounded-lg border-text-primary"
+          placeholder="Search ... "
+          className="h-full flex items-center p-2 rounded- md border-text-primary"
           suffix={<CiSearch style={{ fontSize: 20 }} />}
         />
       </AutoComplete>

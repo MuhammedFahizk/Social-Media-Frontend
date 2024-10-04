@@ -2,6 +2,7 @@ import React, { useEffect, useState, Suspense, lazy, useRef, useCallback } from 
 import FeedHeadings from '../component/FeedHeadings';
 import { fetchPosts } from '../auth/authUser';
 import { Skeleton, Spin } from 'antd';
+import Loading from '../component/Loading';
 
 const LazyFeedCard = lazy(() => import('./FeedCard'));
 
@@ -84,9 +85,7 @@ const HomeFeeds = ({ userId }) => {
           </Suspense>
         ))}
         {loading && (
-          <div className='flex justify-center items-center'>
-            <Spin />
-          </div>
+           <Loading/>
         )}
         <div ref={observerRef} className='min-h-28' />
       </div>

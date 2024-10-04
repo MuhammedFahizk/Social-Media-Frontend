@@ -4,6 +4,7 @@ import HomeLeftSide from "../specific/HomeLeftSide";
 import Stores from "../specific/Stores";
 import Suggestions from "../specific/Suggestions";
 import { HomePage } from "../auth/authUser";
+import Loading from "../component/Loading";
 
 const Home = () => {
   const [data, setData] = useState(null);
@@ -30,7 +31,9 @@ const Home = () => {
   console.log('data', data);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>
+      <Loading />
+    </div>
   }
 
   if (error) {

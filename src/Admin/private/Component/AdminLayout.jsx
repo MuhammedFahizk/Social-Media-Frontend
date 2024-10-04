@@ -1,9 +1,27 @@
+import { message, Popconfirm } from 'antd';
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
-// import AdminSidebar from './AdminSidebar'; // Assume you have a sidebar component
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { logoutAdmin } from '../../api/getApi';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../User/Redux/UserInformation';
 
 const AdminLayout = () => {
-  return (
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
+
+    const handleLogout = async () => {
+
+        try {
+          await logoutAdmin();
+          message.success('Logged out successfully'); 
+          dispatch(logout())
+          navigate("/admin/login"); 
+        } catch (error) {
+          message.error('Logout failed. Please try again.'); 
+          console.error('Error during logout:', error);
+        }
+      };
+      return (
    
 
       <><nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -78,15 +96,7 @@ const AdminLayout = () => {
                               <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span>
                           </Link>
                       </li>
-                      {/* <li>
-                          <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                              <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                  <path d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z" />
-                              </svg>
-                              <span className="flex-1 ms-3 whitespace-nowrap">Inbox</span>
-                              <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
-                          </a>
-                      </li> */}
+                     
                       <li>
                           <Link to={"users"} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                               <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
@@ -132,14 +142,22 @@ const AdminLayout = () => {
                       </li>  
                       */}
                       <li>
-                      <Link className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                      <Popconfirm
+      title="Are you sure you want to logout?"
+      onConfirm={handleLogout}
+      okText="Yes"
+      cancelText="No"
+    >
+                      <div className="flex cursor-pointer items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
                       <svg className="w-6 h-6 text-red-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
   <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
 </svg>
 
                       <h2 className="flex-1 ms-3 text-red-600 whitespace-nowrap">Logout</h2>
-                        </Link>
+                        </div>
+                        </Popconfirm>
+
                       </li>
                   </ul>
               </div>

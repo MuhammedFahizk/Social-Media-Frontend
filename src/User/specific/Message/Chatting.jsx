@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ChatSender } from './ChatSender';
 import { ChatReceiver } from './ChatReceiver';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeRealTimeMessages, removeMessageStatus } from '../../Redux/messageSlice';
+import { removeRealTimeMessages, removeMessageStatus, removeMessageCount } from '../../Redux/messageSlice';
 import useReadMessageListener from '../../hooks/useReadMessageListener';
 import useMessageDelivered from '../../hooks/useMessageDelivered';
 
-const Chatings = ({ chats }) => {
+const Chatting = ({ chats ,setChats }) => {
   const { user } = useSelector(state => state.user);
   const { realTimeMessages } = useSelector(state => state.message);
   const { selectedChatUser } = useSelector(state => state.chatting);
@@ -24,28 +24,23 @@ const Chatings = ({ chats }) => {
     if (newMessages.length > 0) {
       setMessages(prevMessages => [...prevMessages, ...newMessages]);
 
-      // Remove the added messages from the Redux store
       dispatch(removeRealTimeMessages(newMessages.map(message => message._id)));
     }
   }, [realTimeMessages, selectedChatUser, user._id, dispatch]);
 
   useEffect(() => {
-    // Initialize messages when chats prop changes
     setMessages(chats);
     scrollToBottom();
   }, [chats]);
 
   useEffect(() => {
-    // Only update message statuses when messageStatusChanges change
     const updatedMessages = messages.map(chat => {
       const statusChange = messageStatusChanges.find(change => change.messageId === chat._id);
       if (statusChange) {
-        // Only update the status if the new status is of higher priority
         if (
           (chat.status === 'delivered' && statusChange.status === 'read') || 
           (chat.status !== 'read')
         ) {
-          // Dispatch the action to remove the status change after using it
           dispatch(removeMessageStatus({ messageId: chat._id }));
           return { ...chat, status: statusChange.status };
         }
@@ -53,11 +48,11 @@ const Chatings = ({ chats }) => {
       return chat;
     });
 
-    // Update messages only if they have changed
     if (JSON.stringify(messages) !== JSON.stringify(updatedMessages)) {
       setMessages(updatedMessages);
     }
-
+    
+    
     scrollToBottom();
   }, [messageStatusChanges, messages, dispatch]);
 
@@ -69,21 +64,22 @@ const Chatings = ({ chats }) => {
   };
 
   return (
-    <div className='border-text-primary border flex flex-col justify-end h-full max-h-[430px] gap-2 p-2 px-6 rounded-2xl rounded-tl-sm'>
-      <div
-        className='h-fit max-h-[380px] overflow-y-scroll no-scrollbar flex flex-col gap-2'
-        ref={chatContainerRef}
-      >
-        {messages.map((chat) => (
-          chat.sender === user._id ? (
-            <ChatSender key={chat._id || chat.timestamp} chat={chat} />
-          ) : (
-            <ChatReceiver key={chat._id || chat.timestamp} chat={chat} />
-          )
-        ))}
-      </div>
-    </div>
+    <div className='border-text-primary border flex flex-col justify-end h-full gap-2 p-2 px-6 rounded-2xl rounded-tl-sm'>
+  <div
+    className='h-[64vh] sm:h-[60vh] md:h-[78vh] lg:h-[65vh] xl:h-[60vh] overflow-y-scroll no-scrollbar flex flex-col gap-2'
+    ref={chatContainerRef}
+  >
+    {messages.map((chat) => (
+      chat.sender === user._id ? (
+        <ChatSender key={chat._id || chat.timestamp}  setChats={setChats} chat={chat} />
+      ) : (
+        <ChatReceiver key={chat._id || chat.timestamp} setChats={setChats} chat={chat} />
+      )
+    ))}
+  </div>
+</div>
+
   );
 };
 
-export default Chatings;
+export default Chatting;

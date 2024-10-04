@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import UserLoginForm from '../specific/UserLoginForm';
 import UserLoginGoogle from '../specific/UserLoginGoogle';
 import useAuthenticatedRedirect from '../Utils.js/AuthenticatedRedirect';
+import useAuthorize from '../../Routes/useAuthorize';
 
 const UserLoginPage = () => {
   const { isTokenValid, loading } = useAuthenticatedRedirect();
+  const { isAuthorized, loading: authLoading } = useAuthorize('user'); // Check for 'admin' role
 
   if (loading) {
     return <div>Loading...</div>;

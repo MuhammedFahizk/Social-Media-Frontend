@@ -9,6 +9,16 @@ export const usersList = async () => {
       throw error.response ? error.response.data : new Error(error.message);
     }
   };
+
+  export const logoutAdmin = async () => {
+    try {
+      const response = await adminInstance.get("/logOut");
+      return response
+    } catch (error) {
+      console.error("Error: ", error);
+      throw error.response ? error.response.data : new Error(error.message);
+    }
+  };
   
   export const fetchUser = async (id) => {
     try {

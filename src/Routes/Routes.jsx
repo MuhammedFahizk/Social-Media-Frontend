@@ -16,8 +16,7 @@ import Posts from "../Admin/private/Pages/Posts";
 import BlogPageAdmin from "../Admin/private/Pages/BlogPageAdmin";
 import EditPage from "../User/Pages/EditPage";
 import Message from "../User/Pages/Message";
-import UserList from "../User/specific/Message/ChatList";
-import ChatArea from "../User/specific/Message/ChatArea";
+
 import Notification from "../Admin/private/Pages/Notification";
 import EditProfile from "../User/Pages/EditProfile";
 import EditPassword from "../User/specific/Settings/EditPassword";
@@ -31,7 +30,7 @@ export const Routes = createBrowserRouter([
     children: [
       {
         path: "admin",
-        // element: <AdminLayout/>,
+        // element: <AdminAuthorization/>,
         children: [
           {
             path: "",
@@ -71,6 +70,7 @@ export const Routes = createBrowserRouter([
       },
       {
         path: "/",
+        // element: <UserAuthorization />,
         children: [
           {
             path: "login",

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { produce } from 'immer';
 
 const initialState = {
+  role: null ,
   user: {
     name: '',
     email: '',
@@ -15,8 +16,10 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    setRole: (state, action) => {
+      state.role = action.payload;
+    },
     setUser: (state, action) => {
-      // If using Immer, ensure immutability
       return produce(state, draft => {
         draft.user = action.payload;
       });
@@ -30,9 +33,10 @@ const userSlice = createSlice({
     logout: (state) => {
       // Reset user state to initial state
       state.user = initialState.user;
+      state.role = null 
     },
   },
 });
 
-export const { setUser, followUserSuccess, unfollowUserSuccess, logout } = userSlice.actions;
+export const { setUser,setRole, followUserSuccess, unfollowUserSuccess, logout } = userSlice.actions;
 export default userSlice.reducer;

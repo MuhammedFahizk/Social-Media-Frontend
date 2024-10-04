@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "antd";
 import { loginUser } from "../auth/authUser";
 import { toast } from "react-toastify";
-import {setUser } from "../Redux/UserInformation";
+import {setRole, setUser } from "../Redux/UserInformation";
 import { useDispatch } from "react-redux";
 
 const UserLoginForm = () => {
@@ -31,7 +31,10 @@ const UserLoginForm = () => {
 
       if (response.status === 200) {
         console.log('response:', response);
+        
+        
         dispatch(setUser(response.data.user));
+        dispatch(setRole('user'))
         toast.update(toastId, {
           render: "Login successful",
           type: "success",

@@ -6,6 +6,7 @@ import { profilePage } from "../auth/authUser";
 import { useParams, useNavigate } from "react-router-dom";
 import { setUser } from "../Redux/UserInformation";
 import HomeLeftSide from "../specific/HomeLeftSide";
+import Loading from "../component/Loading";
 const ProfileLPage = () => {
   const { id } = useParams();
   const [profile, setProfile] = useState(null);
@@ -36,9 +37,8 @@ const ProfileLPage = () => {
 
   if (loading) {
     return (
-      <div className="w-full h-[90vh] flex items-center justify-center">
-        Loading...
-      </div>
+      <Loading/>
+
     );
   }
 

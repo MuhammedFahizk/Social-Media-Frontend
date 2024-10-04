@@ -2,13 +2,18 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import useAuthenticatedRedirect from "../../util/AuthenticatedRedirect";
 import LoginForm from "../Component/LoginForm";
-const AdminLoginPage = () => {
-  const { isTokenValid, loading } = useAuthenticatedRedirect();
+import useAuthorize from "../../../Routes/useAuthorize";
 
-  if (loading) {
+const AdminLoginPage = () => {
+  const { isTokenValid, loading: tokenLoading } = useAuthenticatedRedirect();
+  const { isAuthorized, loading: authLoading } = useAuthorize('admin'); // Check for 'admin' role
+
+  // Show loading indicator while checking authentication and authorization
+  if (tokenLoading || authLoading) {
     return <div>Loading...</div>;
   }
 
+  // Redirect to admin dashboard if token is valid
   if (isTokenValid) {
     return <Navigate to="/admin" />;
   }

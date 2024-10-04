@@ -6,12 +6,12 @@ import AvatarBtn from '../../component/Avatar';
 
 const FriendDetails = ({ friend }) => {
   const { selectedChatUser } = useSelector((state) => state.chatting);
-  const { realTimeMessages } = useSelector((state) => state.message);
+  const { messageCount } = useSelector((state) => state.message);
   const [count, setCount] = useState(0);
-  
+
   useEffect(() => {
-    setCount(realTimeMessages.filter((item) => item.sender === friend._id).length);
-  }, [realTimeMessages, friend._id]);
+    setCount(messageCount[friend._id]);
+  }, [messageCount, friend._id]);
 
   const dispatch = useDispatch();
 

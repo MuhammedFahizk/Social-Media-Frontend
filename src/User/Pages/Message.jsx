@@ -10,7 +10,7 @@ const Message = () => {
   useReceiveMessage(); // Hook listens for incoming messages
 
   return (
-    <div className='grid grid-cols-9 gap-2 mx-2 my-2'>
+    <div className='grid  sm:grid-cols-9 justify-center  m-0  gap-0 sm:gap-2 sm:mx-2 '>
       <MemoizedUserList />
       <MemoizedChatArea />
     </div>

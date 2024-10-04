@@ -10,8 +10,11 @@ import {  toast } from 'react-toastify';
 
 
 import GoogleLoginBtn from "./GoogleLoginBtn";
+import { useDispatch } from "react-redux";
+import { setRole } from "../../../User/Redux/UserInformation";
 const LoginForm = () => {
 
+  const dispatch  = useDispatch()
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -26,6 +29,7 @@ const LoginForm = () => {
       const response = await loginAdmin(data);
       console.log(response);
       toast.update(toastId, { render: "Login successful", type: "success", isLoading: false, autoClose: 4000 });
+      dispatch(setRole('admin'))
       navigate("/admin");
     } catch (error) {
       console.log("axios Error", error);

@@ -19,3 +19,40 @@ export const deleteComment  = async( commentId, postId ) => {
   
     }
 }
+
+export const clearChat = async (friendId) => {
+  try {
+    const response = await userInstance.delete(`/clearChat`, {
+      params: { friendId }  
+    });
+    return response.data;  
+  } catch (error) {
+    console.error('Error clearing chat:', error);
+    throw error; 
+  }
+};
+
+export const deleteForMe = async(messageId) => {
+  try {
+    const response = await userInstance.delete(`/deleteForMe`, {
+      params: { messageId }  
+    });
+    return response.data;  
+  } catch (error) {
+    console.error('Error clearing chat:', error);
+    throw error; 
+  }
+}
+
+
+export const deleteForEveryone = async(messageId) => {
+  try {
+    const response = await userInstance.delete(`/deleteForEveryone`, {
+      params: { messageId }  
+    });
+    return response.data;  
+  } catch (error) {
+    console.error('Error clearing chat:', error);
+    throw error; 
+  }
+}
