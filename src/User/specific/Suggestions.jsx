@@ -22,7 +22,7 @@ const Suggestions = () => {
       console.log('Fetch response:', response);
   
       if (response.data.length === 0) {
-        setHasMore(false); // No more data to fetch
+        setHasMore(false); 
       }
   
       const filteredSuggestions = response.data.filter(
@@ -47,13 +47,13 @@ const Suggestions = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasMore && !loading) {
-          setOffset((prevOffset) => prevOffset + 6); // Increment offset for next fetch
+          setOffset((prevOffset) => prevOffset + 6);
         }
       },
       {
         root: null,
         rootMargin: '0px',
-        threshold: 0.2, // Adjust threshold if needed
+        threshold: 0.2, 
       }
     );
 
@@ -85,7 +85,7 @@ const Suggestions = () => {
   }
 
   return (
-    <div className="px-5 flex flex-col overflow-y-scroll no-scrollbar h-[55vh] gap-6">
+    <div className="px-5 flex flex-col overflow-y-scroll no-scrollbar h-[65vh] gap-6">
       <h2>Suggestions</h2>
       {suggestions.length === 0 ? (
         <div className="flex justify-center h-fit items-center">

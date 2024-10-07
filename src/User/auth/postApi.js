@@ -76,10 +76,12 @@ export const reportPost = async (data) => {
 
 
 
-export const postChatMessage = async (receiverId, message) => {
+export const postChatMessage = async (receiverId, formData) => {
   try {
-    const response = await userInstance.post(`/chats/${receiverId}/messages`, {
-      message, // The chat message content
+    const response = await userInstance.post(`/chats/${receiverId}/messages`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Ensure multipart content type
+      },
     });
     return response.data;
   } catch (error) {
@@ -87,6 +89,7 @@ export const postChatMessage = async (receiverId, message) => {
     throw error.response ? error.response.data : new Error(error.message);
   }
 };
+
 
 
 export const messageRead = async (messageId) => {

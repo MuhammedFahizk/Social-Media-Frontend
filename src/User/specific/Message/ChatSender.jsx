@@ -5,6 +5,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import ProfileDropDown from '../../component/DropDown';
 import { deleteForEveryone, deleteForMe } from '../../auth/deleteApi';
 import { Popconfirm, message } from 'antd';
+import ImageShow from './Image';
 
 export const ChatSender = ({ chat, onDelete, setChats }) => {
   const [loading, setLoading] = useState(false);
@@ -72,36 +73,57 @@ export const ChatSender = ({ chat, onDelete, setChats }) => {
   const getStatusIcon = () => {
     switch (chat.status) {
       case 'sent':
-        return <FaCheck className='text-sm mt-auto' style={{ fontSize: '10px', color: 'gray' }} />;
+        return <FaCheck className='text-sm ' style={{ fontSize: '8px', color: 'black' }} />;
       case 'delivered':
-        return <CheckIcon className='w-4 text-gray-500' />;
+        return <CheckIcon className='w-4 text-[#000]' />;
       case 'read':
-        return <CheckIcon className='w-4 text-blue-600' />;
+        return <CheckIcon className='w-4 text-[#fafafa]' />;
       default:
         return null;
     }
   };
 
   return (
-    <div className='px-1 ps-1 bg-primary-light flex items-center ms-auto w-fit py-1 rounded-xl text-black rounded-tr-none rounded-br-lg group'>
-      <ProfileDropDown items={items} item={
-        <div className='ms-auto opacity-100 hidden group-hover:block'>
-          <MdOutlineKeyboardArrowDown className="text-xl" />
+    <div className='flex group ms-auto '>
+    <ProfileDropDown
+      items={items}
+      item={<div className="opacity-0     group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
+        <MdOutlineKeyboardArrowDown className="text-2xl " />
+      </div>} />
+      <div className="px-1 pt-1 dark:bg-chat-bubble-dark bg-chat-bubble-light  items-start ms-auto w-fit rounded-xl text-black rounded-tr-none rounded-br-lg  relative">
+
+          {
+            chat.mediaUrl && (
+              <ImageShow file={chat.mediaUrl}  />
+            )
+          }
+        <div className="flex justify-end items-start    gap-2">
+          {
+            chat.content && (
+              
+           
+          <p
+            className="text-sm  break-words max-w-full dark:text-white   sm:max-w-xs md:max-w-sm lg:max-w-md"
+            style={{ whiteSpace: 'pre-line', margin: 0 }}
+          >
+            {chat.content}
+          </p>
+ )
+}
+
         </div>
-      }>
-      </ProfileDropDown>
-      <p className='text-sm' style={{ whiteSpace: 'pre-line', margin: 0 }}>
-        {chat.content}
-      </p>
-      <div className='flex items-center'>
-        <p 
-          className='text-sm mt-auto mx-1 text-gray-600 hover:text-blue-600 hover:scale-110 transition-transform duration-200 ease-in-out' 
-          style={{ fontSize: '8px' }}
-        >
-          {new Date(chat.timestamp).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
-        </p>
-        {getStatusIcon()}
-      </div>
-    </div>
+
+        <div className="flex items-center gap-2 justify-end mt-1">
+          <p
+            className="text-xs text-gray-600 hover:text-blue-600 hover:scale-110 transition-transform duration-200 ease-in-out"
+            style={{ fontSize: '10px' }}
+          >
+            {new Date(chat.timestamp).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
+          </p>
+          {getStatusIcon()}
+        </div>
+      </div></div>
+  
+  
   );
 };

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Avatar from '../component/Avatar';
 import PropTypes from 'prop-types';
+import { Badge } from 'antd';
 const HomeLeftSide = ({ data }) => {
   console.log('data', data);
 
@@ -26,8 +27,9 @@ const HomeLeftSide = ({ data }) => {
               {
                 console.log(friend)
               }
+<Badge dot={friend.online} color='green'>
               <Avatar image={friend.profilePicture } spell={friend.userName.charAt(0).toUpperCase()}/>
-             <Link to={`/profile/${friend._id}`}>
+              </Badge>             <Link to={`/profile/${friend._id}`}>
              <h2 className='text-black dark:text-white'>{friend.userName}</h2></Link>
              
             </div>

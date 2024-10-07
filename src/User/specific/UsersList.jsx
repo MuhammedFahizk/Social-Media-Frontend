@@ -63,11 +63,10 @@ const UsersList = ({ data, setOffset, searchTerm, offset, item, setSearchResults
                         <Link to={`/profile/${item._id}`}>
                             <List.Item.Meta
                                 avatar={<AvatarBtn src={item.profilePicture} spell={item.userName.charAt(0).toUpperCase()} image={item.profilePicture} />}
-                                title={<p className='text-black dark:text-white'>{item.userName}</p>}
+                                title={<p className='text-black w-full  dark:text-white'>{item.userName}</p>}
                                 description={<p className='text-black dark:text-white'>{item.email}</p>}
                             />
                         </Link>
-                        <div>Content</div>
                     </List.Item>
                 )}
             </VirtualList>

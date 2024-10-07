@@ -37,15 +37,15 @@ const SearchBar = ({ item, setSearchResults, setSearchTerm, searchTerm }) => {
   };
 
   return (
-    <div>
+    <div className="p-2">
       <Input
         type="text"
         placeholder="Search..."
-        className="w-full p-2 rounded-2xl"
+        className="w-full  sm:p-2 p-1 px-2  rounded-md sm:rounded-2xl"
         value={searchTerm}
         onChange={handleInputChange}
         suffix={
-          <Button onClick={handleClearSearch}>
+          <Button onClick={handleClearSearch} className=" rounded-full shadow-2xl">
             <MdClear className="text-red-300" />
           </Button>
         }

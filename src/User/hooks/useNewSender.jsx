@@ -8,7 +8,7 @@ const useNewSender = () => {
 
   useEffect(() => {
     const handleNewSender = (senderInfo) => {
-        console.log(senderInfo);
+        console.log('senderInfo', senderInfo);
         
       dispatch(addChat(senderInfo));
     };

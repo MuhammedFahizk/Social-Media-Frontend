@@ -7,8 +7,8 @@ Chart.register(ArcElement, Tooltip, Legend);
 // Function to generate random light colors
 const getRandomLightColor = () => {
   const hue = Math.floor(Math.random() * 360);
-  const saturation = Math.floor(Math.random() * 50) + 50; // Saturation between 50% and 100%
-  const lightness = Math.floor(Math.random() * 20) + 70; // Lightness between 70% and 90%
+  const saturation = Math.floor(Math.random() * 50) + 50;
+  const lightness = Math.floor(Math.random() * 20) + 70;
   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 };
 

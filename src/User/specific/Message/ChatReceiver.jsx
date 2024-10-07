@@ -3,6 +3,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import ProfileDropDown from "../../component/DropDown";
 import { message, Popconfirm } from "antd";
 import { deleteForMe } from "../../auth/deleteApi";
+import ImageShow from "./Image";
 
 export const ChatReceiver = ({ chat, setChats }) => {
   const [loading, setLoading] = useState(false);
@@ -67,30 +68,39 @@ export const ChatReceiver = ({ chat, setChats }) => {
   ];
 
   return (
-    <div className="px-1 ps-4 bg-primary-light flex items-center w-fit py-1 rounded-xl text-black rounded-tl-none group">
-      <p
-        style={{
-          whiteSpace: "pre-line", 
-          margin: 0,
-        }}
-      >
-        {chat.content}
-      </p>
-      <p className="text-sm mt-auto mx-2" style={{ fontSize: "8px" }}>
-        {new Date(chat.timestamp).toLocaleTimeString("en-US", {
-          hour: "numeric",
-          minute: "numeric",
-          hour12: true,
-        })}
-      </p>
-      <ProfileDropDown 
-        items={items} 
-        item={
-          <div className='ms-auto opacity-100 hidden group-hover:block'>
-            <MdOutlineKeyboardArrowDown className="text-xl" />
-          </div>
-        }
-      />
-    </div>
+    <div className='flex group  '>
+   
+      <div className="px-1 pt-1 dark:bg-chat-bubble-dark bg-chat-bubble-light  items-start  w-fit rounded-xl text-black rounded-tl-none rounded-br-lg  relative">
+      {
+            chat.mediaUrl && (
+              <ImageShow file={chat.mediaUrl}  />
+            )
+          }
+        <div className="flex justify-between items-start gap-2">
+          <p
+            className="text-sm break-words max-w-full dark:text-white sm:max-w-xs md:max-w-sm lg:max-w-md"
+            style={{ whiteSpace: 'pre-line', margin: 0 }}
+          >
+            {chat.content}
+          </p>
+
+
+        </div>
+
+        <div className="flex items-center gap-2 justify-end mt-1">
+          <p
+            className="text-xs text-gray-600 hover:text-blue-600 hover:scale-110 transition-transform duration-200 ease-in-out"
+            style={{ fontSize: '10px' }}
+          >
+            {new Date(chat.timestamp).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
+          </p>
+        </div>
+      </div>
+      <ProfileDropDown
+      items={items}
+      item={<div className="opacity-0     group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
+        <MdOutlineKeyboardArrowDown className="text-2xl " />
+      </div>} />
+      </div>
   );
 };

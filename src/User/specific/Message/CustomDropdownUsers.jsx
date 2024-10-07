@@ -6,9 +6,9 @@ import { ChooseUser, addChat } from "../../Redux/chattingSlice";
 const CustomDropdown = ({ options }) => {
   const dispatch = useDispatch();
 
-  const handleSelectUser = useCallback((userId) => {
-    dispatch(ChooseUser(userId));
-    dispatch(addChat(userId));
+  const handleSelectUser = useCallback((user) => {
+    dispatch(ChooseUser(user._id));
+    dispatch(addChat(user));
   }, [dispatch]);
 
   return (
@@ -18,7 +18,7 @@ const CustomDropdown = ({ options }) => {
           key={index}
           className="p-1 flex gap-2 hover:bg-text-primary rounded-lg"
           style={{ display: 'flex', alignItems: 'center' }}
-          onClick={() => handleSelectUser(option._id)}
+          onClick={() => handleSelectUser(option)}
         >
           <AvatarBtn />
           <h3 className="text-black text-md">{option.label}</h3>

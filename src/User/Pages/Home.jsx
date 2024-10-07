@@ -49,7 +49,7 @@ const Home = () => {
 
         <HomeLeftSide data={data.user} />
         <HomeFeeds />
-        <div className="hidden lg:block bg-ternary-light shadow-md dark:shadow-md rounded-2xl dark:bg-secondary-dark w-fit">
+        <div className="hidden lg:block  bg-ternary-light shadow-md dark:shadow-md rounded-2xl dark:bg-secondary-dark  col-span-2">
           <Stores />
           <Suggestions  />
         </div>

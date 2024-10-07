@@ -24,7 +24,9 @@ const SearchChat = () => {
         console.log('response', response);
         const formattedResponse = response.data.data.map(user => ({
           label: user.userName,
-          value: user.userName,
+          userName: user.userName,
+          profilePicture:user.profilePicture,
+          online:user.online,
           _id: user._id
         }));
         setOptions(formattedResponse);
