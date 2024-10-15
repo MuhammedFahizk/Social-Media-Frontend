@@ -3,17 +3,17 @@ import { GoPaperAirplane } from "react-icons/go";
 import { postChatMessage } from "../../auth/postApi";
 import { useDispatch, useSelector } from "react-redux";
 import { addRealTimeMessage } from "../../Redux/messageSlice";
-import { Input, Button, Popconfirm, message } from "antd"; // Added message from Ant Design
+import { Input, Button,  Popconfirm, message } from "antd"; // Added message from Ant Design
 import EmojiPicker from "emoji-picker-react";
 import { useState } from "react";
 import { BsEmojiSmile } from "react-icons/bs"; // Emoji icon for toggling
 import FileShare from "./FileShare";
 import { IoIosTrash } from "react-icons/io";
-
 const { TextArea } = Input;
 
 const SendChat = () => {
   const { selectedChatUser } = useSelector((state) => state.chatting);
+
   const { register, handleSubmit, reset, setValue, watch } = useForm();
   const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null); // To store the selected file
@@ -23,52 +23,47 @@ const SendChat = () => {
 
   // Function to handle form submission
   const onSubmit = async (data) => {
-    // Check if there's no message and no selected image
     if (!data.message.trim() && !selectedImage) {
       message.error("Please enter a message or select a file to send."); // Show error message
-      return; // Prevent submission
+      return;
     }
 
     try {
-      setLoading(true); // Set loading to true
-      const formData = new FormData(); // Create a FormData object
-      formData.append("message", data.message); // Append the message
+      setLoading(true);
+      const formData = new FormData(); 
+      formData.append("message", data.message); 
       if (selectedImage) {
-        formData.append("file", selectedImage); // Append the selected image if available
+        formData.append("file", selectedImage); 
       }
 
-      const response = await postChatMessage(selectedChatUser, formData); // Pass formData to API
-      dispatch(addRealTimeMessage(response.response)); // Update the chat messages in Redux
+      const response = await postChatMessage(selectedChatUser, formData);
+      dispatch(addRealTimeMessage(response.response));
 
-      reset(); // Reset the form after successful submission
-      setSelectedImage(null); // Reset the selected image after submission
+      reset();
+      setSelectedImage(null);
     } catch (error) {
       console.error("Failed to send message:", error);
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false);
     }
   };
 
-  // Custom handler to detect Enter and Shift + Enter
   const handleKeyDown = (event) => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
-      handleSubmit(onSubmit)(); // Trigger form submission
+      handleSubmit(onSubmit)();
     }
   };
 
-  // Function to handle emoji selection
   const onEmojiClick = (event) => {
-    const currentMessage = watch("message") || ""; // Get the current message
-    setValue("message", currentMessage + event.emoji); // Append the selected emoji
+    const currentMessage = watch("message") || ""; 
+    setValue("message", currentMessage + event.emoji);
   };
 
-  // To sync react-hook-form with TextArea value
-  const messageValue = watch("message"); // Watching message field
+  const messageValue = watch("message");
 
-  // Function to remove the selected image
   const handleRemoveImage = () => {
-    setSelectedImage(null); // Reset the selected image
+    setSelectedImage(null);
   };
 
   return (
@@ -78,7 +73,7 @@ const SendChat = () => {
           <FileShare setSelectedImage={setSelectedImage} />
           <button
             type="button"
-            onClick={() => setEmojiPickerOpen(!emojiPickerOpen)} // Toggle emoji picker
+            onClick={() => setEmojiPickerOpen(!emojiPickerOpen)} 
             className="text-xl"
           >
             <BsEmojiSmile />
@@ -92,18 +87,17 @@ const SendChat = () => {
         )}
       </div>
 
-      {/* Selected Image Preview with Remove Button */}
       {selectedImage && (
         <div className="absolute bottom-full left-5 mb-2 z-50 bg-white p-2 shadow-lg rounded-md">
           <img src={URL.createObjectURL(selectedImage)} alt="Selected" className="w-[550px] h-[300px] object-cover" />
           <Popconfirm
             title="Are you sure you want to remove this image?"
-            onConfirm={handleRemoveImage} // Call handleRemoveImage on confirmation
+            onConfirm={handleRemoveImage}
             okText="Yes"
             cancelText="No"
           >
             <button type="button" className="absolute top-0 bg-red-400 shadow-xl rounded-full m-1 right-0 p-1">
-              <IoIosTrash className="text-xl" /> {/* Trash icon */}
+              <IoIosTrash className="text-xl" />
             </button>
           </Popconfirm>
         </div>
@@ -111,9 +105,9 @@ const SendChat = () => {
 
       <TextArea
         placeholder="Type a message..."
-        value={messageValue} // Use the watched value here
+        value={messageValue}
         {...register("message")}
-        onChange={(e) => setValue("message", e.target.value)} // Sync input with react-hook-form
+        onChange={(e) => setValue("message", e.target.value)}
         onKeyDown={handleKeyDown}
         className="bg-text-primary border-0 w-full mt-0 p-2 text-sm"
         autoSize={{ minRows: 1, maxRows: 3 }}
@@ -125,7 +119,7 @@ const SendChat = () => {
         disabled={loading} 
         className="bg-transparent hover:scale-110 border-0 p-2"
       >
-        <GoPaperAirplane />
+        <GoPaperAirplane className="text-white text-xl" />
       </Button>
     </form>
   );

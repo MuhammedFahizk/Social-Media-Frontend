@@ -1,5 +1,15 @@
 import { adminInstance } from "./api_instance";
 
+export const fetchAdmin = async () => {
+  try {
+    const response = await adminInstance.get('/admin');
+    return response;
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error.response ? error.response.data : new Error(error.message);
+  }
+}
+
 export const usersList = async () => {
     try {
       const response = await adminInstance.get("users");

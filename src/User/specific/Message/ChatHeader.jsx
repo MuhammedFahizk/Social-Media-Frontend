@@ -47,7 +47,7 @@ const ChatHeader = ({ user, setChats }) => {
   ];
 
   return (
-    <div className="bg-text-primary rounded-lg p-2 text-white min-h-10 flex items-center justify-between">
+    <div className="bg-selected-light dark:bg-text-primary rounded-lg p-2 dark:text-white min-h-10 flex items-center justify-between">
       <div className="flex items-center gap-2">
         <AvatarBtn image={user.profilePicture} size="medium" />
 

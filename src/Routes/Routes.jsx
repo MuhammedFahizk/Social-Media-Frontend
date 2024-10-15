@@ -23,6 +23,7 @@ import EditPassword from "../User/specific/Settings/EditPassword";
 import EditProfileForm from "../User/specific/Settings/EditProfileForm!";
 import HidePosts from "../User/specific/Settings/HidePosts";
 import HideUsers from "../User/specific/Settings/HideUsers";
+import Stories from "../User/Pages/Stories";
 
 export const Routes = createBrowserRouter([
   {
@@ -120,6 +121,10 @@ export const Routes = createBrowserRouter([
                 path: "messages",
                 element: <Message />,
               },
+              {
+                path: "stories/:userName/:storyId",
+                element: <Stories />, 
+              },              
               {
                 path: "profile-settings",
                 element: <EditProfile />,

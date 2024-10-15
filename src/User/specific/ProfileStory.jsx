@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchProfileStores } from "../auth/getApi";
 import Modal from "./Modal";
-import StoryView from "../Pages/StoryView";
 const ProfileStory = ({ profile }) => {
   const [profileStores, setProfileStores] = useState([]);
   const [selectedStory, setSelectedStory] = useState(null);
@@ -65,7 +64,7 @@ const ProfileStory = ({ profile }) => {
         </div>
       ))}
 
-<Modal isOpen={open} onClose={handleCloseModal}>
+{/* <Modal isOpen={open} onClose={handleCloseModal}>
         {selectedStory && (
           <StoryView
             story={selectedStory}
@@ -75,7 +74,7 @@ const ProfileStory = ({ profile }) => {
             viewUpdate={false}
           />
         )}
-      </Modal>
+      </Modal> */}
     </div>
 
   );

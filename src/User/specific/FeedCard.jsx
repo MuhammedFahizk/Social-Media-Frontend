@@ -9,9 +9,9 @@ import PostComments from "./PostComments";
 import { formatTimeDifference } from "../../Services/formatTimeDifference";
 import MoreOptionFeed from "./MoreOptionFeed";
 import { useSelector } from "react-redux";
-formatTimeDifference
+formatTimeDifference;
 const FeedCard = ({ post }) => {
-  const {_id} = useSelector((state) => state.user.user);
+  const { _id } = useSelector((state) => state.user.user);
 
   const [openComments, setOpenComments] = useState(false);
 
@@ -31,16 +31,14 @@ const FeedCard = ({ post }) => {
           <p className="text-sm text-text-gray">{post.location}</p>
         </div>
         <div className="ml-auto flex h-full items-center gap-2">
-        <h3 className="text-left ">
-                {formatTimeDifference(post.createdAt)} ago
-              </h3>
-              {
-                _id !== post.author._id ? (
-          <MoreOptionFeed postId={post._id} userId={post.author} />
-) : (
-  <></>
-  )
-              }
+          <h3 className="text-left ">
+            {formatTimeDifference(post.createdAt)} ago
+          </h3>
+          {_id !== post.author._id ? (
+            <MoreOptionFeed postId={post._id} userId={post.author} />
+          ) : (
+            <></>
+          )}
         </div>
       </div>
 
@@ -74,10 +72,12 @@ const FeedCard = ({ post }) => {
       <div className="flex flex-col md:flex-row gap-3 md:justify-between w-full">
         <div className="flex gap-4 h-full items-center">
           <LikePost likes={post.likes} id={post._id} />
-          <PostComments postId={post._id} authorId={post.author._id} initialComments={post.comments} />
+          <PostComments
+            postId={post._id}
+            authorId={post.author._id}
+            initialComments={post.comments}
+          />
         </div>
-
-       
       </div>
 
       <FeedComments openComments={openComments} />

@@ -29,6 +29,18 @@ export const fetchConnections  = async(id , type , offset, query) => {
     }
   } 
 
+  export const fetchStorie =  async (userName,storyId) => {
+    try {
+  
+const response = await userInstance.get(`/getFreshStories/${userName}/${storyId}`);
+      return response
+    } catch (error) {
+      console.error("Error: ", error);
+      throw error.response ? error.response.data : new Error(error.message);
+  
+    }
+  }
+
   export const fetchProfileStores  = async(userId) => {
     try {
   

@@ -2,6 +2,7 @@ import { Avatar, Badge } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChooseUser } from '../../Redux/chattingSlice';
+import { removeMessageCount } from '../../Redux/messageSlice'; // Import the action to remove message counts
 import AvatarBtn from '../../component/Avatar';
 import { PiUser } from "react-icons/pi";
 
@@ -12,7 +13,6 @@ const FriendDetails = ({ friend }) => {
 
   const dispatch = useDispatch();
 
-  // Update the count when messageCount or friend._id changes
   useEffect(() => {
     if (messageCount && friend._id) {
       const unreadCount = messageCount[friend._id] || 0; // Default to 0 if undefined
@@ -21,17 +21,28 @@ const FriendDetails = ({ friend }) => {
     }
   }, [messageCount, friend._id]);
 
+  const handleUserSelection = () => {
+    // Dispatch action to choose the selected user
+    dispatch(ChooseUser(friend._id));
+    
+    // Dispatch action to remove the message count for this user
+    dispatch(removeMessageCount(friend._id));
+    
+    // Set the local state count to 0 as the count is reset
+    setCount(0);
+  };
+
   return (
     <div
-      className={`bg-secondary-light gap-2 h-12 justify-between dark:bg-primary-dark dark:hover:bg-ternary-dark items-center flex px-4 rounded-md cursor-pointer hover:bg-ternary-light ${
-        friend._id === selectedChatUser ? 'dark:bg-ternary-dark' : ''
+      className={`bg-secondary-light gap-2 h-12 justify-between dark:bg-primary-dark dark:hover:bg-text-primary hover:bg-selected-light items-center flex px-4 rounded-md cursor-pointer ${
+        friend._id === selectedChatUser ? 'dark:bg-text-primary bg-selected-light' : ''
       }`}
-      onClick={() => dispatch(ChooseUser(friend._id))}
+      onClick={handleUserSelection}
     >
       {/* Avatar section */}
       <div className='flex items-center w-12'>
         <Badge dot={friend.online} status='success'>
-          <Avatar shape='square' src={friend.profilePicture}  icon={<PiUser/>}/>
+          <Avatar shape='square' src={friend.profilePicture} icon={<PiUser />} />
         </Badge>
       </div>
 

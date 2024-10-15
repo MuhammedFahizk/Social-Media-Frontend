@@ -95,11 +95,11 @@ const UserPage = () => {
                 <span className="font-medium">Signup Date:</span> {new Date(user.createdAt).toLocaleString()}
               </p>
               <p className="text-gray-600 mt-2">
-                <span className="font-medium">Blocked:</span> {user.isBlocked ? 'Yes' : 'No'}
+                <span className="font-medium">Blocked:</span> {user.isBlocked.status ? 'Yes' : 'No'}
               </p>
             </div>
 
-            {user.isBlocked ? (
+            {user.isBlocked.status ? (
               <button
                 onClick={handleUnblock}
                 className="px-3 py-1 bg-red-500 text-white shadow-lg rounded-md border mt-4"

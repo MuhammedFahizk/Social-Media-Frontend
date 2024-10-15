@@ -33,7 +33,7 @@ const UserList = () => {
     const loadUsers = async () => {
       try {
         const usersData = await fetchUsers();
-        setUsers(usersData);
+        setUsers((prevUsers) => [ ...prevUsers, ...usersData]); 
       } catch (err) {
         setError(err.message);
       } finally {
@@ -42,7 +42,7 @@ const UserList = () => {
     };
 
     loadUsers();
-  }, [dispatch]);
+  }, []);
 
   // Add the first element of chatList to users
   useEffect(() => {

@@ -59,8 +59,8 @@ const Users = () => {
       title: 'Status',
       dataIndex: 'isBlocked',
       render: (isBlocked) => (
-        <p style={{ color: isBlocked ? 'red' : 'green' }}>
-          {isBlocked ? 'Blocked' : 'Active'}
+        <p style={{ color: isBlocked.status ? 'red' : 'green' }}>
+          {isBlocked.status ? 'Blocked' : 'Active'}
         </p>
       ),
     },
