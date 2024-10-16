@@ -92,4 +92,15 @@ export const usersList = async () => {
     }
   };
   
+
+// fetchReports function
+export const fetchReports = async () => {
+  try {
+    const response = await adminInstance.get('/reports');
+    return response.data;
+  } catch (error) {
+    console.error('Error: ', error);
+    throw error.response ? error.response.data : new Error(error.message);
+  }
+};
   

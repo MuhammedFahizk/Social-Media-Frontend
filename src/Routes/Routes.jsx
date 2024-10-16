@@ -24,6 +24,7 @@ import EditProfileForm from "../User/specific/Settings/EditProfileForm!";
 import HidePosts from "../User/specific/Settings/HidePosts";
 import HideUsers from "../User/specific/Settings/HideUsers";
 import Stories from "../User/Pages/Stories";
+import Reports from "../Admin/private/Pages/Reports";
 
 export const Routes = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ export const Routes = createBrowserRouter([
               {
                 path: "posts",
                 element: <Posts />,
+              },
+              {
+                path: "reports",
+                element: <Reports />,
               },
               {
                 path: "user/:id",

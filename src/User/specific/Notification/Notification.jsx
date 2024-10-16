@@ -19,7 +19,7 @@ const Notification = ({ data, setNotifications }) => {
       <AvatarBtn  image={data.senderDetails.profilePicture} />
       <div>
           <Link to={`/profile/${data?.notification.userId}`} className='text-text-primary'>
-        <h3>
+        <h3 className='w-[200px] '>
           {` ${data?.notification.message}`}
         </h3>
           </Link> 
