@@ -23,9 +23,9 @@ const LogOutBtn = () => {
   return (
     <div>
       <hr />
-      <Link target="_blank" className='text-red-500  hover:text-red-600'  onClick={logout} rel="noopener noreferrer" >
+      <button  className='text-red-500  hover:text-red-600'  onClick={logout}  >
    <h3>Log Out</h3>
-  </Link>
+  </button>
     </div>
   )
 }

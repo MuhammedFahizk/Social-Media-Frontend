@@ -7,9 +7,12 @@ const CustomDropdown = ({ options }) => {
   const dispatch = useDispatch();
 
   const handleSelectUser = useCallback((user) => {
-    dispatch(ChooseUser(user._id));
+    const userId = user._id;
+    console.log("User ID to dispatch:", userId); // Should log the correct user ID
+    dispatch(ChooseUser(userId));
     dispatch(addChat(user));
   }, [dispatch]);
+  
 
   return (
     <ul className="h-[40vh] overflow-y-scroll no-scrollbar">

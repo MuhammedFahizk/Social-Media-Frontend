@@ -7,7 +7,8 @@ import ImageShow from "./Image";
 
 export const ChatReceiver = ({ chat, setChats }) => {
   const [loading, setLoading] = useState(false);
-
+  console.log(chat);
+  
   const handleDeleteForMe = async () => {
     setLoading(true);
     try {
@@ -42,14 +43,7 @@ export const ChatReceiver = ({ chat, setChats }) => {
       ),
       key: "copy",
     },
-    {
-      label: (
-        <div className="flex h-full items-center justify-center gap-2">
-          <h3>Forward</h3>
-        </div>
-      ),
-      key: "forward",
-    },
+    
     {
       label: (
         <Popconfirm

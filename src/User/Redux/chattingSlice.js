@@ -10,8 +10,12 @@ const chattingSlice = createSlice({
   initialState,
   reducers: {
     ChooseUser: (state, action) => {
-      state.selectedChatUser = action.payload;
+      console.log("Action payload in ChooseUser:", action.payload); // Should log the user ID
+      if (action.payload) {
+        state.selectedChatUser = action.payload;
+      }
     },
+    
     addChat: (state, action) => {
       const userExists = state.chatList.some((item) => item._id === action.payload._id);
       if (!userExists) {

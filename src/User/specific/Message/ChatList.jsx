@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchChatList } from "../../auth/getApi";
 import FriendDetails from "./FriendDetails";
@@ -26,14 +26,12 @@ const UserList = () => {
   const dispatch = useDispatch();
 
   useNewSender();
-  console.log(users);
-  
-  // Fetch the initial users list
+
   useEffect(() => {
     const loadUsers = async () => {
       try {
         const usersData = await fetchUsers();
-        setUsers((prevUsers) => [ ...prevUsers, ...usersData]); 
+        setUsers((prevUsers) => [...prevUsers, ...usersData]);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -44,14 +42,25 @@ const UserList = () => {
     loadUsers();
   }, []);
 
-  // Add the first element of chatList to users
   useEffect(() => {
     if (chatList.length > 0) {
-      const newUser = chatList[0]; // Get the first user from chatList
-      setUsers((prevUsers) => [newUser, ...prevUsers]); // Prepend the new user to users
-      dispatch(clearChatList()); // Clear chat list after adding
+      const newUser = chatList[0];
+      setUsers((prevUsers) => [newUser, ...prevUsers]);
+      dispatch(clearChatList());
     }
   }, [chatList, dispatch]);
+
+  const showDrawer = useCallback(() => setVisible(true), []);
+  const onClose = useCallback(() => setVisible(false), []);
+
+  const uniqueUsers = useMemo(
+    () =>
+      users.filter(
+        (user, index, self) =>
+          index === self.findIndex((u) => u._id === user._id)
+      ),
+    [users]
+  );
 
   if (loading) return <div>Loading...</div>;
   if (error)
@@ -61,24 +70,10 @@ const UserList = () => {
       </div>
     );
 
-  const showDrawer = () => {
-    setVisible(true);
-  };
-
-  const onClose = () => {
-    setVisible(false);
-  };
-
-  // Filter unique users based on _id
-  const uniqueUsers = users.filter(
-    (user, index, self) => index === self.findIndex((u) => u._id === user._id)
-  );
-
   return (
     <>
       <div className="col-span-2 hidden sm:block bg-white h-[88vh] dark:bg-secondary-dark px-2 p-2 shadow-lg rounded-lg">
         <SearchChat />
-
         <ul className="list-none px-0 flex flex-col gap-1 my-4">
           {uniqueUsers.map((user) => (
             <FriendDetails key={user._id} friend={user} />
@@ -114,4 +109,4 @@ const UserList = () => {
   );
 };
 
-export default UserList;
+export default React.memo(UserList);

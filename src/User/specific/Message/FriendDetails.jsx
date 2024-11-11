@@ -1,5 +1,5 @@
 import { Avatar, Badge } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChooseUser } from '../../Redux/chattingSlice';
 import { removeMessageCount } from '../../Redux/messageSlice'; // Import the action to remove message counts
@@ -15,22 +15,17 @@ const FriendDetails = ({ friend }) => {
 
   useEffect(() => {
     if (messageCount && friend._id) {
-      const unreadCount = messageCount[friend._id] || 0; // Default to 0 if undefined
-      const initialUnread = friend.unreadMessagesCount || 0; // Default to 0 if undefined
+      const unreadCount = messageCount[friend._id] || 0; 
+      const initialUnread = selectedChatUser === friend._id ? 0 :  friend.unreadMessagesCount || 0;
       setCount(unreadCount + initialUnread); // Sum the two values
     }
   }, [messageCount, friend._id]);
 
-  const handleUserSelection = () => {
-    // Dispatch action to choose the selected user
+  const handleUserSelection = useCallback(() => {
     dispatch(ChooseUser(friend._id));
-    
-    // Dispatch action to remove the message count for this user
     dispatch(removeMessageCount(friend._id));
-    
-    // Set the local state count to 0 as the count is reset
     setCount(0);
-  };
+  }, [dispatch, friend._id]);
 
   return (
     <div

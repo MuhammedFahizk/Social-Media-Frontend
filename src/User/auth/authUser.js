@@ -15,7 +15,7 @@ export const SignUpUser = async (data) => {
   try {
     const response = await userInstance.post("/signUp", data);
     console.log("Response ", response);
-    return response.data;
+    return response;
   } catch (error) {
     console.log("Error  axi", error.response.data);
     throw error.response ? error.response.data : new Error(error.message);

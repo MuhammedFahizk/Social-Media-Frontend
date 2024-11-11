@@ -3,53 +3,55 @@ import { GoPaperAirplane } from "react-icons/go";
 import { postChatMessage } from "../../auth/postApi";
 import { useDispatch, useSelector } from "react-redux";
 import { addRealTimeMessage } from "../../Redux/messageSlice";
-import { Input, Button,  Popconfirm, message } from "antd"; // Added message from Ant Design
+import { Input, Button, Popconfirm, message } from "antd";
 import EmojiPicker from "emoji-picker-react";
 import { useState } from "react";
-import { BsEmojiSmile } from "react-icons/bs"; // Emoji icon for toggling
+import { BsEmojiSmile } from "react-icons/bs";
 import FileShare from "./FileShare";
 import { IoIosTrash } from "react-icons/io";
 const { TextArea } = Input;
 
 const SendChat = () => {
   const { selectedChatUser } = useSelector((state) => state.chatting);
-
   const { register, handleSubmit, reset, setValue, watch } = useForm();
   const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null); // To store the selected file
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
-  // Function to handle form submission
   const onSubmit = async (data) => {
-    if (!data.message.trim() && !selectedImage) {
-      message.error("Please enter a message or select a file to send."); // Show error message
+    const messageText = data.message ? data.message.trim() : "";
+
+    // Check if both message and image are empty
+    if (!messageText && !selectedImage) {
+      message.error("Please enter a message or select a file to send.");
       return;
     }
 
     try {
-      setLoading(true);
-      const formData = new FormData(); 
-      formData.append("message", data.message); 
+      setLoading(true); // Disable further submissions
+      const formData = new FormData();
+      formData.append("message", messageText);
       if (selectedImage) {
-        formData.append("file", selectedImage); 
+        formData.append("file", selectedImage);
       }
 
       const response = await postChatMessage(selectedChatUser, formData);
       dispatch(addRealTimeMessage(response.response));
 
+      // Reset the form
       reset();
       setSelectedImage(null);
     } catch (error) {
       console.error("Failed to send message:", error);
     } finally {
-      setLoading(false);
+      setLoading(false); // Re-enable submissions
     }
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter" && !event.shiftKey) {
+    if (event.key === "Enter" && !event.shiftKey && !loading) {
       event.preventDefault();
       handleSubmit(onSubmit)();
     }
@@ -73,7 +75,7 @@ const SendChat = () => {
           <FileShare setSelectedImage={setSelectedImage} />
           <button
             type="button"
-            onClick={() => setEmojiPickerOpen(!emojiPickerOpen)} 
+            onClick={() => setEmojiPickerOpen(!emojiPickerOpen)}
             className="text-xl"
           >
             <BsEmojiSmile />
@@ -113,14 +115,13 @@ const SendChat = () => {
         autoSize={{ minRows: 1, maxRows: 3 }}
       />
 
-      <Button 
-        type="submit" 
-        loading={loading} 
-        disabled={loading} 
-        className="bg-transparent hover:scale-110 border-0 p-2"
+      <button
+        type="submit"
+        disabled={loading} // Disable button when loading
+        className={`bg-transparent hover:scale-110 border-0 p-2 ${loading ? "opacity-50" : ""}`}
       >
         <GoPaperAirplane className="text-white text-xl" />
-      </Button>
+      </button>
     </form>
   );
 };
