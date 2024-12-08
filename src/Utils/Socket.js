@@ -4,7 +4,7 @@ let socket
 
 export const registerUser = (userId) => {
     if (!socket) {
-      socket = io('http://localhost:8080', { withCredentials: true, transports: ['polling', 'websocket'] });
+      socket = io(import.meta.env.VITE_SERVER_PORT, { withCredentials: true, transports: ['polling', 'websocket'] });
       socket.emit('registerUser', userId);
     }
   };
