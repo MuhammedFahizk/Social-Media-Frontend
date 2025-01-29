@@ -13,7 +13,7 @@ This is the frontend of Chat Hive, a social media platform built using the MERN 
 
 ## Demo
 
-You can check out the live demo here: [Demo Link](#https://chathivemedia.vercel.app/) 
+You can check out the live demo here: [Demo Link](https://chathivemedia.vercel.app/) 
 
 **Note:** The project is currently in the deployment stage.
 
